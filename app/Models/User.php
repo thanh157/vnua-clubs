@@ -2,44 +2,67 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
-class User extends Authenticatable
+class User extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    // Các thuộc tính có thể gán
+    protected $fillable = ['name', 'email', 'password', 'role_id'];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    // Định nghĩa bảng của mô hình này
+    protected $table = 'users';
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password' => 'hashed',
-    ];
+    // Hàm để lấy thông tin Role của User
+    public function getRole()
+    {
+        return DB::table('roles')
+                 ->where('id', $this->role_id)
+                 ->first();
+    }
+
+    // Hàm để lấy thông tin về các Membership của User
+    public function getMemberships()
+    {
+        return DB::table('memberships')
+                 ->where('user_id', $this->id)
+                 ->get();
+    }
+
+    // Hàm để lấy danh sách câu lạc bộ mà người dùng này tham gia
+    public function getClubs()
+    {
+        return DB::table('memberships')
+                 ->join('clubs', 'memberships.club_id', '=', 'clubs.id')
+                 ->where('memberships.user_id', $this->id)
+                 ->get(['clubs.*']);
+    }
+
+    // Hàm để kiểm tra xem người dùng có phải là admin hay không
+    public function isAdmin()
+    {
+        return $this->role_id === 1;  // Giả sử role_id = 1 là Admin
+    }
+
+    // Hàm để kiểm tra mật khẩu của người dùng (thay vì sử dụng Authenticatable)
+    public function checkPassword($password)
+    {
+        return password_verify($password, $this->password);
+    }
+
+    // Hàm để tạo mật khẩu mới cho người dùng
+    public function setPassword($password)
+    {
+        $this->password = password_hash($password, PASSWORD_BCRYPT);
+        $this->save();
+    }
+
+    // Hàm để đăng nhập (tạo session hoặc JWT, phụ thuộc vào cách bạn làm xác thực)
+    public function login()
+    {
+        // Logic đăng nhập (tạo session hoặc JWT token)
+    }
 }
