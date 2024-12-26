@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -10,7 +10,7 @@ class CreateRolesTable extends Migration
     {
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
-            $table->string('name'); // Tên vai trò (admin, club_president, member, guest)
+            $table->string('name'); // Tên vai trò: admin, club_president, member, visitor
             $table->timestamps();
         });
     }

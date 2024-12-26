@@ -13,7 +13,7 @@ class CreateClubRequestsTable extends Migration
             $table->string('name'); // Tên câu lạc bộ
             $table->text('description'); // Mô tả câu lạc bộ
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending'); // Trạng thái đơn (pending, approved, rejected)
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Người tạo đơn
+            $table->integer('user_id'); // Người tạo đơn
             $table->timestamps();
         });
     }
