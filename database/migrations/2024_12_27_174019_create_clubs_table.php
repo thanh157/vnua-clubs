@@ -1,18 +1,20 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateClubsTable extends Migration
+return new class extends Migration
 {
     public function up()
     {
         Schema::create('clubs', function (Blueprint $table) {
             $table->id();
-            $table->string('name'); // Tên câu lạc bộ
-            $table->text('description'); // Mô tả câu lạc bộ
+            $table->string('thumbnail');
+            $table->string('name');
+            $table->text('description');
             $table->date('established_date'); // Ngày thành lập
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->decimal('total_budget', 15, 2)->default(0.00);
             $table->timestamps();
         });
     }
@@ -21,4 +23,5 @@ class CreateClubsTable extends Migration
     {
         Schema::dropIfExists('clubs');
     }
-}
+};
+
