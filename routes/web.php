@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Guest\HomeController;
+use App\Http\Controllers\Guest\ClubController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('client.pages.home.home');
-});
+// Route::get('/', function () {
+//     return view('client.pages.home.home');
+// });
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/clubs/{id}', [ClubController::class, 'show'])->name('client.clubs.show');
 
 Route::get('/login', function () {
     return view('client.login');

@@ -23,6 +23,10 @@
         .hero-section {
             animation: backgroundColorChange 0.9s infinite alternate; /* Áp dụng hiệu ứng thay đổi màu nền */
         }
+        .card-text {
+            height: 60px; /* Chiều cao cố định cho mô tả */
+            overflow: hidden; /* Ẩn phần mô tả vượt quá chiều cao */
+        }
     </style>
     <!-- Hero Section -->
     <div class="hero-section text-center text-white" style="position: relative;">
@@ -120,28 +124,33 @@
             <p style="font-size: 1.125rem;">Tìm hiểu các câu lạc bộ được yêu thích nhất tại trường</p>
         </div>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
-            @for($i = 1; $i <= 8; $i++)
-            <div class="col">
-                <div class="card shadow-sm border-0 rounded-lg bg-light" style="transition: transform 0.3s;">
-                    <img src="{{asset('assets/client/images/club-1.jpg')}}" alt="CLB" class="card-img-top rounded-top" style="height: 180px; object-fit: cover;">
-                    <div class="card-body">
-                        <h5 class="card-title" style="font-size: 1.25rem; font-weight: bold;">CLB Âm nhạc</h5>
-                        <p class="card-text" style="font-size: 14px;">Khám phá các hoạt động thú vị và sôi nổi của CLB Âm nhạc.</p>
+            @foreach ($clubs as $club)
+                <div class="col-md-4">
+                    <div class="card shadow-sm border-0 rounded-lg bg-light" style="transition: transform 0.3s;">
+                        <img src="{{ asset($club->image ?? 'assets/client/images/default-club.jpg') }}" 
+                            alt="{{ $club->name }}" 
+                            class="card-img-top rounded-top" 
+                            style="height: 180px; object-fit: cover;">
+                            
+                        <div class="card-body">
+                            <h5 class="card-title" style="font-size: 1.25rem; font-weight: bold;">{{ $club->name }}</h5>
+                            <p class="card-text" style="font-size: 14px;">{{ Str::limit($club->description, 100) }}</p>
+                        </div>
+                        
+                        <div class="card-footer d-flex justify-content-between position-relative">
+                            <a href="#" class="text-decoration-none text-muted like-icon">
+                                <i class="ph-heart me-2" style="cursor: pointer;"></i>
+                                <span>{{ $club->likes }}</span>
+                            </a>
+                            <a href="{{ route('client.clubs.show', $club->id) }}" 
+                            class="text-decoration-none text-primary see-more">
+                                Xem thêm <i class="ph-arrow-circle-right ms-1"></i>
+                            </a>
+                            <div class="heart-container"></div>
+                        </div>                    
                     </div>
-                    <div class="card-footer d-flex justify-content-between position-relative">
-                        <a href="#" class="text-decoration-none text-muted like-icon">
-                            <i class="ph-heart me-2" style="cursor: pointer;"></i>
-                            <span>29</span>
-                        </a>
-                        <a href="{{ route('client.details')}}" class="text-decoration-none text-primary see-more">
-                            Xem thêm <i class="ph-arrow-circle-right ms-1"></i>
-                        </a>
-                        <!-- Vùng chứa hiệu ứng trái tim bay -->
-                        <div class="heart-container"></div>
-                    </div>                    
                 </div>
-            </div>
-            @endfor
+            @endforeach
         </div>
     </div>
    <!-- Activities Section -->

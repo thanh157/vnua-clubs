@@ -5,21 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ClubRequest extends Model
+class Member extends Model
 {
     use HasFactory;
 
     // Bảng tương ứng trong cơ sở dữ liệu
-    protected $table = 'club_requests';
+    protected $table = 'members';
 
     // Các thuộc tính có thể được gán hàng loạt
     protected $fillable = [
+        'club_id',
         'name',
-        'description',
-        'owner_name',
-        'owner_code',
-        'owner_email',
-        'owner_phone',
+        'email',
+        'phone',
         'status'
     ];
 
@@ -32,21 +30,33 @@ class ClubRequest extends Model
         'updated_at',
     ];
 
-    // Hàm để lấy trạng thái theo kiểu hiển thị
-    public function getStatusAttribute($value)
+    // Liên kết với model Club
+    public function club()
     {
-        return ucfirst($value); // Định dạng chữ cái đầu tiên viết hoa
+        return $this->belongsTo(Club::class);
     }
 
-    // Hàm để kiểm tra nếu yêu cầu đang trong trạng thái 'pending'
+    // Hàm xác định trạng thái member
+    public function getStatusAttribute($value)
+    {
+        return ucfirst($value); // Định dạng trạng thái với chữ cái đầu tiên viết hoa
+    }
+
+    // Hàm xác nhận trạng thái 'approved'
+    public function isApproved()
+    {
+        return $this->status === 'approved';
+    }
+
+    // Hàm xác nhận trạng thái 'pending'
     public function isPending()
     {
         return $this->status === 'pending';
     }
 
-    // Hàm để kiểm tra nếu yêu cầu đã được phê duyệt
-    public function isApproved()
+    // Hàm xác nhận trạng thái 'rejected'
+    public function isRejected()
     {
-        return $this->status === 'approved';
+        return $this->status === 'rejected';
     }
 }
