@@ -2,14 +2,12 @@
 
 namespace App\Models;
 
-use App\Enums\Role;
+use App\Enums\StatusMemberRequest;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class MemberRequest extends Model
 {
     use HasFactory;
 
@@ -17,28 +15,17 @@ class User extends Authenticatable
         'name',
         'code',
         'email',
-        'password',
         'phone',
-        'role',
+        'status',
         'club_id'
     ];
 
     protected $casts = [
-        'role' => Role::class,
+        'status' => StatusMemberRequest::class,
     ];
 
     public function club(): BelongsTo
     {
         return $this->belongsTo(Club::class, 'club_id');
-    }
-
-    public function transactions(): HasMany
-    {
-        return $this->hasMany(Transaction::class);
-    }
-
-    public function posts(): HasMany
-    {
-        return $this->hasMany(Post::class);
     }
 }

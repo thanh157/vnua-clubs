@@ -2,30 +2,48 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Enums\Role;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Club extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'established_date'];
+    protected $fillable = [
+        'name',
+        'thumbnail',
+        'cover_image',
+        'description',
+        'balance'
+    ];
 
-    // Mối quan hệ với Membership
-    public function memberships()
+    // Relationship tới User làm President
+    public function president(): HasOne
     {
-        return $this->hasMany(Membership::class);
+        return $this->hasOne(User::class, 'club_id')->where('role', Role::PRESIDENT);
     }
 
-    // Mối quan hệ với Event (sự kiện của câu lạc bộ)
-    public function events()
+    // Relationship tới User làm Member
+    public function members(): HasMany
     {
-        return $this->hasMany(Event::class);
+        return $this->hasMany(User::class, 'club_id')->where('role', Role::MEMBER);
     }
 
-    // Mối quan hệ với các thành viên thông qua Membership
-    public function users()
+    public function users(): HasMany
     {
-        return $this->belongsToMany(User::class, 'memberships');
+        return $this->hasMany(User::class);
+    }
+
+    public function posts(): HasMany
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    public function memberRequests(): HasMany
+    {
+        return $this->hasMany(MemberRequest::class);
     }
 }

@@ -2,18 +2,26 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Enums\StatusRequestClub;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ClubRequest extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'club_name', 'description', 'status'];
+    protected $fillable = [
+        'name',
+        'description',
+        'owner_name',
+        'owner_code',
+        'owner_email',
+        'owner_phone',
+        'status'
+    ];
 
-    // Mối quan hệ với User
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+    protected $casts = [
+        'status' => StatusRequestClub::class,
+    ];
 }
+
