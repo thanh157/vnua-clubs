@@ -41,6 +41,7 @@
                 <h6 class="mb-0">Tổng quan về Câu lạc bộ</h6>
                 <span class="text-muted">Thống kê chính</span>
             </div>
+
             <div class="row">
                 <div class="col-sm-6 col-xl-3">
                     <div class="card card-body">
@@ -65,7 +66,7 @@
                         </div>
                     </div>
                 </div>
-        
+                
                 <div class="col-sm-6 col-xl-3">
                     <div class="card card-body">
                         <div class="d-flex align-items-center">
@@ -171,7 +172,7 @@
                         <div class="card-header d-lg-flex py-lg-0">
                             <h5 class="py-lg-3 mb-0">Tên câu lạc bộ</h5>
                             <div class="mt-1 my-lg-auto ms-lg-auto">
-                                <a href="#" class="btn btn-primaryy" style="height: 45px; font-size:16px">Tham gia ngay <i class="ph-user-plus ms-2"></i></a>
+                                <a href="{{ route('client.form-member')}}" class="btn btn-primaryy" style="height: 45px; font-size:16px">Tham gia ngay <i class="ph-user-plus ms-2"></i></a>
                             </div>
                         </div>
             
@@ -420,7 +421,52 @@
                     </div>
                 </div>
             </div>
-            {{-- /danh gia clb  --}}
+            
+            {{-- quản lí chi tiêu --}}
+            <div class="mb-3 pt-4">
+                <h6 class="mb-0">Các khoản phí và danh sách các thành viên trong CLB (Dành cho thành viên CLB)</h6>
+                <span class="text-muted">Bạn có thể xem các khoản phí của mình và số lượng thành viên trong câu lạc bộ của mình ở đây</span>
+            </div>
+            <div class="row">
+            {{-- Submit phi clb --}}
+            <div class="row">
+                {{-- Submit phi clb --}}
+                <div class="col-sm-6 col-xl-3">
+                    <div class="card card-body position-relative">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fa-solid fa-clipboard-check text-primary opacity-75 me-3" style="font-size: 2rem;"></i>
+                            <div class="flex-fill">
+                                <h6 class="mb-0">Các khoản chi phí của bạn</h6>
+                                <span class="text-muted">Xem các khoản phí của bạn tại đây</span>
+                            </div>
+                        </div>
+                        <div class="">
+                            <!-- Nội dung khác có thể được thêm vào đây -->
+                        </div>
+                        <a href="{{ route('client.spending')}}" class="text-end text-decoration-underline mt-3 d-inline-block" id="expenditureLink">Xem chi tiêu của bạn</a>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-xl-3">
+                    <div class="card card-body position-relative">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fa-solid fa-clipboard-check text-primary opacity-75 me-3" style="font-size: 2rem;"></i>
+                            <div class="flex-fill">
+                                <h6 class="mb-0">Danh sách thành viên</h6>
+                                <span class="text-muted">Xem danh sách thành viên tại đây</span>
+                            </div>
+                        </div>
+                        <div class="">
+                            <!-- Nội dung khác có thể được thêm vào đây -->
+                        </div>
+                        <a href="{{ route('client.members')}}" class="text-end text-decoration-underline mt-3 d-inline-block" id="expenditureLink">Xem danh sách thành viên</a>
+                    </div>
+                </div>
+                
+            </div>
+            {{-- end QLCT--}}
+            
+
         </div>
     </div>
 </div>

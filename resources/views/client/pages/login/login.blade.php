@@ -21,7 +21,7 @@
 
 					<!-- Thẻ đăng nhập -->
 					<form class="login-form needs-validation" action="https://demo.interface.club/limitless/demo/template/html/layout_1/full/index.html" novalidate>
-						<div class="card mb-0">
+						<div class="cardst mb-0" style="border: 2px solid #ccc; border-radius: 10px; padding: 20px; background-color:#fff">
 							<div class="card-body">
 								<div class="text-center mb-3">
                                     <div class="d-inline-flex align-items-center justify-content-center mb-4 mt-2">

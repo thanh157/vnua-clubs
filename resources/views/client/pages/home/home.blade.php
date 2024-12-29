@@ -29,7 +29,7 @@
         <div style="padding: 60px 20px;">
             <h1 style="font-size: 2.5rem; font-family: 'Helvetica', sans-serif; font-weight: 700;">KHÁM PHÁ CÁC CÂU LẠC BỘ HÀNG ĐẦU</h1>
             <p style="font-size: 1.125rem; margin: 20px 0;">Tham gia câu lạc bộ để học hỏi, giao lưu và phát triển bản thân.</p>
-            <a href="#" class="btn btn-warning rounded-pill px-4 py-2" style="font-size: 1rem;">Tìm hiểu thêm</a>
+            <a href="{{ route('client.notifications')}}" class="btn btn-warning rounded-pill px-4 py-2" style="font-size: 1rem;">Tìm hiểu thêm</a>
         </div>
     </div>   
     <!-- Benefits Section -->
@@ -360,7 +360,7 @@
     <div class="text-center py-5" style="background-color: #17a2b8; color: white;">
         <h2 style="font-size: 2rem;">Bạn đã sẵn sàng tham gia một câu lạc bộ chưa?</h2>
         <p style="font-size: 1.125rem;">Đừng bỏ lỡ cơ hội trở thành một phần của cộng đồng sinh viên năng động.</p>
-        <a href="#" class="btn btn-warning rounded-pill px-4 py-2">Đăng ký ngay</a>
+        <a href="{{ route('client.form-member')}}" class="btn btn-warning rounded-pill px-4 py-2">Đăng ký ngay</a>
     </div>
 
 </div>
