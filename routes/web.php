@@ -21,6 +21,10 @@ Route::get('/login', function () {
     return view('client.login');
 })->name('login');
 
+Route::get('/sign-up', function () {
+    return view('client.sign-up');
+})->name('sign-up');
+
 
 Route::get('/admin', function () {
     return view('admin.pages.index');
@@ -32,5 +36,24 @@ Route::get('/Trang-chu', fn() => view('client/pages/home/home'))->name('client.h
 //activeactive
 Route::get('/login', fn() => view('client/pages/login/login'))->name('client.login');
 
-Route::get('/Chi-tiet-cau-lac-bo', fn() => view('client/pages/clubs-details/details'))->name('client.details'); 
-// Route::get('/Dang-ki-thanh-vien', fn() => view('client/pages/forms/form-member'))->name('client.form-member'); 
+Route::get('/Chi-tiet-cau-lac-bo', fn() => view('client/pages/clubs-details/details'))->name('client.details');
+// form dk tv 
+Route::get('/Dang-ki-thanh-vien', fn() => view('client/pages/forms/form-member'))->name('client.form-member');
+
+// dki tv
+Route::get('/Dang-ki-tham-gia-CLB', fn() => view('client/pages/forms/form-member'))->name('client.form-member');
+
+// dki tk 
+Route::get('/Dang-ki-tai-khoan', fn() => view('client/pages/sign-up/sign-up'))->name('client.sign-up');
+
+// profile 
+Route::get('/edit-profile', fn() => view('client/pages/edit-profile/edit'))->name('client.edit');
+
+// spennding
+Route::get('/spending', fn() => view('client/pages/spending/spending'))->name('client.spending');
+
+// members
+Route::get('/members', fn() => view('client/pages/members/club-member'))->name('client.members');
+
+// notification
+Route::get('/notification', fn() => view('client/pages/notifications/notification'))->name('client.notifications');
