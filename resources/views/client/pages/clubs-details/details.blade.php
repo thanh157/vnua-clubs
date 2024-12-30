@@ -26,17 +26,18 @@
     
             <!-- Tên câu lạc bộ - căn giữa với avatar -->
             <div class="text-black">
-                <h1 class="mb-0">Tên câu lạc bộ</h1>
-                <span class="d-block">UX/UI designer</span>
+                <h1 class="mb-0">CLB Truyền thông</h1>
+                <span class="d-block">Trực thuộc Hội Sinh Viên Học viện Nông Nghiệp Việt Nam</span>
             </div>
         </div>
     </div>
-
+    
     {{-- {{-- view club --}}
     <div class="content">
         <!-- Simple statistics -->
         <div class="content">
             <!-- Tổng quan về Câu lạc bộ -->
+            
             <div class="mb-3">
                 <h6 class="mb-0">Tổng quan về Câu lạc bộ</h6>
                 <span class="text-muted">Thống kê chính</span>
@@ -297,16 +298,16 @@
                         <div class="col-xl-3 col-sm-6">
                             <div class="card">
                                 <div class="card-img-actions mx-1 mt-1">
-                                    <img class="card-img img-fluid" src="{{ asset('assets/client/images/vnua-' . $i . '.jpg') }}" alt="Hình ảnh {{ $i }}">
+                                    <img class="card-img img-fluid" src="{{ asset('assets/client/images/clb-' . $i . '.jpg') }}" alt="Hình ảnh {{ $i }}">
                                     <div class="card-img-actions-overlay card-img">
-                                        <a href="{{ asset('assets/client/images/vnua-' . $i . '.jpg') }}" class="btn btn-outline-white btn-icon rounded-pill" data-bs-popup="lightbox" data-gallery="gallery1">
+                                        <a href="{{ asset('assets/client/images/clb-' . $i . '.jpg') }}" class="btn btn-outline-white btn-icon rounded-pill" data-bs-popup="lightbox" data-gallery="gallery1">
                                             <i class="ph-magnifying-glass-plus"></i>
                                         </a>
                                     </div>
                                 </div>
                                 <div class="card-body">
                                     <div class="d-flex align-items-start flex-wrap">
-                                        <div class="fw-semibold">vnua-{{ $i }}.jpg</div>                                                         
+                                        <div class="fw-semibold">Hình ảnh của CLB</div>                                                       
                                         <span class="text-muted ms-auto">300Kb</span>
                                     </div>
                                 </div>
@@ -329,7 +330,7 @@
                             <div class="card-img-actions mx-1 mt-1 position-relative">
                                 <!-- Sử dụng ID video mới để thay ảnh bìa -->
                                 <img class="card-img img-fluid" 
-                                     src="https://img.youtube.com/vi/Llw9Q6akRo4/0.jpg" 
+                                src="{{ asset('assets/client/images/demo-' . $i . '.jpg') }}" alt="Hình ảnh {{ $i }}"
                                      alt="Video YouTube">
                                 
                                 <a href="https://www.youtube.com/watch?v=Llw9Q6akRo4&list=RDLlw9Q6akRo4&start_radio=1" 
@@ -427,7 +428,6 @@
                 <h6 class="mb-0">Các khoản phí và danh sách các thành viên trong CLB (Dành cho thành viên CLB)</h6>
                 <span class="text-muted">Bạn có thể xem các khoản phí của mình và số lượng thành viên trong câu lạc bộ của mình ở đây</span>
             </div>
-            <div class="row">
             {{-- Submit phi clb --}}
             <div class="row">
                 {{-- Submit phi clb --}}
@@ -464,7 +464,7 @@
                 </div>
                 
             </div>
-            {{-- end QLCT--}}
+            {{-- end QLCT--}}            
             
 
         </div>

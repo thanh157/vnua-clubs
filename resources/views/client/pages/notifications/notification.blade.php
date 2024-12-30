@@ -38,11 +38,11 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Danh sách thông báo
     const notifications = [
-        { club: "CLB Lập trình Web", date: "2024-12-29", description: "Tuyển thành viên tham gia phát triển website." },
+        { club: "CLB Lập trình Web", date: "2024-12-31", description: "Tuyển thành viên tham gia phát triển website." },
         { club: "CLB Thiết kế Đồ họa", date: "2024-12-28", description: "Tuyển thành viên sáng tạo và thiết kế." },
         { club: "CLB Kỹ thuật Phần mềm", date: "2024-12-27", description: "Tuyển lập trình viên backend và frontend." },
-        { club: "CLB Công nghệ AI", date: "2024-12-29", description: "Tuyển thành viên nghiên cứu AI/ML." },
-        { club: "CLB Game Development", date: "2024-12-25", description: "Tuyển lập trình viên và nhà thiết kế game." },
+        { club: "CLB Công nghệ AI", date: "2024-12-30", description: "Tuyển thành viên nghiên cứu AI/ML." },
+        { club: "CLB Game Development", date: "2024-12-1", description: "Tuyển lập trình viên và nhà thiết kế game." },
         { club: "CLB UX/UI", date: "2024-12-24", description: "Tuyển thành viên phát triển trải nghiệm người dùng." },
         { club: "CLB Robotics", date: "2024-12-23", description: "Tuyển thành viên tham gia thiết kế robot." },
         { club: "CLB IoT", date: "2024-12-22", description: "Tuyển thành viên phát triển ứng dụng IoT." },

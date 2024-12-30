@@ -49,6 +49,9 @@ Route::get('/Dang-ki-thanh-vien', fn() => view('client/pages/forms/form-member')
 // dki tv
 Route::get('/Dang-ki-tham-gia-CLB', fn() => view('client/pages/forms/form-member'))->name('client.form-member');
 
+// dli tl clb 
+Route::get('/Dang-ki-thanh-lap-clb', fn() => view('client/pages/forms/form-club'))->name('client.form-club');
+
 // dki tk 
 Route::get('/Dang-ki-tai-khoan', fn() => view('client/pages/sign-up/sign-up'))->name('client.sign-up');
 

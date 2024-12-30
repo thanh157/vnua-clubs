@@ -1,6 +1,12 @@
 body{
     overflow: auto !important;
 }
+
+footer {
+    padding: 0 !important; /* Loại bỏ padding thừa */
+    margin: 0; /* Đảm bảo không có khoảng cách thừa */
+}
+  
 .nav-item{
     position:relative;
 }

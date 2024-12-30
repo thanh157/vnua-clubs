@@ -46,7 +46,7 @@
             <div class="col">
                 <div class="benefit-item text-center p-3 shadow-sm">
                     <div class="benefit-icon mb-3">
-                        <img src="{{asset('assets/client/images/vnua-1.jpg')}}" alt="Phát triển kỹ năng" class="img-fluid" style="border-radius: 50%; width: 80px; height: 80px; object-fit: cover;">
+                        <img src="{{asset('assets/client/images/kn.jpg')}}" alt="Phát triển kỹ năng" class="img-fluid" style="border-radius: 50%; width: 80px; height: 80px; object-fit: cover;">
                     </div>
                     <h6 class="benefit-title" style="font-size: 1rem; font-weight: bold; color: #444;">Phát triển kỹ năng</h6>
                     <p class="benefit-text" style="font-size: 0.85rem; color: #666;">Rèn luyện kỹ năng mềm và chuyên môn.</p>
@@ -55,7 +55,7 @@
             <div class="col">
                 <div class="benefit-item text-center p-3 shadow-sm">
                     <div class="benefit-icon mb-3">
-                        <img src="{{asset('assets/client/images/vnua-2.jpg')}}" alt="Giao lưu kết bạn" class="img-fluid" style="border-radius: 50%; width: 80px; height: 80px; object-fit: cover;">
+                        <img src="{{asset('assets/client/images/kb.jpg')}}" alt="Giao lưu kết bạn" class="img-fluid" style="border-radius: 50%; width: 80px; height: 80px; object-fit: cover;">
                     </div>
                     <h6 class="benefit-title" style="font-size: 1rem; font-weight: bold; color: #444;">Giao lưu kết bạn</h6>
                     <p class="benefit-text" style="font-size: 0.85rem; color: #666;">Kết nối với những người có chung sở thích.</p>
@@ -64,7 +64,7 @@
             <div class="col">
                 <div class="benefit-item text-center p-3 shadow-sm">
                     <div class="benefit-icon mb-3">
-                        <img src="{{asset('assets/client/images/vnua-3.jpg')}}" alt="Cơ hội phát triển" class="img-fluid" style="border-radius: 50%; width: 80px; height: 80px; object-fit: cover;">
+                        <img src="{{asset('assets/client/images/pt.jpg')}}" alt="Cơ hội phát triển" class="img-fluid" style="border-radius: 50%; width: 80px; height: 80px; object-fit: cover;">
                     </div>
                     <h6 class="benefit-title" style="font-size: 1rem; font-weight: bold; color: #444;">Cơ hội phát triển</h6>
                     <p class="benefit-text" style="font-size: 0.85rem; color: #666;">Mở rộng cơ hội nghề nghiệp tương lai.</p>
@@ -73,7 +73,7 @@
             <div class="col">
                 <div class="benefit-item text-center p-3 shadow-sm">
                     <div class="benefit-icon mb-3">
-                        <img src="{{asset('assets/client/images/vnua-4.jpg')}}" alt="Tăng cường sức khỏe" class="img-fluid" style="border-radius: 50%; width: 80px; height: 80px; object-fit: cover;">
+                        <img src="{{asset('assets/client/images/tctt.jpg')}}" alt="Tăng cường sức khỏe" class="img-fluid" style="border-radius: 50%; width: 80px; height: 80px; object-fit: cover;">
                     </div>
                     <h6 class="benefit-title" style="font-size: 1rem; font-weight: bold; color: #444;">Tăng cường sức khỏe</h6>
                     <p class="benefit-text" style="font-size: 0.85rem; color: #666;">Rèn luyện thể chất qua các hoạt động.</p>
@@ -82,7 +82,7 @@
             <div class="col">
                 <div class="benefit-item text-center p-3 shadow-sm">
                     <div class="benefit-icon mb-3">
-                        <img src="{{asset('assets/client/images/vnua-5.jpg')}}" alt="Kỹ năng lãnh đạo" class="img-fluid" style="border-radius: 50%; width: 80px; height: 80px; object-fit: cover;">
+                        <img src="{{asset('assets/client/images/ld.jpg')}}" alt="Kỹ năng lãnh đạo" class="img-fluid" style="border-radius: 50%; width: 80px; height: 80px; object-fit: cover;">
                     </div>
                     <h6 class="benefit-title" style="font-size: 1rem; font-weight: bold; color: #444;">Kỹ năng lãnh đạo</h6>
                     <p class="benefit-text" style="font-size: 0.85rem; color: #666;">Phát triển kỹ năng quản lý và lãnh đạo.</p>
@@ -124,35 +124,31 @@
             <p style="font-size: 1.125rem;">Tìm hiểu các câu lạc bộ được yêu thích nhất tại trường</p>
         </div>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
-            @foreach ($clubs as $club)
-                <div class="col-md-4">
-                    <div class="card shadow-sm border-0 rounded-lg bg-light" style="transition: transform 0.3s;">
-                        <img src="{{ asset($club->image ?? 'assets/client/images/default-club.jpg') }}" 
-                            alt="{{ $club->name }}" 
-                            class="card-img-top rounded-top" 
-                            style="height: 180px; object-fit: cover;">
-                            
-                        <div class="card-body">
-                            <h5 class="card-title" style="font-size: 1.25rem; font-weight: bold;">{{ $club->name }}</h5>
-                            <p class="card-text" style="font-size: 14px;">{{ Str::limit($club->description, 100) }}</p>
-                        </div>
-                        
-                        <div class="card-footer d-flex justify-content-between position-relative">
-                            <a href="#" class="text-decoration-none text-muted like-icon">
-                                <i class="ph-heart me-2" style="cursor: pointer;"></i>
-                                <span>{{ $club->likes }}</span>
-                            </a>
-                            <a href="{{ route('client.clubs.show', $club->id) }}" 
-                            class="text-decoration-none text-primary see-more">
-                                Xem thêm <i class="ph-arrow-circle-right ms-1"></i>
-                            </a>
-                            <div class="heart-container"></div>
-                        </div>                    
+            {{-- @for($i = 1; $i <= 8; $i++) --}}
+            <div class="col">
+                <div class="card shadow-sm border-0 rounded-lg bg-light" style="transition: transform 0.3s;">
+                    <img src="{{asset('assets/client/images/club-1.jpg')}}" alt="CLB" class="card-img-top rounded-top" style="height: 180px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title" style="font-size: 1.25rem; font-weight: bold;">CLB Truyền thông</h5>
+                        <p class="card-text" style="font-size: 14px;">Khám phá các hoạt động thú vị và sôi nổi của CLB Truyền thông</p>
                     </div>
+                    <div class="card-footer d-flex justify-content-between position-relative">
+                        <a href="#" class="text-decoration-none text-muted like-icon">
+                            <i class="ph-heart me-2" style="cursor: pointer;"></i>
+                            <span>29</span>
+                        </a>
+                        <a href="{{ route('client.details')}}" class="text-decoration-none text-primary see-more">
+                            Xem thêm <i class="ph-arrow-circle-right ms-1"></i>
+                        </a>
+                        <!-- Vùng chứa hiệu ứng trái tim bay -->
+                        <div class="heart-container"></div>
+                    </div>      
                 </div>
-            @endforeach
+            </div>
+            {{-- @endfor --}}
         </div>
     </div>
+    
    <!-- Activities Section -->
     <div class="container" style="max-width: 100%; padding: 50px; background-color: #f6f9ffd6">
         <div class="text-center mb-4">
@@ -162,30 +158,31 @@
         <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
             <div class="col">
                 <div class="card shadow-sm h-100 text-center">
-                    <img src="https://via.placeholder.com/150" alt="Activity 1" class="card-img-top" style="height: 180px; object-fit: cover;">
+                    <img src="{{asset('assets/client/images/vnua-7.jpg')}}" alt="Activity 1" class="card-img-top" style="height: 180px; object-fit: cover;">
                     <div class="card-body">
                         <h5 class="card-title">Buổi Giao Lưu Văn Hóa</h5>
                         <p class="card-text">Tham gia các buổi giao lưu để tìm hiểu về văn hóa và truyền thống.</p>
                     </div>
-                    <div class="card-footer">
+                    {{-- <div class="card-footer">
                         <a href="#" class="text-decoration-none text-primary">Xem chi tiết</a>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             <div class="col">
                 <div class="card shadow-sm h-100 text-center">
-                    <img src="https://via.placeholder.com/150" alt="Activity 2" class="card-img-top" style="height: 180px; object-fit: cover;">
+                    <img src="{{asset('assets/client/images/vnua-8.jpg')}}" alt="Activity 2" class="card-img-top" style="height: 180px; object-fit: cover;">
                     <div class="card-body">
                         <h5 class="card-title">Buổi Chia Sẻ Kinh Nghiệm</h5>
                         <p class="card-text">Tham gia các buổi chia sẻ từ các chuyên gia trong các lĩnh vực khác nhau.</p>
                     </div>
-                    <div class="card-footer">
+                    {{-- <div class="card-footer">
                         <a href="#" class="text-decoration-none text-primary">Xem chi tiết</a>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
     </div>
+
     <!-- Achievements Section -->
     <div class="container" style="max-width: 100%; padding: 50px; background-color: #fffdf6d6">
         <div class="text-center mb-4">
@@ -195,7 +192,7 @@
         <div class="row row-cols-1 row-cols-md-4 row-cols-lg-4 g-4">
             <div class="col">
                 <div class="card shadow-sm text-center">
-                    <img src="https://via.placeholder.com/150" alt="Achievement 1" class="card-img-top" style="height: 180px; object-fit: cover;">
+                    <img src="{{asset('assets/client/images/vnua-9.jpg')}}" alt="Achievement 1" class="card-img-top" style="height: 180px; object-fit: cover;">
                     <div class="card-body">
                         <h5 class="card-title">Giải Nhất Cuộc Thi Sáng Tạo</h5>
                         <p class="card-text">Câu lạc bộ Khoa học đạt giải nhất trong cuộc thi sáng tạo cấp trường.</p>
@@ -204,7 +201,7 @@
             </div>
             <div class="col">
                 <div class="card shadow-sm text-center">
-                    <img src="https://via.placeholder.com/150" alt="Achievement 2" class="card-img-top" style="height: 180px; object-fit: cover;">
+                    <img src="{{asset('assets/client/images/vnua-10.jpg')}}" alt="Achievement 2" class="card-img-top" style="height: 180px; object-fit: cover;">
                     <div class="card-body">
                         <h5 class="card-title">Giải Nhì Cuộc Thi Thể Thao</h5>
                         <p class="card-text">Câu lạc bộ Thể thao giành giải nhì trong cuộc thi thể thao toàn trường.</p>
@@ -213,6 +210,7 @@
             </div>
         </div>
     </div>
+
     <!-- News Section -->
     <div class="container pb-5" style="max-width: 100%; padding: 50px; background-color: #f9eff1;">
         <div class="text-center mb-4">
@@ -234,55 +232,55 @@
                                     <p class="card-text" style="font-size: 0.875rem;">Cập nhật tin tức về buổi biểu diễn của câu lạc bộ Âm nhạc vào cuối tuần này.</p>
                                 </div>
                                 <div class="card-footer" style="padding: 5px;">
-                                    <a href="#" class="text-decoration-none text-primary">Xem thêm</a>
+                                    <a href="https://vnua.edu.vn/tin-tuc-su-kien" class="text-decoration-none text-primary">Xem thêm</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col">
                             <div class="card shadow-sm h-100 text-center" style="height: 300px;">
-                                <img src="https://via.placeholder.com/150" alt="News 2" class="card-img-top" style="height: 150px; object-fit: cover;">
+                                <img src="{{asset('assets/client/images/vnua-4.jpg')}}" alt="News 2" class="card-img-top" style="height: 150px; object-fit: cover;">
                                 <div class="card-body" style="padding: 10px;">
                                     <h5 class="card-title" style="font-size: 1rem;">Chào Mừng Năm Học Mới</h5>
                                     <p class="card-text" style="font-size: 0.875rem;">Lễ khai giảng năm học mới của các câu lạc bộ sẽ diễn ra vào tuần tới.</p>
                                 </div>
                                 <div class="card-footer" style="padding: 5px;">
-                                    <a href="#" class="text-decoration-none text-primary">Xem thêm</a>
+                                    <a href="https://vnua.edu.vn/tin-tuc-su-kien" class="text-decoration-none text-primary">Xem thêm</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col">
                             <div class="card shadow-sm h-100 text-center" style="height: 300px;">
-                                <img src="https://via.placeholder.com/150" alt="News 3" class="card-img-top" style="height: 150px; object-fit: cover;">
+                                <img src="{{asset('assets/client/images/vnua-3.jpg')}}" alt="News 3" class="card-img-top" style="height: 150px; object-fit: cover;">
                                 <div class="card-body" style="padding: 10px;">
                                     <h5 class="card-title" style="font-size: 1rem;">Khóa Học Mới Tại CLB Lập Trình</h5>
                                     <p class="card-text" style="font-size: 0.875rem;">Cập nhật về khóa học lập trình cho các thành viên của câu lạc bộ.</p>
                                 </div>
                                 <div class="card-footer" style="padding: 5px;">
-                                    <a href="#" class="text-decoration-none text-primary">Xem thêm</a>
+                                    <a href="https://vnua.edu.vn/tin-tuc-su-kien" class="text-decoration-none text-primary">Xem thêm</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col">
                             <div class="card shadow-sm h-100 text-center" style="height: 300px;">
-                                <img src="https://via.placeholder.com/150" alt="News 4" class="card-img-top" style="height: 150px; object-fit: cover;">
+                                <img src="{{asset('assets/client/images/vnua-2.jpg')}}" alt="News 4" class="card-img-top" style="height: 150px; object-fit: cover;">
                                 <div class="card-body" style="padding: 10px;">
                                     <h5 class="card-title" style="font-size: 1rem;">Hội Thảo Chuyên Đề Về Khởi Nghiệp</h5>
                                     <p class="card-text" style="font-size: 0.875rem;">Cập nhật thông tin về hội thảo khởi nghiệp của câu lạc bộ Kinh tế.</p>
                                 </div>
                                 <div class="card-footer" style="padding: 5px;">
-                                    <a href="#" class="text-decoration-none text-primary">Xem thêm</a>
+                                    <a href="https://vnua.edu.vn/tin-tuc-su-kien" class="text-decoration-none text-primary">Xem thêm</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col">
                             <div class="card shadow-sm h-100 text-center" style="height: 300px;">
-                                <img src="https://via.placeholder.com/150" alt="News 5" class="card-img-top" style="height: 150px; object-fit: cover;">
+                                <img src="{{asset('assets/client/images/vnua-8.jpg')}}" alt="News 5" class="card-img-top" style="height: 150px; object-fit: cover;">
                                 <div class="card-body" style="padding: 10px;">
                                     <h5 class="card-title" style="font-size: 1rem;">Buổi Giao Lưu Sinh Viên Quốc Tế</h5>
                                     <p class="card-text" style="font-size: 0.875rem;">Thông tin về buổi giao lưu sinh viên quốc tế sẽ được tổ chức trong tháng này.</p>
                                 </div>
                                 <div class="card-footer" style="padding: 5px;">
-                                    <a href="#" class="text-decoration-none text-primary">Xem thêm</a>
+                                    <a href="https://vnua.edu.vn/tin-tuc-su-kien" class="text-decoration-none text-primary">Xem thêm</a>
                                 </div>
                             </div>
                         </div>
@@ -293,61 +291,61 @@
                     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-4">
                         <div class="col">
                             <div class="card shadow-sm h-100 text-center" style="height: 300px;">
-                                <img src="https://via.placeholder.com/150" alt="News 6" class="card-img-top" style="height: 150px; object-fit: cover;">
+                                <img src="{{asset('assets/client/images/kn.jpg')}}" alt="News 6" class="card-img-top" style="height: 150px; object-fit: cover;">
                                 <div class="card-body" style="padding: 10px;">
                                     <h5 class="card-title" style="font-size: 1rem;">Đăng Ký Tham Gia CLB Thể Thao</h5>
                                     <p class="card-text" style="font-size: 0.875rem;">Cập nhật thông tin về việc đăng ký tham gia câu lạc bộ thể thao.</p>
                                 </div>
                                 <div class="card-footer" style="padding: 5px;">
-                                    <a href="#" class="text-decoration-none text-primary">Xem thêm</a>
+                                    <a href="https://vnua.edu.vn/tin-tuc-su-kien" class="text-decoration-none text-primary">Xem thêm</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col">
                             <div class="card shadow-sm h-100 text-center" style="height: 300px;">
-                                <img src="https://via.placeholder.com/150" alt="News 7" class="card-img-top" style="height: 150px; object-fit: cover;">
+                                <img src="{{asset('assets/client/images/vnua-1.jpg')}}" alt="News 7" class="card-img-top" style="height: 150px; object-fit: cover;">
                                 <div class="card-body" style="padding: 10px;">
                                     <h5 class="card-title" style="font-size: 1rem;">Workshop Về Kỹ Năng Lãnh Đạo</h5>
                                     <p class="card-text" style="font-size: 0.875rem;">Cập nhật về workshop phát triển kỹ năng lãnh đạo tại các câu lạc bộ.</p>
                                 </div>
                                 <div class="card-footer" style="padding: 5px;">
-                                    <a href="#" class="text-decoration-none text-primary">Xem thêm</a>
+                                    <a href="https://vnua.edu.vn/tin-tuc-su-kien" class="text-decoration-none text-primary">Xem thêm</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col">
                             <div class="card shadow-sm h-100 text-center" style="height: 300px;">
-                                <img src="https://via.placeholder.com/150" alt="News 8" class="card-img-top" style="height: 150px; object-fit: cover;">
+                                <img src="{{asset('assets/client/images/kn.jpg')}}" alt="News 8" class="card-img-top" style="height: 150px; object-fit: cover;">
                                 <div class="card-body" style="padding: 10px;">
                                     <h5 class="card-title" style="font-size: 1rem;">Tổ Chức Chuyến Tham Quan Câu Lạc Bộ Ngoại Ngữ</h5>
                                     <p class="card-text" style="font-size: 0.875rem;">Cập nhật thông tin về chuyến tham quan câu lạc bộ Ngoại ngữ tuần này.</p>
                                 </div>
                                 <div class="card-footer" style="padding: 5px;">
-                                    <a href="#" class="text-decoration-none text-primary">Xem thêm</a>
+                                    <a href="https://vnua.edu.vn/tin-tuc-su-kien" class="text-decoration-none text-primary">Xem thêm</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col">
                             <div class="card shadow-sm h-100 text-center" style="height: 300px;">
-                                <img src="https://via.placeholder.com/150" alt="News 9" class="card-img-top" style="height: 150px; object-fit: cover;">
+                                <img src="{{asset('assets/client/images/bd.jpg')}}" alt="News 9" class="card-img-top" style="height: 150px; object-fit: cover;">
                                 <div class="card-body" style="padding: 10px;">
                                     <h5 class="card-title" style="font-size: 1rem;">Cuộc Thi Thể Thao Trong Nhà</h5>
                                     <p class="card-text" style="font-size: 0.875rem;">Cuộc thi thể thao trong nhà của câu lạc bộ thể thao sẽ được tổ chức vào cuối tháng này.</p>
                                 </div>
                                 <div class="card-footer" style="padding: 5px;">
-                                    <a href="#" class="text-decoration-none text-primary">Xem thêm</a>
+                                    <a href="https://vnua.edu.vn/tin-tuc-su-kien" class="text-decoration-none text-primary">Xem thêm</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col">
                             <div class="card shadow-sm h-100 text-center" style="height: 300px;">
-                                <img src="https://via.placeholder.com/150" alt="News 10" class="card-img-top" style="height: 150px; object-fit: cover;">
+                                <img src="{{asset('assets/client/images/club-1.jpg')}}" alt="News 10" class="card-img-top" style="height: 150px; object-fit: cover;">
                                 <div class="card-body" style="padding: 10px;">
                                     <h5 class="card-title" style="font-size: 1rem;">Chương Trình Giao Lưu Văn Hóa Quốc Tế</h5>
                                     <p class="card-text" style="font-size: 0.875rem;">Cập nhật thông tin về chương trình giao lưu văn hóa quốc tế của câu lạc bộ.</p>
                                 </div>
                                 <div class="card-footer" style="padding: 5px;">
-                                    <a href="#" class="text-decoration-none text-primary">Xem thêm</a>
+                                    <a href="https://vnua.edu.vn/tin-tuc-su-kien" class="text-decoration-none text-primary">Xem thêm</a>
                                 </div>
                             </div>
                         </div>
@@ -367,9 +365,12 @@
     </div> 
    <!-- Call to Action Section -->
     <div class="text-center py-5" style="background-color: #17a2b8; color: white;">
-        <h2 style="font-size: 2rem;">Bạn đã sẵn sàng tham gia một câu lạc bộ chưa?</h2>
+        <h2 style="font-size: 2rem;">Bạn đã sẵn sàng tham gia hoặc thành lập một câu lạc bộ chưa?</h2>
         <p style="font-size: 1.125rem;">Đừng bỏ lỡ cơ hội trở thành một phần của cộng đồng sinh viên năng động.</p>
-        <a href="{{ route('client.form-member')}}" class="btn btn-warning rounded-pill px-4 py-2">Đăng ký ngay</a>
+        <div class="dk"  style="padding: 20px">
+            <a href="{{ route('client.form-member') }}" class="btn btn-warning rounded-pill px-4 py-2" style="margin-right: 20px;">Đăng ký tham gia CLB</a>
+            <a href="{{ route('client.form-club') }}" class="btn btn-warning rounded-pill px-4 py-2">Đăng ký thành lập CLB</a>
+        </div>             
     </div>
 
 </div>
