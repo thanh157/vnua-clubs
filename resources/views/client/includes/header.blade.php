@@ -18,7 +18,7 @@
                   </a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" href="#" style="color: #fff;">
+                  <a class="nav-link" href="{{ route('client.notifications')}}" style="color: #fff;">
                       <i class="fas fa-bell"></i> Thông báo
                   </a>
               </li>
@@ -39,7 +39,7 @@
           <div class="text-start me-5">
               <span class="d-block fw-bold text-uppercase" style="font-size: 14px; color: #fff100;">Tài khoản</span>
               <div style="font-size: 14px;">
-                  <a href="#" class="text-decoration-none login-link" style="color: #fff; padding-right: 8px;">Đăng ký</a>
+                  <a href="{{ route('client.sign-up')}}" class="text-decoration-none login-link" style="color: #fff; padding-right: 8px;">Đăng ký</a>
                   <a href="{{ route('client.login')}}" class="text-decoration-none login-link" style="color: #fff;">Đăng nhập</a>
               </div>
           </div>

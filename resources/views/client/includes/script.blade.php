@@ -32,4 +32,12 @@
 <script src="{{ asset('assets/client/js/balance_stats.js') }}"></script>
 <script src="{{ asset('assets/client/js/tornado_negative_stack.js') }}"></script>
 <script src="{{ asset('assets/client/js/user_pages_profile.js') }}"></script>
+
 <script src="{{ asset('assets/client/js/base.js') }}"></script>
+<script src="{{ asset('assets/client/js/form.js') }}"></script>
+<script src="{{ asset('assets/client/js/sucess-forms.js') }}"></script>
+
+<script src="{{ asset('assets/client/js/spending.js') }}"></script>
+<script src="{{ asset('assets/client/js/members.js') }}"></script>
+
+<script src="{{ asset('assets/client/js/demo/pages/fullcalendar_basic.js')}}"></script>

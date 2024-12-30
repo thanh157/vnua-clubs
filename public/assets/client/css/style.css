@@ -445,3 +445,14 @@ body{
     object-fit: cover;
 }
 
+/* Cải thiện hiệu ứng hover cho nút "Xem chi tiêu của bạn" */
+#expenditureLink {
+    text-decoration: underline;
+    transition: color 0.3s ease; /* Thêm hiệu ứng mượt mà khi đổi màu */
+    color: blue; /* Màu chữ ban đầu là xanh */
+}
+
+#expenditureLink:hover {
+    color: red; /* Màu chữ khi hover là đỏ */
+    text-decoration: none; /* Loại bỏ gạch chân khi hover */
+}

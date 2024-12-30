@@ -1,6 +1,9 @@
 {{-- style css  --}}
 <link rel="stylesheet" href="{{asset('assets/client/css/style.css')}}">
 <link rel="stylesheet" href="{{asset('assets/client/css/form.css')}}">
+<link rel="stylesheet" href="{{asset('assets/client/css/spending.css')}}">
+<link rel="stylesheet" href="{{asset('assets/client/css/member.css')}}">
+<link rel="stylesheet" href="{{asset('assets/client/css/notification.css')}}">
 {{-- css footer  --}}
 <link rel="stylesheet" href="{{asset('assets/client/css/footer.css')}}">
 {{-- home css  --}}
@@ -25,6 +28,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/phosphor-icons@1.4.0" rel="stylesheet">
 
 
 

@@ -9,16 +9,17 @@
 </head>
 <body>
 
-    <!-- Kiểm tra nếu không phải trang đăng nhập, thì hiển thị header -->
-    @if(!request()->is('login')) 
+    <!-- Kiểm tra nếu không phải trang đăng ký hoặc đăng nhập, thì hiển thị header -->
+    @if(!request()->is('Dang-ki-tai-khoan') && !request()->is('login')) 
         @include('client.includes.header')
     @endif
+
 
     @include('client.includes.script')
     @yield('content')
 
-    <!-- Kiểm tra nếu không phải trang đăng nhập, thì hiển thị footer -->
-    @if(!request()->is('login')) 
+    <!-- Kiểm tra nếu không phải trang đăng ký hoặc đăng nhập, thì hiển thị footer -->
+    @if(!request()->is('Dang-ki-tai-khoan') && !request()->is('login')) 
         @include('client.includes.footer')
     @endif
 
