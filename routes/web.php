@@ -38,11 +38,11 @@ Route::get('/admin', function () {
 
 Route::get('/Hoat-dong-sap-toi', fn() => view('client/pages/actives/actives'))->name('client.actives');
 // homehome
-Route::get('/Trang-chu', fn() => view('client/pages/home/home'))->name('client.home');
+Route::get('/Trang-chu', [HomeController::class, 'index'])->name('client.home');
 //activeactive
 Route::get('/login', fn() => view('client/pages/login/login'))->name('client.login');
 
-Route::get('/Chi-tiet-cau-lac-bo', fn() => view('client/pages/clubs-details/details'))->name('client.details');
+Route::get('/Chi-tiet-cau-lac-bo/{clubId}',  [ClubController::class, 'index'])->name('client.details');
 // form dk tv 
 Route::get('/Dang-ki-thanh-vien', fn() => view('client/pages/forms/form-member'))->name('client.form-member');
 
@@ -66,3 +66,7 @@ Route::get('/members', fn() => view('client/pages/members/club-member'))->name('
 
 // notification
 Route::get('/notification', fn() => view('client/pages/notifications/notification'))->name('client.notifications');
+
+Route::get('/404', function () {
+    abort(404);
+});

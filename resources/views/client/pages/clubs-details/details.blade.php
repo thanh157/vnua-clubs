@@ -26,8 +26,8 @@
     
             <!-- Tên câu lạc bộ - căn giữa với avatar -->
             <div class="text-black">
-                <h1 class="mb-0">CLB Truyền thông</h1>
-                <span class="d-block">Trực thuộc Hội Sinh Viên Học viện Nông Nghiệp Việt Nam</span>
+                <h1 class="mb-0">{{ $club->name }}</h1>
+                <span class="d-block">{{ $club->category ?? 'Chưa phân loại' }}</span>
             </div>
         </div>
     </div>
@@ -49,7 +49,7 @@
                         <div class="d-flex align-items-center">
                             <i class="fa-solid fa-heart text-danger me-3" style="font-size: 2rem;"></i>
                             <div class="flex-fill text-end">
-                                <h4 class="mb-0">65</h4>
+                                <h4 class="mb-0">{{ $club->likes }}</h4>
                                 <span class="text-muted">Lượt thích</span>
                             </div>
                         </div>

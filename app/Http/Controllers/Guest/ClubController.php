@@ -8,9 +8,17 @@ use Illuminate\Http\Request;
 
 class ClubController extends Controller
 {
-    public function show($id)
+
+    protected $clubService;
+
+    public function index($id)
     {
-        $club = Club::findOrFail($id);
-        return view('client.pages.clubs-details.details', compact('club'));
+        try {
+            $club = Club::findOrFail($id);
+            
+            return view('client.pages.clubs-details.details', compact('club'));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Club not found');
+        }
     }
 }

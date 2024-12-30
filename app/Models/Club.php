@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\DTOs\ClubDTO;
 use App\Enums\Role;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,7 +18,9 @@ class Club extends Model
         'thumbnail',
         'cover_image',
         'description',
-        'balance'
+        'balance',
+        'category',
+        'likes'
     ];
 
     // Relationship tới User làm President
@@ -32,9 +35,10 @@ class Club extends Model
         return $this->hasMany(User::class, 'club_id')->where('role', Role::MEMBER);
     }
 
-    public function users(): HasMany
+    public function users()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsToMany(User::class, 'user_club_member')
+                    ->withTimestamps(); // Automatically manages created_at and updated_at
     }
 
     public function posts(): HasMany
@@ -46,4 +50,5 @@ class Club extends Model
     {
         return $this->hasMany(MemberRequest::class);
     }
+
 }

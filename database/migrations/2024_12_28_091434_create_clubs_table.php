@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('cover_image');
             $table->text('description');
             $table->bigInteger('balance')->default(0);
+            $table->foreignId('owner_id')->nullable()->constrained('users')->onDelete('cascade'); // Allow owner_id to be nullable
+            $table->integer('likes')->default(0);
             $table->timestamps();
         });
     }
