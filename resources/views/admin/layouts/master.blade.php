@@ -15,27 +15,19 @@
 
     <!-- Main content -->
     <div class="content-wrapper">
-
-    <!-- Inner content -->
-    <div class="content-inner">
-
-        <!-- Content area -->
-        <div class="content">
+        <!-- Inner content -->
+        <div class="content-inner">
             @yield('content')
-        </div>
-        <!-- /content area -->
 
-    </div>
+            <!-- Footer -->
+            @include('admin.includes.footer')
+            <!-- /footer -->
+        </div>
         <!-- /inner content -->
     </div>
     <!-- /main content -->
 
-   
 </div>
 <!-- /page content -->
-
- <!-- Footer -->
-    @include('admin.includes.footer')
-    <!-- /footer -->
 </body>
 </html>
