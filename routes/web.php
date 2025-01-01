@@ -33,9 +33,32 @@ Route::get('/sign-up', function () {
     return view('client.sign-up');
 })->name('sign-up');
 
+//Admin
+Route::get('admin/login', function () {
+    return view('admin.pages.admin.login');
+})->name('admin.login');
 
-Route::get('/admin', function () {
-    return view('admin.pages.index');
+Route::prefix('admin')->group(function () {
+    Route::get('/', function () {
+        return view('admin.pages.admin.dashboard');
+    })->name('admin.dashboard');
+
+    Route::get('/clubs', function () {
+        return view('admin.pages.admin.club-list');
+    })->name('admin.clubs');
+
+    Route::get('/clubs/requests', function () {
+        return view('admin.pages.admin.club-request');
+    })->name('admin.club-requests');
+});
+
+//Admin-club
+Route::get('/admin-club/login', function () {
+    return view('admin.pages.admin-club.club-admin-login');
+});
+
+Route::get('/admin-club', function () {
+    return view('admin.pages.club');
 });
 
 Route::get('/Hoat-dong-sap-toi', fn() => view('client/pages/actives/actives'))->name('client.actives');
@@ -54,13 +77,14 @@ Route::get('/Chi-tiet-cau-lac-bo/{clubId}',  [ClubController::class, 'index'])->
 // Route for liking a club
 Route::post('/clubs/{id}/like', [ClubController::class, 'like'])->name('clubs.like')->middleware('auth');
 
-// form dk tv 
+Route::get('/Chi-tiet-cau-lac-bo', fn() => view('client/pages/clubs-details/details'))->name('client.details');
+// form dk tv
 Route::get('/Dang-ki-thanh-vien', fn() => view('client/pages/forms/form-member'))->name('client.form-member');
 
 // dki tv
 Route::get('/Dang-ki-tham-gia-CLB', fn() => view('client/pages/forms/form-member'))->name('client.form-member');
 
-// dli tl clb 
+// dli tl clb
 Route::get('/Dang-ki-thanh-lap-clb', fn() => view('client/pages/forms/form-club'))->name('client.form-club');
 
 // dki tk 
@@ -68,7 +92,7 @@ Route::get('/Dang-ki-tai-khoan', [RegisterController::class, 'showRegistrationFo
 Route::post('/Dang-ki-tai-khoan', [RegisterController::class, 'register'])->name('client.sign-up.submit');
 
 
-// profile 
+// profile
 Route::get('/edit-profile', fn() => view('client/pages/edit-profile/edit'))->name('client.edit');
 
 // spennding

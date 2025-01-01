@@ -1,16 +1,19 @@
-const avatarPath = "{{ asset('assets/client/images/logo-vnua.jpg') }}";
-// Dữ liệu thành viên mẫu, với mỗi thành viên có tên, chức vụ và đường dẫn đến avatar
+
+// Đường dẫn đến avatar (server xử lý đúng trong file Blade)
+const avatarPath = "{{asset('assets/client/images/logo-vnua.jpg')}}";
+
+// Dữ liệu thành viên
 const members = [
-    { name: "Nguyễn Minh F", role: "Tổ trưởng nhóm nghiên cứu", avatar: avatarPath },
-    { name: "Trần Thị G", role: "Cộng tác viên", avatar: avatarPath },
-    { name: "Lê Minh H", role: "Thành viên", avatar: avatarPath },
-    { name: "Hoàng Thị I", role: "Thành viên", avatar: avatarPath },
-    { name: "Phạm Minh J", role: "Thành viên", avatar: avatarPath },
-    { name: "Nguyễn Thị K", role: "Cộng tác viên", avatar: avatarPath },
-    { name: "Trần Minh L", role: "Thành viên", avatar: avatarPath },
-    { name: "Lê Thị M", role: "Thành viên", avatar: avatarPath },
-    { name: "Hoàng Minh N", role: "Tổ trưởng nhóm sự kiện", avatar: avatarPath },
-    { name: "Phạm Thị O", role: "Cộng tác viên", avatar: avatarPath }
+    { name: "Nguyễn Văn An", role: "Tổ trưởng nhóm nghiên cứu", avatar: avatarPath },
+    { name: "Trần Thị Bích", role: "Cộng tác viên", avatar: avatarPath },
+    { name: "Lê Văn Cường", role: "Thành viên", avatar: avatarPath },
+    { name: "Hoàng Thị Duyên", role: "Thành viên", avatar: avatarPath },
+    { name: "Phạm Minh Đức", role: "Thành viên", avatar: avatarPath },
+    { name: "Nguyễn Thị Hoa", role: "Cộng tác viên", avatar: avatarPath },
+    { name: "Trần Văn Hải", role: "Thành viên", avatar: avatarPath },
+    { name: "Lê Thị Khánh", role: "Thành viên", avatar: avatarPath },
+    { name: "Hoàng Văn Nam", role: "Tổ trưởng nhóm sự kiện", avatar: avatarPath },
+    { name: "Phạm Thị Oanh", role: "Cộng tác viên", avatar: avatarPath }
 ];
 
   

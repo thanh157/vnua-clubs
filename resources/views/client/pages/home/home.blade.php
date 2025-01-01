@@ -129,7 +129,7 @@ Trang chủ
     <!-- Featured Clubs Section -->
     <div class="container pb-5" style="max-width: 100%; padding: 50px; background-color: #f9eff1;">
         <div class="text-center mb-4">
-            <h2 class="highlight-title">Các câu lạc bộ nổi bật</h2>
+            <h2 class="highlight-title" style="font-size: 1.75rem">Các câu lạc bộ nổi bật</h2>
             <p style="font-size: 1.125rem;">Tìm hiểu các câu lạc bộ được yêu thích nhất tại trường</p>
         </div>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
@@ -167,7 +167,7 @@ Trang chủ
     <!-- Activities Section -->
     <div class="container" style="max-width: 100%; padding: 50px; background-color: #f6f9ffd6">
         <div class="text-center mb-4">
-            <h2 class="highlight-title">Hoạt động của các câu lạc bộ</h2>
+            <h2 class="highlight-title" style="font-size: 1.75rem">Hoạt động tiêu biểu của các câu lạc bộ</h2>
             <p style="font-size: 1.125rem;">Khám phá các hoạt động sôi nổi và thú vị trong các câu lạc bộ.</p>
         </div>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
@@ -176,7 +176,19 @@ Trang chủ
                     <img src="{{asset('assets/client/images/vnua-7.jpg')}}" alt="Activity 1" class="card-img-top" style="height: 180px; object-fit: cover;">
                     <div class="card-body">
                         <h5 class="card-title">Buổi Giao Lưu Văn Hóa</h5>
-                        <p class="card-text">Tham gia các buổi giao lưu để tìm hiểu về văn hóa và truyền thống.</p>
+                        <p class="card-text">Tham gia các buổi giao lưu để tìm hiểu về văn hóa và truyền thống của CLB Xã hội học.</p>
+                    </div>
+                    {{-- <div class="card-footer">
+                        <a href="#" class="text-decoration-none text-primary">Xem chi tiết</a>
+                    </div> --}}
+                </div>
+            </div>
+            <div class="col">
+                <div class="card shadow-sm h-100 text-center">
+                    <img src="{{asset('assets/client/images/vnua-11.jpg')}}" alt="Activity 2" class="card-img-top" style="height: 180px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">Buổi Chia Sẻ Kinh Nghiệm</h5>
+                        <p class="card-text">Tham gia các buổi chia sẻ từ các chuyên gia trong các lĩnh vực khác nhau của CLB Tư vấn - Tham vấn.</p>
                     </div>
                     {{-- <div class="card-footer">
                         <a href="#" class="text-decoration-none text-primary">Xem chi tiết</a>
@@ -187,8 +199,20 @@ Trang chủ
                 <div class="card shadow-sm h-100 text-center">
                     <img src="{{asset('assets/client/images/vnua-8.jpg')}}" alt="Activity 2" class="card-img-top" style="height: 180px; object-fit: cover;">
                     <div class="card-body">
-                        <h5 class="card-title">Buổi Chia Sẻ Kinh Nghiệm</h5>
-                        <p class="card-text">Tham gia các buổi chia sẻ từ các chuyên gia trong các lĩnh vực khác nhau.</p>
+                        <h5 class="card-title">Lao động tại Học viện</h5>
+                        <p class="card-text">Tham gia tình nguyện dọn dẹp và trồng cây tại khuân viên Học viện của Câu lạc bộ Đồ cũ là vàng.</p>
+                    </div>
+                    {{-- <div class="card-footer">
+                        <a href="#" class="text-decoration-none text-primary">Xem chi tiết</a>
+                    </div> --}}
+                </div>
+            </div>
+            <div class="col">
+                <div class="card shadow-sm h-100 text-center">
+                    <img src="{{asset('assets/client/images/vnua-12.jpg')}}" alt="Activity 2" class="card-img-top" style="height: 180px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">Sinh nhật 10 năm của CLB Giutar</h5>
+                        <p class="card-text">CLB Giuta tổ chức các hoạt động sôi nổi chào mừng kỉ niệm 10 năm thành lập CLB.</p>
                     </div>
                     {{-- <div class="card-footer">
                         <a href="#" class="text-decoration-none text-primary">Xem chi tiết</a>
@@ -201,7 +225,7 @@ Trang chủ
     <!-- Achievements Section -->
     <div class="container" style="max-width: 100%; padding: 50px; background-color: #fffdf6d6">
         <div class="text-center mb-4">
-            <h2 class="highlight-title">Thành tựu của các câu lạc bộ</h2>
+            <h2 class="highlight-title" style="font-size: 1.75rem">Thành tựu của các câu lạc bộ</h2>
             <p style="font-size: 1.125rem;">Những thành tích nổi bật mà các câu lạc bộ đã đạt được trong các hoạt động.</p>
         </div>
         <div class="row row-cols-1 row-cols-md-4 row-cols-lg-4 g-4">
@@ -219,7 +243,25 @@ Trang chủ
                     <img src="{{asset('assets/client/images/vnua-10.jpg')}}" alt="Achievement 2" class="card-img-top" style="height: 180px; object-fit: cover;">
                     <div class="card-body">
                         <h5 class="card-title">Giải Nhì Cuộc Thi Thể Thao</h5>
-                        <p class="card-text">Câu lạc bộ Thể thao giành giải nhì trong cuộc thi thể thao toàn trường.</p>
+                        <p class="card-text">Câu lạc bộ Bóng đá giành giải nhì trong cuộc thi thể thao toàn trường.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card shadow-sm text-center">
+                    <img src="{{asset('assets/client/images/vnua-13.jpg')}}" alt="Achievement 2" class="card-img-top" style="height: 180px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">Giải Nhì Cuộc Thi Quần Vợt</h5>
+                        <p class="card-text">Giải quần vợt câu lạc bộ cán bộ công nhân viên chức Học viện.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card shadow-sm text-center">
+                    <img src="{{asset('assets/client/images/vnua-14.jpg')}}" alt="Achievement 2" class="card-img-top" style="height: 180px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">Giải Nhất cuộc thi Văn nghệ</h5>
+                        <p class="card-text">Câu lạc bộ Tiếng anh đạt được giải nhất trong cuộc thi.</p>
                     </div>
                 </div>
             </div>
@@ -229,7 +271,7 @@ Trang chủ
     <!-- News Section -->
     <div class="container pb-5" style="max-width: 100%; padding: 50px; background-color: #f9eff1;">
         <div class="text-center mb-4">
-            <h2 class="highlight-title">Tin tức mới nhất</h2>
+            <h2 class="highlight-title" style="font-size: 1.75rem">Tin tức mới nhất</h2>
             <p style="font-size: 1.125rem;">Cập nhật các tin tức mới nhất về các hoạt động và sự kiện.</p>
         </div>
 
@@ -306,7 +348,7 @@ Trang chủ
                     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-4">
                         <div class="col">
                             <div class="card shadow-sm h-100 text-center" style="height: 300px;">
-                                <img src="{{asset('assets/client/images/kn.jpg')}}" alt="News 6" class="card-img-top" style="height: 150px; object-fit: cover;">
+                                <img src="{{asset('assets/client/images/bd.jpg')}}" alt="News 6" class="card-img-top" style="height: 150px; object-fit: cover;">
                                 <div class="card-body" style="padding: 10px;">
                                     <h5 class="card-title" style="font-size: 1rem;">Đăng Ký Tham Gia CLB Thể Thao</h5>
                                     <p class="card-text" style="font-size: 0.875rem;">Cập nhật thông tin về việc đăng ký tham gia câu lạc bộ thể thao.</p>
@@ -318,10 +360,10 @@ Trang chủ
                         </div>
                         <div class="col">
                             <div class="card shadow-sm h-100 text-center" style="height: 300px;">
-                                <img src="{{asset('assets/client/images/vnua-1.jpg')}}" alt="News 7" class="card-img-top" style="height: 150px; object-fit: cover;">
+                                <img src="{{asset('assets/client/images/vnua-15.jpg')}}" alt="News 7" class="card-img-top" style="height: 150px; object-fit: cover;">
                                 <div class="card-body" style="padding: 10px;">
-                                    <h5 class="card-title" style="font-size: 1rem;">Workshop Về Kỹ Năng Lãnh Đạo</h5>
-                                    <p class="card-text" style="font-size: 0.875rem;">Cập nhật về workshop phát triển kỹ năng lãnh đạo tại các câu lạc bộ.</p>
+                                    <h5 class="card-title" style="font-size: 1rem;">Học viện trao 30tỷ học bổng</h5>
+                                    <p class="card-text" style="font-size: 0.875rem;">Dành trên 30 tỉ đồng trao học bổng khuyến khích học tập cho sinh viên.</p>
                                 </div>
                                 <div class="card-footer" style="padding: 5px;">
                                     <a href="https://vnua.edu.vn/tin-tuc-su-kien" class="text-decoration-none text-primary">Xem thêm</a>
@@ -342,7 +384,7 @@ Trang chủ
                         </div>
                         <div class="col">
                             <div class="card shadow-sm h-100 text-center" style="height: 300px;">
-                                <img src="{{asset('assets/client/images/bd.jpg')}}" alt="News 9" class="card-img-top" style="height: 150px; object-fit: cover;">
+                                <img src="{{asset('assets/client/images/vnua-16.jpg')}}" alt="News 9" class="card-img-top" style="height: 150px; object-fit: cover;">
                                 <div class="card-body" style="padding: 10px;">
                                     <h5 class="card-title" style="font-size: 1rem;">Cuộc Thi Thể Thao Trong Nhà</h5>
                                     <p class="card-text" style="font-size: 0.875rem;">Cuộc thi thể thao trong nhà của câu lạc bộ thể thao sẽ được tổ chức vào cuối tháng này.</p>
