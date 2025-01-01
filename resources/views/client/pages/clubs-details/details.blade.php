@@ -163,7 +163,7 @@ Chi tiết câu lạc bộ
                     </div>
                 </div> --}}
             </div>
-
+    
             {{-- gioi thieu chi tiet clb --}}
             <div class="mt-4 mb-3 d-flex align-items-stretch align-items-lg-start flex-column flex-lg-row">
                 <!-- Left content -->
@@ -173,7 +173,7 @@ Chi tiết câu lạc bộ
                         <div class="card-header d-lg-flex py-lg-0">
                             <h5 class="py-lg-3 mb-0">CLB Truyền thông</h5>
                             <div class="mt-1 my-lg-auto ms-lg-auto">
-                                <a href="{{ route('client.form-member')}}" class="btn btn-primaryy" style="height: 45px; font-size:16px">Tham gia ngay <i class="ph-user-plus ms-2"></i></a>
+                                <a href="{{ url('/clubs/register/' . $club->id) }}" class="btn btn-primaryy" style="height: 45px; font-size:16px">Tham gia ngay <i class="ph-user-plus ms-2"></i></a>
                             </div>
                         </div>
 
