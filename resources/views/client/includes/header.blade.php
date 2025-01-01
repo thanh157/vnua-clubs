@@ -31,20 +31,38 @@
 
       {{-- log in and log out --}}
       <div class="d-flex align-items-center text-success" style="font-family: Arial, sans-serif; color: #fff;">
-          <div class="me-2">
-              <a href="#" class="text-decoration-none" style="font-size: 34px; color: #fff;">
-                  <i class="fas fa-user"></i>
-              </a>
-          </div>
-          <div class="text-start me-5">
-              <span class="d-block fw-bold text-uppercase" style="font-size: 14px; color: #fff100;">Tài khoản</span>
-              <div style="font-size: 14px;">
-                  <a href="{{ route('client.sign-up')}}" class="text-decoration-none login-link" style="color: #fff; padding-right: 8px;">Đăng ký</a>
-                  <a href="{{ route('client.login')}}" class="text-decoration-none login-link" style="color: #fff;">Đăng nhập</a>
-              </div>
-          </div>
-      </div>
-  </div>
+        <div class="me-2">
+            <a href="#" class="text-decoration-none" style="font-size: 34px; color: #fff;">
+                <i class="fas fa-user"></i>
+            </a>
+        </div>
+        <div class="text-start me-5">
+            <span class="d-block fw-bold text-uppercase" style="font-size: 14px; color: #fff100;">Tài khoản</span>
+            <div style="font-size: 14px;">
+                <a href="{{ route('client.sign-up')}}" class="text-decoration-none login-link" style="color: #fff; padding-right: 8px;">Đăng ký</a>
+                <a href="{{ route('client.login')}}" class="text-decoration-none login-link" style="color: #fff;">Đăng nhập</a>
+            </div>
+        </div>
+    </div>
+
+      {{-- Hiển thị tên và avatar sau khi đã đăng nhập--}}
+        {{-- <div class="d-flex align-items-center" style="font-family: Arial, sans-serif; color: #fff; width:230px">
+            <!-- Avatar -->
+            <div class="me-2">
+                <a href="#" class="text-decoration-none">
+                    <img src="https://scontent-hkg4-1.xx.fbcdn.net/v/t39.30808-6/431968918_1408471566698978_892730662987273362_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=a5f93a&_nc_eui2=AeExdgGrvIahDVOfRpFR6ktPGK8q0_gLGLUYryrT-AsYtZqthgN0kgm1hM-MbgAWC_hlOMehWe3gXa_tkYURbSST&_nc_ohc=sDJpi6o6DcIQ7kNvgHS7lGN&_nc_zt=23&_nc_ht=scontent-hkg4-1.xx&_nc_gid=AzBmTPeU5oM_MuNCY-1eB30&oh=00_AYAkaZmCkQBa_sAhiQasSTK4qAOcTBgoXlmjbuGBTTNUqw&oe=6778D2D6"
+                        alt="Avatar" 
+                        style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+                </a>
+            </div>
+            <!-- Tên người dùng -->
+            <div class="text-start">
+                <span class="d-block fw-bold text-uppercase" style="font-size: 14px; color: #fff">
+                    Hà Dương Thanh
+                </span>
+            </div>
+        </div> --}}
+    </div>
 </nav>
 
 <!-- Thêm CSS cho hiệu ứng hover cho tất cả các liên kết trong navbar -->
