@@ -20,6 +20,9 @@ return new class extends Migration
             $table->boolean('is_active')->default(true);
             $table->boolean('is_blocked')->default(false);
             $table->timestamps();
+
+            // Thêm ràng buộc unique cho cặp user_id và club_id
+            $table->unique(['user_id', 'club_id']);
         });
     }
 

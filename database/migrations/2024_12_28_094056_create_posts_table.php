@@ -13,9 +13,13 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
             $table->string('title');
             $table->text('content');
+            $table->string('image')->nullable();
+            $table->string('reference_url')->nullable();
+            $table->integer('status')->default(0);
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Tham chiếu tới bảng users
+            $table->foreignId('club_id')->nullable()->constrained('clubs')->onDelete('cascade'); // Tham chiếu tới bảng clubs và cho phép null
             $table->timestamps();
         });
     }

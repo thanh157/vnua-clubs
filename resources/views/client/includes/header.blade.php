@@ -13,7 +13,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('client.actives')}}" style="color: #fff;">
+                    <a class="nav-link" href="{{ route('client.activities')}}" style="color: #fff;">
                         <i class="fas fa-users"></i> Hoạt động
                     </a>
                 </li>

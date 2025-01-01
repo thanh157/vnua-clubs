@@ -21,13 +21,13 @@ class Club extends Model
         'balance',
         'category',
         'likes',
-        'admin_id'
+        'owner_id'
     ];
 
     // Relationship tới User làm President
     public function president(): HasOne
     {
-        return $this->hasOne(User::class, 'id', 'admin_id');
+        return $this->hasOne(User::class, 'id', 'owner_id');
     }
 
     // Relationship tới User làm Member
@@ -71,4 +71,10 @@ class Club extends Model
         }
         return $this->likes()->where('user_id', $user->id)->exists();
     }
+
+     // Relationship tới Activity
+     public function activities(): HasMany
+     {
+         return $this->hasMany(Activity::class);
+     }
 }

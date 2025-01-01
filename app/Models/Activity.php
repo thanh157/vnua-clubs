@@ -14,8 +14,11 @@ class Activity extends Model
     protected $fillable = [
         'name',
         'description',
+        'time_note',
+        'image_url',
         'start_date',
         'end_date',
+        'location',
         'status',
         'club_id',
         'budget'

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use App\Enums\Role;
 use Illuminate\Support\Str;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
@@ -30,6 +31,7 @@ class RegisterController extends Controller
         }
 
         $user = $this->create($request->all());
+        event(new Registered($user)); // Gửi sự kiện Registered để gửi email xác minh
 
         Auth::login($user);
 

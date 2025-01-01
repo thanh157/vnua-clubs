@@ -61,7 +61,7 @@ Chi tiết câu lạc bộ
                         <div class="d-flex align-items-center">
                             <i class="fa-solid fa-users text-indigo me-3" style="font-size: 2rem;"></i>
                             <div class="flex-fill text-end">
-                                <h4 class="mb-0">245</h4>
+                                <h4 class="mb-0">{{ $memberAmount }}</h4>
                                 <span class="text-muted">Thành viên</span>
                             </div>
                         </div>
@@ -131,7 +131,7 @@ Chi tiết câu lạc bộ
                     <div class="card card-body bg-primary text-white">
                         <div class="d-flex align-items-center">
                             <div class="flex-fill">
-                                <h4 class="mb-0">100</h4>
+                                <h4 class="mb-0">{{ $postCount }}</h4>
                                 Bài viết
                             </div>
                             <i class="fa-solid fa-newspaper text-white opacity-75 ms-3" style="font-size: 2rem;"></i>
@@ -253,13 +253,13 @@ Chi tiết câu lạc bộ
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($posts as $index => $post)
+                        @foreach($currentActivities as $index => $activity)
                         <tr>
                             <td>{{ $index + 1 }}</td>
-                            <td>{{ \Carbon\Carbon::parse($post->start_date)->format('H:i d/m/Y') }} - {{ \Carbon\Carbon::parse($post->end_date)->format('H:i d/m/Y') }}</td>
+                            <td>{{ \Carbon\Carbon::parse($activity->start_date)->format('H:i d/m/Y') }} - {{ \Carbon\Carbon::parse($activity->end_date)->format('H:i d/m/Y') }}</td>
     
-                            <td>{{ $post->title }}</td>
-                            <td>{{ $post->location }}</td>
+                            <td>{{ $activity->name }}</td>
+                            <td>{{ $activity->location }}</td>
                         </tr>
                         @endforeach
                     </tbody>

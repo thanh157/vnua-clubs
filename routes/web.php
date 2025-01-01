@@ -5,6 +5,10 @@ use App\Http\Controllers\User\ClubController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Guest\ActivityController;
+
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,7 +65,7 @@ Route::get('/admin-club', function () {
     return view('admin.pages.club');
 });
 
-Route::get('/Hoat-dong-sap-toi', fn() => view('client/pages/actives/actives'))->name('client.actives');
+Route::get('/Hoat-dong-sap-toi', fn() => view('client/pages/actives/actives'))->name('client.activities');
 // homehome
 Route::get('/Trang-chu', [HomeController::class, 'index'])->name('client.home');
 //activeactive
@@ -73,7 +77,8 @@ Route::post('logout', [LoginController::class, 'logout'])->name('client.logout')
 // Route::get('register', )->name('register'); 
 Route::post('register', [RegisterController::class, 'register']);
 
-Route::get('/Chi-tiet-cau-lac-bo/{clubId}',  [ClubController::class, 'index'])->name('client.details');
+Route::get('/Chi-tiet-cau-lac-bo/{clubId}',  [ClubController::class, 'index'])->name('client.details'); //->middleware('verified');
+
 // Route for liking a club
 Route::post('/clubs/{id}/like', [ClubController::class, 'like'])->name('clubs.like')->middleware('auth');
 
@@ -87,10 +92,36 @@ Route::get('/Dang-ki-tham-gia-CLB', fn() => view('client/pages/forms/form-member
 // dli tl clb
 Route::get('/Dang-ki-thanh-lap-clb', fn() => view('client/pages/forms/form-club'))->name('client.form-club');
 
+// Route for showing the registration form
+Route::get('/clubs/register/{id}', [ClubController::class, 'showRegisterForm'])->name('clubs.showRegisterForm')->middleware('auth');
+
+// Route for handling the registration
+Route::post('/clubs/register/{id}', [ClubController::class, 'register'])->name('clubs.register')->middleware('auth');
 // dki tk 
 Route::get('/Dang-ki-tai-khoan', [RegisterController::class, 'showRegistrationForm'])->name('client.sign-up');
+
 Route::post('/Dang-ki-tai-khoan', [RegisterController::class, 'register'])->name('client.sign-up.submit');
 
+// Send mail verify
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect('/Trang-chu');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::post('/email/resend', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.resend');
+
+// Route cho các hoạt động
+Route::resource('Hoat-dong-sap-toi', ActivityController::class);
+Route::get('/Hoat-dong-sap-toi', [ActivityController::class,'index'])->name('client.activities');
 
 // profile
 Route::get('/edit-profile', fn() => view('client/pages/edit-profile/edit'))->name('client.edit');

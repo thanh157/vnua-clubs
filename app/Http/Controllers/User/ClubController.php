@@ -7,7 +7,9 @@ use App\Models\Club;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Like;
 use App\DTOs\ClubDTO;
+use App\Models\Member;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request;
 
 class ClubController extends Controller
 {
@@ -15,16 +17,17 @@ class ClubController extends Controller
     {
         try {
             Log::info('ClubController@index');
-            $club = Club::findOrFail($id);
-            $clubDto = ClubDTO::fromClub($club);
-            $membserAmount = $club->users()->count();
-            // $postCount = $club->posts()->count();
-            // $currentPosts = $club->posts()->latest()->take(3)->get();
+            $clubObject = Club::findOrFail($id);
+            $club = ClubDTO::fromClub($clubObject);
+            $memberAmount = $clubObject->users()->count();
+            $activityCount = $clubObject->activities()->count();
+            $currentActivities = $clubObject->activities()->orderBy('start_date', 'desc')->take(5)->get();
+            $postCount = $clubObject->posts()->count();
             
-            return view('client.pages.clubs-details.details', compact('clubDto', 'membserAmount', 'postCount', 'currentPosts'));
+            return view('client.pages.clubs-details.details', compact('club', 'memberAmount', 'activityCount', 'currentActivities', 'postCount'));
             // return view('client.pages.clubs-details.details', compact('club'));
         } catch (\Exception $e) {
-            Log::info('Error: '. $e->getMessage());
+            Log::error('Error: '. $e->getMessage());
             return redirect()->back()->with('error', 'Club not found');
         }
     }
@@ -47,6 +50,35 @@ class ClubController extends Controller
         $club->increment('likes');
 
         return response()->json(['message' => 'Liked successfully', 'likes' => $club->likes()->count()]);
+    }
+
+    public function showRegisterForm($id)
+    {
+        $club = Club::findOrFail($id);
+        return view('client.pages.forms.form-member', compact('club'));
+    }
+
+    public function register(Request $request, $id)
+    {
+        $user = Auth::user();
+        $club = Club::findOrFail($id);
+
+        // Kiểm tra xem người dùng đã là thành viên của câu lạc bộ chưa
+        $existingMember = Member::where('user_id', $user->id)->where('club_id', $club->id)->first();
+        if ($existingMember) {
+            return redirect()->back()->with('error', 'Bạn đã là thành viên của câu lạc bộ này.');
+        }
+
+        // Tạo mới thành viên
+        Member::create([
+            'user_id' => $user->id,
+            'club_id' => $club->id,
+            'role' => 'member', // Hoặc vai trò khác nếu cần
+            'is_active' => true,
+            'is_blocked' => false,
+        ]);
+
+        return redirect()->back()->with('success', 'Đăng ký tham gia câu lạc bộ thành công.');
     }
 }
 

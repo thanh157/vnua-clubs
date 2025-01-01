@@ -13,6 +13,9 @@ class Post extends Model
     protected $fillable = [
         'title',
         'content',
+        'image',
+        'status',
+        'reference_url',
         'club_id',
         'user_id'
     ];
