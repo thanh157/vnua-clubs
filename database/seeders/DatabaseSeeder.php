@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Club;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,8 +19,8 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        // $this->call(AdminSeeder::class);
+        $this->call(AdminSeeder::class);
         // Tạo 10 câu lạc bộ
-        // Club::factory()->count(10)->create();
+        $this->call(ClubSeeder::class);
     }
 }

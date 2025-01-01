@@ -147,9 +147,9 @@ Trang chủ
                     </div>
 
                     <div class="card-footer d-flex justify-content-between position-relative">
-                        <a href="#" class="text-decoration-none text-muted like-icon">
+                        <a href="#" class="text-decoration-none text-muted like-icon" data-club-id="{{ $club->id }}" @if($club->isLikedBy(Auth::user())) style="pointer-events: none; color: gray;" @endif>
                             <i class="ph-heart me-2" style="cursor: pointer;"></i>
-                            <span>{{ $club->likes }}</span>
+                            <span class="like-count">{{ $club->likes }}</span>
                         </a>
                         <a href="{{ route('client.details', $club->id) }}"
                             class="text-decoration-none text-primary see-more">
@@ -389,6 +389,42 @@ Trang chủ
     </div>
 
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.like-icon').forEach(function(element) {
+            element.addEventListener('click', function(event) {
+                event.preventDefault();
+                var clubId = this.getAttribute('data-club-id');
+                var likeIcon = this;
+
+                fetch(`/clubs/${clubId}/like`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        body: JSON.stringify({})
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.message === 'Liked successfully') {
+                            var likeCountElement = likeIcon.querySelector('.like-count');
+                            likeCountElement.textContent = data.likes;
+                            likeIcon.style.pointerEvents = 'none';
+                            likeIcon.style.color = 'gray';
+                            // Tạo nhiều trái tim bay lên
+                for (let i = 0; i < 8; i++) { // Tạo 8 trái tim bay lên
+                    createFlyingHeart(heartContainer);
+                }
+                        } else {
+                            alert(data.message);
+                        }
+                    });
+            });
+        });
+    });
+</script>
 <!-- Add inline CSS for hover effects -->
 <style>
     /* Hero Section: Change background color on hover */

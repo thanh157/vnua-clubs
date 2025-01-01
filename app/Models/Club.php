@@ -20,7 +20,8 @@ class Club extends Model
         'description',
         'balance',
         'category',
-        'likes'
+        'likes',
+        'admin_id'
     ];
 
     // Relationship tới User làm President
@@ -51,4 +52,16 @@ class Club extends Model
         return $this->hasMany(MemberRequest::class);
     }
 
+    public function likes(): HasMany
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    public function isLikedBy(?User $user)
+    {
+        if ($user === null) {
+            return true;
+        }
+        return $this->likes()->where('user_id', $user->id)->exists();
+    }
 }

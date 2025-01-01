@@ -11,13 +11,13 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('code')->unique();
+            $table->string('name')->nullable();
+            $table->string('code')->nullable()->unique();
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('phone');
+            $table->string('phone')->nullable();
             $table->enum('role', array_map(fn($role) => $role->value, Role::cases()));
-            $table->integer('club_id');
+            // $table->integer('club_id');
             $table->timestamps();
         });
     }
