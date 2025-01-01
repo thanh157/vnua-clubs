@@ -4,18 +4,27 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Club;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Like;
+use App\DTOs\ClubDTO;
+use Illuminate\Support\Facades\Log;
 
 class ClubController extends Controller
 {
-    public function show($id)
+    public function index($id)
     {
         try {
+            Log::info('ClubController@index');
             $club = Club::findOrFail($id);
-            return view('client.pages.clubs-details.details', compact('club'));
+            $clubDto = ClubDTO::fromClub($club);
+            $membserAmount = $club->users()->count();
+            // $postCount = $club->posts()->count();
+            // $currentPosts = $club->posts()->latest()->take(3)->get();
+            
+            return view('client.pages.clubs-details.details', compact('clubDto', 'membserAmount', 'postCount', 'currentPosts'));
+            // return view('client.pages.clubs-details.details', compact('club'));
         } catch (\Exception $e) {
+            Log::info('Error: '. $e->getMessage());
             return redirect()->back()->with('error', 'Club not found');
         }
     }

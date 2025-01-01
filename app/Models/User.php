@@ -47,4 +47,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class);
     }
+
+    public function clubs()
+    {
+        return $this->belongsToMany(Club::class, 'user_club_member')
+                    ->withPivot('role', 'is_active', 'is_blocked')
+                    ->withTimestamps();
+    }
 }

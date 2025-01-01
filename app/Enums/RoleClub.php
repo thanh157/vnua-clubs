@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum Role: string
+enum RoleClub: string
 {
     case PRESIDENT = 'president';
     case VICE_PRESIDENT = 'vice_president';

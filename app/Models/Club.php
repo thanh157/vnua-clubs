@@ -27,19 +27,26 @@ class Club extends Model
     // Relationship tới User làm President
     public function president(): HasOne
     {
-        return $this->hasOne(User::class, 'club_id')->where('role', Role::PRESIDENT);
+        return $this->hasOne(User::class, 'id', 'admin_id');
     }
 
     // Relationship tới User làm Member
     public function members(): HasMany
     {
-        return $this->hasMany(User::class, 'club_id')->where('role', Role::MEMBER);
+        return $this->hasMany(Member::class);
     }
 
+    // Relationship tới User
     public function users()
     {
         return $this->belongsToMany(User::class, 'user_club_member')
-                    ->withTimestamps(); // Automatically manages created_at and updated_at
+                    ->withPivot('role', 'is_active', 'is_blocked')
+                    ->withTimestamps();
+    }
+
+    public function memberUsers()
+    {
+        return $this->users()->wherePivot('role', 'member');
     }
 
     public function posts(): HasMany

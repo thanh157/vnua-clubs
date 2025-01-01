@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Enums\RoleClub;
 
 return new class extends Migration
 {
@@ -15,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('club_id')->constrained()->onDelete('cascade');
+            $table->enum('role', array_map(fn($role) => $role->value, RoleClub::cases()));
             $table->boolean('is_active')->default(true);
             $table->boolean('is_blocked')->default(false);
             $table->timestamps();

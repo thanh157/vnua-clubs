@@ -13,6 +13,8 @@ class ClubDTO
     public $balance;
     public $category;
     public $likes;
+    public $membserAmount;  
+    public $postCount;            
 
     public function __construct($id, $name, $thumbnail, $cover_image, $description, $balance, $category, $likes)
     {

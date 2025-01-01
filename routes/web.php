@@ -77,7 +77,7 @@ Route::get('/Chi-tiet-cau-lac-bo/{clubId}',  [ClubController::class, 'index'])->
 // Route for liking a club
 Route::post('/clubs/{id}/like', [ClubController::class, 'like'])->name('clubs.like')->middleware('auth');
 
-Route::get('/Chi-tiet-cau-lac-bo', fn() => view('client/pages/clubs-details/details'))->name('client.details');
+// Route::get('/Chi-tiet-cau-lac-bo', fn() => view('client/pages/clubs-details/details'))->name('client.details');
 // form dk tv
 Route::get('/Dang-ki-thanh-vien', fn() => view('client/pages/forms/form-member'))->name('client.form-member');
 

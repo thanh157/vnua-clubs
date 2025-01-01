@@ -38,8 +38,6 @@ class ClubController extends Controller
         $like->club_id = $club->id;
         $like->save();
 
-        $user->
-
         return response()->json(['message' => 'Liked successfully', 'likes' => $club->likes()->count()]);
     }
 }

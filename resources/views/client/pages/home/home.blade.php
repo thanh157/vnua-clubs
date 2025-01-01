@@ -142,7 +142,7 @@ Trang chủ
                         style="height: 180px; object-fit: cover;">
 
                     <div class="card-body">
-                        <h5 class="card-title" style="font-size: 1.25rem; font-weight: bold;">{{ $club->name }}</h5>
+                        <h5 class="card-title" style="font-size: 1.25rem; font-weight: bold;">{{ Str::limit($club->name, 20) }}</h5>
                         <p class="card-text" style="font-size: 14px;">{{ Str::limit($club->description, 100) }}</p>
                     </div>
 
