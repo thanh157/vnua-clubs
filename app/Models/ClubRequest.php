@@ -10,13 +10,15 @@ class ClubRequest extends Model
 {
     use HasFactory;
 
+    use HasFactory;
+
     protected $fillable = [
-        'name',
+        'club_name',
         'description',
-        'owner_name',
-        'owner_code',
-        'owner_email',
-        'owner_phone',
+        'category',
+        'activity_time',
+        'logo',
+        'user_id',
         'status'
     ];
 

@@ -281,7 +281,7 @@ Trang chủ
             <p style="font-size: 1.125rem;">Đừng bỏ lỡ cơ hội trở thành một phần của cộng đồng sinh viên năng động.</p>
             <div class="dk" style="padding: 20px">
                 <a href="{{ route('client.form-member') }}" class="btn btn-warning rounded-pill px-4 py-2" style="margin-right: 20px;">Đăng ký tham gia CLB</a>
-                <a href="{{ route('client.form-club') }}" class="btn btn-warning rounded-pill px-4 py-2">Đăng ký thành lập CLB</a>
+                <a href="{{ route('club-requests.create') }}" class="btn btn-warning rounded-pill px-4 py-2">Đăng ký thành lập CLB</a>
             </div>
         </div>
 

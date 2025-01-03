@@ -27,9 +27,9 @@ class HomeController extends Controller
 
         // Ghi log thông tin các câu lạc bộ, hoạt động và bài post
         Log::info('Loaded clubs size:', [ $clubs->count() ]);
-        Log::info('Loaded clubs:', ['clubs' => $clubs]);
-        Log::info('Loaded latest activities:', ['activities' => $latestActivities]);
-        Log::info('Loaded latest posts:', ['posts' => $latestPosts]);
+        // Log::info('Loaded clubs:', ['clubs' => $clubs]);
+        // Log::info('Loaded latest activities:', ['activities' => $latestActivities]);
+        // Log::info('Loaded latest posts:', ['posts' => $latestPosts]);
 
         return view('client.pages.home.home', compact('clubs', 'latestActivities', 'latestPosts')); 
     }

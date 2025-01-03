@@ -7,6 +7,7 @@ use App\Models\Club;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Like;
 use App\DTOs\ClubDTO;
+use App\Enums\RoleClub;
 use App\Models\Member;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
@@ -79,6 +80,41 @@ class ClubController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Đăng ký tham gia câu lạc bộ thành công.');
+    }
+
+    public function showRegisterClubForm()
+    {
+        return view('client.pages.forms.form-club');
+    }
+
+    public function registerClub(Request $request)
+    {
+        // Xác thực dữ liệu
+        $validated = $request->validate([
+            'club_name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'category' => 'required|string|max:255',
+            'activity_time' => 'required|string|max:255',
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        // Xử lý upload file logo
+        $logoPath = null;
+        if ($request->hasFile('logo')) {
+            $logoPath = $request->file('logo')->store('logos', 'public');
+        }
+
+        // Tạo mới câu lạc bộ
+        Club::create([
+            'name' => $validated['club_name'],
+            'description' => $validated['description'],
+            'category' => $validated['category'],
+            'activity_time' => $validated['activity_time'],
+            'logo' => $logoPath,
+            'owner_id' => Auth::id(), // Lấy ID của người dùng hiện tại
+        ]);
+
+        return redirect()->route('client.form-club')->with('success', 'Đăng ký thành lập câu lạc bộ thành công.');
     }
 }
 

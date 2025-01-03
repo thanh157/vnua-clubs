@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\User\ClubRequestController;
 use App\Http\Controllers\Guest\HomeController;
 use App\Http\Controllers\User\ClubController;
 use Illuminate\Support\Facades\Route;
@@ -90,7 +91,7 @@ Route::get('/Dang-ki-thanh-vien', fn() => view('client/pages/forms/form-member')
 Route::get('/Dang-ki-tham-gia-CLB', fn() => view('client/pages/forms/form-member'))->name('client.form-member');
 
 // dli tl clb
-Route::get('/Dang-ki-thanh-lap-clb', fn() => view('client/pages/forms/form-club'))->name('client.form-club');
+// Route::get('/Dang-ki-thanh-lap-clb', fn() => view('client/pages/forms/form-club'))->name('client.form-club');
 
 // Route for showing the registration form
 Route::get('/clubs/register/{id}', [ClubController::class, 'showRegisterForm'])->name('clubs.showRegisterForm')->middleware('auth');
@@ -138,3 +139,12 @@ Route::get('/notification', fn() => view('client/pages/notifications/notificatio
 Route::get('/404', function () {
     abort(404);
 });
+
+
+
+
+// Route để hiển thị form đăng ký thành lập câu lạc bộ
+Route::get('/club-requests/create', [ClubRequestController::class, 'create'])->name('club-requests.create')->middleware('auth');
+
+// Route để xử lý việc lưu form đăng ký thành lập câu lạc bộ
+Route::post('/club-requests/store', [ClubRequestController::class, 'store'])->name('club-requests.store');
