@@ -15,16 +15,14 @@ class Resource extends Model
         'public_url',
         'secure_url',
         'type',
-        'useFor',
+        'use_for',
         'public_id',
-        'club_id',
-        'user_id',
-        'activity_id',
-        'post_id',
+        'use_for_id',
+        'create_user_id',
     ];
 
     protected $casts = [
         'type' => ResourceType::class,
-        'useFor' => ResourceUseFor::class,
+        'use_for' => ResourceUseFor::class,
     ];
 }

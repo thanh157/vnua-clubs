@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Enums\ResourceType;
+use App\Enums\ResourceUseFor;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ClubRequest;
@@ -47,11 +49,20 @@ class ClubRequestController extends Controller
             'user_id' => Auth::id(), // Lấy ID của người dùng hiện tại
         ]);
 
+        // Tạo metadata
+        $metaData = [
+            'type' => ResourceType::IMAGE,
+            'use_for' => ResourceUseFor::CLUB_REQUEST,
+            'use_for_id' => $clubRequest->id,
+            'create_user_id' => Auth::id()
+        ];
+
         // Xử lý upload file logo ngầm
         if ($request->hasFile('logo')) {
             $file = $request->file('logo');
             $filePath = $file->store('temp'); // Lưu file tạm thời
-            UploadImageToCloud::dispatch($clubRequest, $filePath, 'logo');
+
+            UploadImageToCloud::dispatch($clubRequest, $filePath, 'logo', $metaData);
         }
 
         return redirect()->route('client.home')->with('success', 'Đã nộp đơn đăng ký thành công!');

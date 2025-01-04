@@ -18,12 +18,10 @@ return new class extends Migration
             $table->string('public_url');
             $table->string('secure_url');
             $table->enum('type', array_map(fn($type) => $type->value, ResourceType::cases()));
-            $table->enum('useFor', array_map(fn($for) => $for->value, ResourceUseFor::cases()));
+            $table->enum('use_for', array_map(fn($for) => $for->value, ResourceUseFor::cases()));
             $table->string('public_id');
-            $table->unsignedBigInteger('club_id')->nullable();
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->unsignedBigInteger('activity_id')->nullable();
-            $table->unsignedBigInteger('post_id')->nullable();
+            $table->unsignedBigInteger('create_user_id')->nullable();
+            $table->unsignedBigInteger('use_for_id')->nullable();
             $table->timestamps();
         });
     }
