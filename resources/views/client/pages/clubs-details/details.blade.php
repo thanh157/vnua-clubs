@@ -32,7 +32,7 @@ Chi tiết câu lạc bộ
         </div>
     </div>
 
-    {{-- {{-- view club --}}
+    {{-- view club --}}
     <div class="content">
         <!-- Simple statistics -->
         <div class="content">
@@ -163,7 +163,7 @@ Chi tiết câu lạc bộ
                     </div>
                 </div> --}}
             </div>
-    
+
             {{-- gioi thieu chi tiet clb --}}
             <div class="mt-4 mb-3 d-flex align-items-stretch align-items-lg-start flex-column flex-lg-row">
                 <!-- Left content -->
@@ -231,7 +231,6 @@ Chi tiết câu lạc bộ
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -246,10 +245,10 @@ Chi tiết câu lạc bộ
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>STT</th>
-                            <th>Thời gian tổ chức</th>
-                            <th>Tên hoạt động</th>
-                            <th>Địa điểm</th>
+                            {{-- <th>STT</th> --}}
+                            <th>Tên</th>
+                            <th>Mô tả</th>
+                            <th>Số thành viên</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -257,7 +256,6 @@ Chi tiết câu lạc bộ
                         <tr>
                             <td>{{ $index + 1 }}</td>
                             <td>{{ \Carbon\Carbon::parse($activity->start_date)->format('H:i d/m/Y') }} - {{ \Carbon\Carbon::parse($activity->end_date)->format('H:i d/m/Y') }}</td>
-    
                             <td>{{ $activity->name }}</td>
                             <td>{{ $activity->location }}</td>
                         </tr>
@@ -449,16 +447,12 @@ Chi tiết câu lạc bộ
                     <div class="">
                         <!-- Nội dung khác có thể được thêm vào đây -->
                     </div>
-                    <a href="{{ route('client.members')}}" class="text-end text-decoration-underline mt-3 d-inline-block" id="expenditureLink">Xem danh sách thành viên</a>
+                    <a href="{{ route('client.members')}}" class="text-end text-decoration-underline mt-3 d-inline-block" id="expenditureLinkb">Xem danh sách thành viên</a>
                 </div>
             </div>
-
         </div>
         {{-- end QLCT--}}
-
-
     </div>
-</div>
 </div>
 
 @endsection

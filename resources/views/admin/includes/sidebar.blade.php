@@ -66,9 +66,7 @@
             </ul>
         </div>
         <!-- /main navigation -->
-
     </div>
     <!-- /sidebar content -->
-
 </div>
 <!-- /main sidebar -->

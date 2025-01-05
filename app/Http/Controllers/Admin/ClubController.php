@@ -20,13 +20,18 @@ class ClubController extends Controller
         return view('admin.clubs.show', compact('club'));
     }
 
-    public function approve(Request $request, $id)
+    public function approve($id)
     {
         $club = Club::findOrFail($id);
         $club->status = 'approved';
         $club->save();
 
         return redirect()->route('admin.clubs.index');
+    }
+
+    public function create()
+    {
+        return view('admin.clubs.create');
     }
 
     public function edit($id)
@@ -48,5 +53,15 @@ class ClubController extends Controller
         Club::destroy($id);
 
         return redirect()->route('admin.clubs.index');
+    }
+
+    public function spending()
+    {
+        return view('admin.clubs.spending');
+    }
+
+    public function report()
+    {
+        return view('admin.clubs.report');
     }
 }

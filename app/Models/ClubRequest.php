@@ -2,9 +2,8 @@
 
 namespace App\Models;
 
-use App\Enums\StatusRequestClub;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class ClubRequest extends Model
 {
@@ -21,9 +20,4 @@ class ClubRequest extends Model
         'user_id',
         'status'
     ];
-
-    protected $casts = [
-        'status' => StatusRequestClub::class,
-    ];
 }
-

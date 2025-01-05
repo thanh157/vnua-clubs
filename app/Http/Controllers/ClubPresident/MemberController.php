@@ -1,34 +1,23 @@
 <?php
 
-namespace App\Http\Controllers\ClubPresident;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Membership;
-use Illuminate\Http\Request;
 
 class MemberController extends Controller
 {
-    public function approveRequest($id)
+    public function approve()
     {
-        $membership = Membership::findOrFail($id);
-        $membership->status = 'approved';
-        $membership->save();
-
-        return redirect()->route('clubpresident.members.index');
+        return view('admin.pages.admin-club.club-list2');
     }
 
-    public function index()
+    public function list()
     {
-        $members = Membership::where('club_id', auth()->user()->club_id)->get();
-        return view('clubpresident.members.index', compact('members'));
+        return view('admin.members.list');
     }
 
-    public function getBoardMembers()
+    public function committee()
     {
-        $boardMembers = Membership::where('club_id', auth()->user()->club_id)
-                                   ->where('role', 'board')
-                                   ->get();
-        return view('clubpresident.members.board', compact('boardMembers'));
+        return view('admin.members.committee');
     }
 }
-

@@ -7,6 +7,7 @@ use App\Models\Club;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Like;
+use Illuminate\Support\Facades\Log;
 
 class ClubController extends Controller
 {
@@ -17,10 +18,11 @@ class ClubController extends Controller
     {
         try {
             $club = Club::findOrFail($id);
-            
+
             return view('client.pages.clubs-details.details', compact('club'));
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Club not found');
+            Log::info($e);
+            // return redirect()->back()->with('error', 'Club not found');
         }
     }
 
