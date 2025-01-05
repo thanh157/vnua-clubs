@@ -18,10 +18,8 @@ class ClubController extends Controller
             $club = Club::findOrFail($id);
             $clubDto = ClubDTO::fromClub($club);
             $membserAmount = $club->users()->count();
-            // $postCount = $club->posts()->count();
-            // $currentPosts = $club->posts()->latest()->take(3)->get();
-            
-            return view('client.pages.clubs-details.details', compact('clubDto', 'membserAmount', 'postCount', 'currentPosts'));
+
+            return view('client.pages.clubs-details.details', compact('clubDto', 'membserAmount'));
             // return view('client.pages.clubs-details.details', compact('club'));
         } catch (\Exception $e) {
             Log::info('Error: '. $e->getMessage());
