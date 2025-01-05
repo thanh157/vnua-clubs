@@ -16,7 +16,7 @@ use App\Http\Controllers\Admin\ClubDescriptionController;
 use App\Http\Controllers\Admin\SpendingController;
 use App\Http\Controllers\Admin\AnnouncementController;
 use App\Http\Controllers\Admin\ClubRequestManagementController;
-
+use App\Http\Controllers\User\MemberRequestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -123,10 +123,10 @@ Route::get('/Dang-ki-tham-gia-CLB', fn() => view('client/pages/forms/form-member
 // Route::get('/Dang-ki-thanh-lap-clb', fn() => view('client/pages/forms/form-club'))->name('client.form-club');
 
 // Route for showing the registration form
-Route::get('/clubs/register/{id}', [ClubController::class, 'showRegisterForm'])->name('clubs.showRegisterForm')->middleware('auth');
+// Route::get('/clubs/register/{id}', [ClubController::class, 'showRegisterForm'])->name('clubs.showRegisterForm')->middleware('auth');
 
-// Route for handling the registration
-Route::post('/clubs/register/{id}', [ClubController::class, 'register'])->name('clubs.register')->middleware('auth');
+// // Route for handling the registration
+// Route::post('/clubs/register/{id}', [ClubController::class, 'register'])->name('clubs.register')->middleware('auth');
 // dki tk 
 Route::get('/Dang-ki-tai-khoan', [RegisterController::class, 'showRegistrationForm'])->name('client.sign-up');
 
@@ -223,3 +223,6 @@ Route::post('/club-registration', [ClubController::class, 'submitRegistration'])
 
 // Route để hiển thị danh sách đăng ký tham gia câu lạc bộ
 Route::get('/admin/club-requests', [ClubRequestController::class, 'index'])->name('admin.club-requests');
+
+Route::get('/member-requests/create/{club_id?}', [MemberRequestController::class, 'create'])->name('member-requests.create');
+Route::post('/member-requests/store', [MemberRequestController::class, 'store'])->name('member-requests.store');

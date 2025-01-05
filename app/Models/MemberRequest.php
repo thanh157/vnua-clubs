@@ -21,7 +21,9 @@ class MemberRequest extends Model
         'avatar',
         'faculty',
         'purpose',
-        'club_id'
+        'club_id',
+        'status',
+        'user_id'
     ];
 
     protected $casts = [

@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const clubBorderColor = borderColors[index % borderColors.length];
             const clubBackgroundColor = getUniqueBackgroundColor(clubBorderColor);
 
-            const registerUrl = `{{ url('/clubs/register/${activity.club_id}') }}`;
+            const registerUrl = `{{ url('/member-requests/create/${activity.club_id}') }}`;
 
             clubCard.innerHTML = `
                 <div class="card" style="border-radius: 8px; border: 1px solid ${clubBorderColor}; background-color: ${clubBackgroundColor};">

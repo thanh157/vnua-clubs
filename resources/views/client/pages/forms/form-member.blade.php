@@ -1,7 +1,7 @@
 @extends('client.layouts.master')
 
 @section('title')
-    Đăng kí tham gia câu lạc bộ
+Đăng kí tham gia câu lạc bộ
 @endsection
 
 @section('content')
@@ -21,11 +21,15 @@
             </div>
 
             <div class="card-body border-top">
-                <form onsubmit="return showSuccessMessage()">
+                <form id="memberRequestForm" action="{{ route('member-requests.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
                     <div class="row mb-3 mt-3">
                         <label class="col-lg-3 col-form-label">Họ và tên:</label>
                         <div class="col-lg-9">
                             <input type="text" class="form-control" name="name" placeholder="Nhập họ và tên của bạn" required>
+                            @if ($errors->has('name'))
+                            <span class="text-danger">{{ $errors->first('name') }}</span>
+                            @endif
                         </div>
                     </div>
 
@@ -33,6 +37,9 @@
                         <label class="col-lg-3 col-form-label">Mã sinh viên:</label>
                         <div class="col-lg-9">
                             <input type="text" class="form-control" name="student_id" placeholder="Nhập mã sinh viên của bạn" required>
+                            @if ($errors->has('student_id'))
+                            <span class="text-danger">{{ $errors->first('student_id') }}</span>
+                            @endif
                         </div>
                     </div>
 
@@ -40,13 +47,19 @@
                         <label class="col-lg-3 col-form-label">Tên lớp:</label>
                         <div class="col-lg-9">
                             <input type="text" class="form-control" name="class_name" placeholder="Nhập tên lớp của bạn" required>
+                            @if ($errors->has('class_name'))
+                            <span class="text-danger">{{ $errors->first('class_name') }}</span>
+                            @endif
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <label class="col-lg-3 col-form-label">Email:</label>
                         <div class="col-lg-9">
-                            <input type="email" class="form-control" name="email" placeholder="Nhập email của bạn" required>
+                            <input type="email" class="form-control" name="email" placeholder="Nhập email của bạn" value="{{ Auth::user()->email }}" text="{{ Auth::user()->email }}" required readonly>
+                            <!-- @if ($errors->has('email'))
+                            <span class="text-danger">{{ $errors->first('email') }}</span>
+                            @endif -->
                         </div>
                     </div>
 
@@ -54,9 +67,12 @@
                         <label class="col-lg-3 col-form-label">Số điện thoại:</label>
                         <div class="col-lg-9">
                             <input type="tel" class="form-control" name="phone" placeholder="Nhập số điện thoại của bạn" required pattern="[0-9]{10}" title="Vui lòng nhập đúng số điện thoại (10 chữ số)">
+                            @if ($errors->has('phone'))
+                            <span class="text-danger">{{ $errors->first('phone') }}</span>
+                            @endif
                         </div>
                     </div>
-                    
+
                     <div class="row mb-3">
                         <label class="col-lg-3 col-form-label">Giới tính:</label>
                         <div class="col-lg-9">
@@ -75,6 +91,9 @@
                                 </label>
                             </div>
                         </div>
+                        @if ($errors->has('gender'))
+                        <span class="text-danger">{{ $errors->first('gender') }}</span>
+                        @endif
                     </div>
 
                     <div class="row mb-3">
@@ -97,13 +116,21 @@
                                 <option value="veterinary">Thú y</option>
                                 <option value="aquaculture">Thủy sản</option>
                             </select>
+                            @if ($errors->has('faculty'))
+                            <span class="text-danger">{{ $errors->first('faculty') }}</span>
+                            @endif
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <label class="col-lg-3 col-form-label">Tên câu lạc bộ muốn đăng kí:</label>
                         <div class="col-lg-9">
-                            <input type="text" class="form-control" name="name_club" placeholder="Nhập tên câu lạc bộ bạn muốn tham gia" required>
+                            <select class="form-control" name="club_id" required>
+                                <option value="" disabled>Chọn câu lạc bộ</option>
+                                @foreach($clubs as $club)
+                                <option value="{{ $club->id }}" {{ $club->id == $defaultClubId ? 'selected' : '' }}>{{ $club->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
 
@@ -111,17 +138,23 @@
                         <label class="col-lg-3 col-form-label">Mục đích tham gia câu lạc bộ:</label>
                         <div class="col-lg-9">
                             <textarea rows="3" cols="3" class="form-control" name="message" placeholder="Nhập câu trả lời của bạn" required></textarea>
+                            @if ($errors->has('message'))
+                            <span class="text-danger">{{ $errors->first('message') }}</span>
+                            @endif
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <label class="col-lg-3 col-form-label">Ảnh đại diện của bạn:</label>
                         <div class="col-lg-9">
-                            <input type="file" class="form-control" accept=".png, .jpg, .jpeg" required>
+                            <input type="file" class="form-control" accept=".png, .jpg, .jpeg" required name="avatar">
                             <div class="form-text text-muted">Các định dạng được chấp nhận: .png, .jpg, .jpeg Kích thước tệp tối đa 2Mb</div>
+                            @if ($errors->has('avatar'))
+                            <span class="text-danger">{{ $errors->first('avatar') }}</span>
+                            @endif
                         </div>
                     </div>
-                    
+
                     <div class="text-end mt-3 mb-3">
                         <button type="submit" class="btn btn-primary" style="height: 45px; font-size:16px">Gửi đơn <i class="ph-paper-plane-tilt ms-2"></i></button>
                     </div>
@@ -141,17 +174,50 @@
 </div>
 
 <script>
+    document.getElementById('memberRequestForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        let formData = new FormData(this);
+
+        fetch("{{ route('member-requests.store') }}", {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Xóa các thông báo lỗi cũ
+            document.querySelectorAll('.text-danger').forEach(el => el.innerText = '');
+
+            if (data.errors) {
+                for (const [key, value] of Object.entries(data.errors)) {
+                    if (key === 'form') {
+                        alert(value[0]);
+                    } else {
+                        document.getElementById(`error-${key}`).innerText = value[0];
+                    }
+                }
+            } else {
+                showSuccessMessage();
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    });
     function showSuccessMessage() {
         // Ẩn toàn bộ form đăng ký, header và body
         document.getElementById('registrationForm').style.display = 'none';
         document.getElementById('cardHeader').style.display = 'none';
         document.getElementById('cardBody').style.display = 'none';
-        
+
         // Hiển thị thông báo đăng ký thành công
         document.getElementById('successMessage').style.display = 'block';
 
-        // Ngừng gửi form thực tế
-        return false;
+        // Chuyển hướng về trang chủ sau 3 giây
+        setTimeout(function() {
+            window.location.href = "{{ route('client.home') }}";
+        }, 3000);
     }
 
     // Hàm quay lại trang chủ

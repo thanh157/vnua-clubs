@@ -8,4 +8,5 @@ enum ResourceUseFor: string
     case THUMBNAIL = 'THUMBNAIL';
     case GALLERY = 'GALLERY';
     case CLUB_REQUEST = 'CLUB_REQUEST';
+    case MEMBER_REQUEST = 'MEMBER_REQUEST';
 }
