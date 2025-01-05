@@ -209,7 +209,7 @@
 
         <ul class="nav flex-row justify-content-end order-1 order-lg-2">
             <li class="nav-item ms-lg-2 bg-success" style="border-radius: 30px">
-                <a href="#" class="navbar-nav-link rounded-pill d-flex align-items-center">
+                <a href=" {{ route('client.home')}}" class="navbar-nav-link rounded-pill d-flex align-items-center">
                     <i class="ph-house me-2"></i>
                     <span>Trang chủ</span>
                 </a>
@@ -225,11 +225,11 @@
                 <a href="#" class="navbar-nav-link align-items-center rounded-pill p-1" data-bs-toggle="dropdown">
                     <div class="status-indicator-container">
                         <img src="{{ Avatar::create('admin')->toBase64() }}" class="w-32px h-32px rounded-pill" alt="">
-{{--                        <img src="{{ Avatar::create('Nguyễn Phương Nam')->toBase64() }}" class="w-32px h-32px rounded-pill" alt="">--}}
+                        {{-- <img src="{{ Avatar::create('Nguyễn Phương Nam')->toBase64() }}" class="w-32px h-32px rounded-pill" alt="">--}}
                         <span class="status-indicator bg-success"></span>
                     </div>
-                    <span class="d-none d-lg-inline-block mx-lg-2">Admin</span>
-{{--                    <span class="d-none d-lg-inline-block mx-lg-2">Nguyễn Phương Nam</span>--}}
+                    <span class="d-none d-lg-inline-block mx-lg-2">{{ Auth::user()->name }}</span>
+                    {{-- <span class="d-none d-lg-inline-block mx-lg-2">Nguyễn Phương Nam</span>--}}
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-end">
@@ -238,10 +238,13 @@
                         Thông tin cá nhân
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <i class="ph-sign-out me-2"></i>
-                        Đăng xuất
-                    </a>
+                    <form action="{{ route('client.logout') }}" method="POST" class="dropdown-item">
+                        @csrf
+                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">
+                            <i class="ph-sign-out me-2"></i>
+                            Đăng xuất
+                        </button>
+                    </form>
                 </div>
             </li>
         </ul>

@@ -31,7 +31,7 @@
                     <div class="text-uppercase fs-sm lh-sm opacity-50 sidebar-resize-hide">Quản lý thành viên</div>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.admin-club') }}" class="nav-link">
+                    <a href="{{ route('admin.member-requests') }}" class="nav-link">
                         <i class="ph-check-square"></i>
                         <span>
                             Duyệt đơn đăng ký tham gia CLB

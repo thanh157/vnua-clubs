@@ -31,5 +31,27 @@ class AdminSeeder extends Seeder
                 'phone' => '1234567890',
             ]);
         }
+
+        if (!DB::table('users')->where('email', 'adclub@gmail.com')->exists()) {
+            DB::table('users')->insert([
+                'email' => 'adclub@gmail.com',
+                'password' => bcrypt('adclub@123'),
+                'role' => Role::ADMIN_CLUB,
+                'name' => 'Admin Club',
+                'code' => Str::random(10),
+                'phone' => '1234567890',
+            ]);
+        }
+
+        if (!DB::table('users')->where('email', 'user@gmail.com')->exists()) {
+            DB::table('users')->insert([
+                'email' => 'user@gmail.com',
+                'password' => bcrypt('user@123'),
+                'role' => Role::USER,
+                'name' => 'User',
+                'code' => Str::random(10),
+                'phone' => '1234567890',
+            ]);
+        }
     }
 }

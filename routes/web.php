@@ -222,7 +222,14 @@ Route::post('/club-registration', [ClubController::class, 'submitRegistration'])
 // Route::get('/admin/club-requests', [ClubRequestController::class, 'index'])->name('admin.club-requests');
 
 // Route để hiển thị danh sách đăng ký tham gia câu lạc bộ
-Route::get('/admin/club-requests', [ClubRequestController::class, 'index'])->name('admin.club-requests');
+Route::get('/admin/club-requests', [ClubRequestManagementController::class, 'index'])->name('admin.club-requests');
 
 Route::get('/member-requests/create/{club_id?}', [MemberRequestController::class, 'create'])->name('member-requests.create');
 Route::post('/member-requests/store', [MemberRequestController::class, 'store'])->name('member-requests.store');
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/member-requests', [ClubRequestManagementController::class, 'member'])->name('admin.member-requests');
+    Route::patch('/admin/member-requests/approve/{id}', [ClubRequestManagementController::class, 'approve'])->name('admin.member-requests.approve');
+    Route::patch('/admin/member-requests/{id}/reject', [ClubRequestManagementController::class, 'reject'])->name('admin.member-requests.reject');
+    Route::delete('/admin/member-requests/{id}', [ClubRequestManagementController::class, 'deleteMemberRequest'])->name('admin.member-requests.delete');
+});
