@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\DTOs\ClubDTO;
 use App\Enums\Role;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,24 +18,35 @@ class Club extends Model
         'thumbnail',
         'cover_image',
         'description',
-        'balance'
+        'balance',
+        'category',
+        'likes',
+        'admin_id'
     ];
 
     // Relationship tới User làm President
     public function president(): HasOne
     {
-        return $this->hasOne(User::class, 'club_id')->where('role', Role::PRESIDENT);
+        return $this->hasOne(User::class, 'id', 'admin_id');
     }
 
     // Relationship tới User làm Member
     public function members(): HasMany
     {
-        return $this->hasMany(User::class, 'club_id')->where('role', Role::MEMBER);
+        return $this->hasMany(Member::class);
     }
 
-    public function users(): HasMany
+    // Relationship tới User
+    public function users()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsToMany(User::class, 'user_club_member')
+                    ->withPivot('role', 'is_active', 'is_blocked')
+                    ->withTimestamps();
+    }
+
+    public function memberUsers()
+    {
+        return $this->users()->wherePivot('role', 'member');
     }
 
     public function posts(): HasMany
@@ -45,5 +57,18 @@ class Club extends Model
     public function memberRequests(): HasMany
     {
         return $this->hasMany(MemberRequest::class);
+    }
+
+    public function likes(): HasMany
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    public function isLikedBy(?User $user)
+    {
+        if ($user === null) {
+            return true;
+        }
+        return $this->likes()->where('user_id', $user->id)->exists();
     }
 }

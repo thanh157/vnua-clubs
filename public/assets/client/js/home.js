@@ -1,32 +1,32 @@
 document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.like-icon').forEach(likeElement => {
-        likeElement.addEventListener('click', function (event) {
-            event.preventDefault();
+    // document.querySelectorAll('.like-icon').forEach(likeElement => {
+    //     likeElement.addEventListener('click', function (event) {
+    //         event.preventDefault();
 
-            const heartIcon = this.querySelector('i');
-            const likeCountElement = this.querySelector('span');
-            const heartContainer = this.closest('.card-footer').querySelector('.heart-container');
-            let likeCount = parseInt(likeCountElement.textContent.trim());
+    //         const heartIcon = this.querySelector('i');
+    //         const likeCountElement = this.querySelector('span');
+    //         const heartContainer = this.closest('.card-footer').querySelector('.heart-container');
+    //         let likeCount = parseInt(likeCountElement.textContent.trim());
 
-            if (heartIcon.classList.contains('fa-solid')) { // Nếu là trái tim đậm
-                heartIcon.classList.remove('fa-solid'); // Loại bỏ trạng thái đậm
-                heartIcon.classList.add('fa-regular'); // Trái tim không đậm
-                likeCount -= 1;
-            } else {
-                heartIcon.classList.remove('fa-regular'); // Loại bỏ trái tim không đậm
-                heartIcon.classList.add('fa-solid'); // Trái tim đậm (đỏ)
-                likeCount += 1;
+    //         if (heartIcon.classList.contains('fa-solid')) { // Nếu là trái tim đậm
+    //             heartIcon.classList.remove('fa-solid'); // Loại bỏ trạng thái đậm
+    //             heartIcon.classList.add('fa-regular'); // Trái tim không đậm
+    //             // likeCount -= 1;
+    //         } else {
+    //             heartIcon.classList.remove('fa-regular'); // Loại bỏ trái tim không đậm
+    //             heartIcon.classList.add('fa-solid'); // Trái tim đậm (đỏ)
+    //             // likeCount += 1;
 
-                // Tạo nhiều trái tim bay lên
-                for (let i = 0; i < 8; i++) { // Tạo 8 trái tim bay lên
-                    createFlyingHeart(heartContainer);
-                }
-            }
+    //             // Tạo nhiều trái tim bay lên
+    //             for (let i = 0; i < 8; i++) { // Tạo 8 trái tim bay lên
+    //                 createFlyingHeart(heartContainer);
+    //             }
+    //         }
 
-            // Cập nhật số lượng tim
-            likeCountElement.textContent = likeCount;
-        });
-    });
+    //         // Cập nhật số lượng tim
+    //         // likeCountElement.textContent = likeCount;
+    //     });
+    // });
 
     // Hàm tạo trái tim bay
     function createFlyingHeart(container) {

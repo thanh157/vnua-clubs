@@ -29,4 +29,10 @@ class Activity extends Model
     {
         return $this->belongsTo(Club::class, 'club_id');
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_activity_join')
+                    ->withTimestamps(); // Automatically manages created_at and updated_at
+    }
 }

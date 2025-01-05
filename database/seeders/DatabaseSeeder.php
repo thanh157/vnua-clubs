@@ -20,5 +20,7 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call(AdminSeeder::class);
+        // Tạo 10 câu lạc bộ
+        $this->call(ClubSeeder::class);
     }
 }

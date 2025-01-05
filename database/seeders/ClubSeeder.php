@@ -5,10 +5,9 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use App\Enums\Role;
-use Illuminate\Support\Str;
+use App\Models\Club;
 
-class AdminSeeder extends Seeder
+class ClubSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -22,15 +21,6 @@ class AdminSeeder extends Seeder
         //     ]);
         // }
 
-        if (!DB::table('users')->where('email', 'admin@gmail.com')->exists()) {
-            DB::table('users')->insert([
-                'email' => 'admin@gmail.com',
-                'password' => bcrypt('admin@123'),
-                'role' => Role::ADMIN,
-                'name' => 'Admin',
-                'code' => Str::random(10),
-                'phone' => '1234567890',
-            ]);
-        }
+        Club::factory()->count(10)->create();
     }
 }

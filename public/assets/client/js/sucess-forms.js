@@ -2,7 +2,7 @@
 function validatePassword() {
     const email = document.querySelector('input[name="email"]').value;
     const password = document.querySelector('input[name="password"]').value;
-    const confirmPassword = document.querySelector('input[name="confirm_password"]').value;
+    const confirmPassword = document.querySelector('input[name="password_confirmation"]').value;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Regex kiểm tra email
 
     // Kiểm tra email hợp lệ
@@ -20,7 +20,7 @@ function validatePassword() {
     }
 
     // Hiển thị thông báo thành công và chuyển sang form chỉnh sửa
-    showSuccessMessage(event);
+    // showSuccessMessage(event);
     return false; // Ngăn gửi form đi
 }
 
@@ -30,5 +30,5 @@ function showSuccessMessage(event) {
     // Ẩn form đăng ký và hiển thị thông báo thành công
     document.querySelector(".login-form").style.display = "none";
     document.getElementById("successMessage").style.display = "block";
-    document.getElementById("profileEditForm").style.display = "block";
+    // document.getElementById("profileEditForm").style.display = "block";
 }
