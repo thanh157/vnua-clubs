@@ -233,15 +233,13 @@ Route::get('/admin/club-requests', [ClubRequestManagementController::class, 'ind
 Route::get('/member-requests/create/{club_id?}', [MemberRequestController::class, 'create'])->name('member-requests.create');
 Route::post('/member-requests/store', [MemberRequestController::class, 'store'])->name('member-requests.store');
 
-Route::middleware(['auth', 'admin'])->group(function () {
+Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 
     Route::get('/', function () {
         return view('admin.pages.admin.dashboard');
     })->name('admin.dashboard');
 
-    Route::get('/clubs', function () {
-        return view('admin.pages.admin.club-list');
-    })->name('admin.clubs');
+    Route::get('/clubs', [ClubManagementController::class, 'index'])->name('admin.clubs');
 
     Route::get('/clubs/requests', function () {
         return view('admin.pages.admin.club-request');
