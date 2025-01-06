@@ -6,12 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Club;
 use Illuminate\Http\Request;
 
-class ClubController extends Controller
+class ClubManagementController extends Controller
 {
     public function index()
     {
         $clubs = Club::all();
-        return view('admin.clubs.index', compact('clubs'));
+        return view('admin.pages.admin.club-list', compact('clubs'));
     }
 
     public function show($id)

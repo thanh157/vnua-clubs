@@ -12,12 +12,18 @@ class MemberRequest extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'code',
-        'email',
+        'full_name',
+        'student_id',
+        'class_name',
         'phone',
+        'email',
+        'gender',
+        'avatar',
+        'faculty',
+        'purpose',
+        'club_id',
         'status',
-        'club_id'
+        'user_id'
     ];
 
     protected $casts = [

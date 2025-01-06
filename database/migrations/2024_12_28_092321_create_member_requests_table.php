@@ -14,13 +14,19 @@ return new class extends Migration
     {
         Schema::create('member_requests', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('code');
-            $table->string('email');
+            $table->string('full_name');
+            $table->string('student_id');
+            $table->string('class_name');
             $table->string('phone');
+            $table->string('email');
+            $table->string('gender');
+            $table->string('avatar')->nullable();
+            $table->string('faculty');
+            $table->text('purpose');
+            $table->foreignId('club_id')->constrained('clubs');
             $table->enum('status', array_map(fn($status) => $status->value, StatusMemberRequest::cases()))
                 ->default(StatusMemberRequest::PENDING);
-            $table->integer('club_id');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }

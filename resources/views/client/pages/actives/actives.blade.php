@@ -21,32 +21,35 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const clubsData = [
+    let clubsData = [
         {
-            title: "Câu Lạc Bộ Âm Nhạc",
+            name: "Câu Lạc Bộ Âm Nhạc",
             location: "Phòng Âm Nhạc, Học viện Nông nghiệp Việt Nam",
-            date: "Mỗi Thứ Bảy hàng tuần",
+            time_note: "Mỗi Thứ Bảy hàng tuần",
             description: "Câu lạc bộ Âm nhạc tạo ra một không gian để sinh viên giao lưu, học hỏi và phát triển khả năng âm nhạc của mình. Các hoạt động chính bao gồm: luyện tập các bài hát, chơi nhạc cụ và tổ chức các buổi biểu diễn âm nhạc định kỳ."
         },
         {
-            title: "Câu Lạc Bộ Thể Dục Thể Thao",
+            name: "Câu Lạc Bộ Thể Dục Thể Thao",
             location: "Sân Thể Dục, Học viện Nông nghiệp Việt Nam",
-            date: "Thứ Hai, Thứ Tư, Thứ Sáu hàng tuần",
+            time_note: "Thứ Hai, Thứ Tư, Thứ Sáu hàng tuần",
             description: "Câu lạc bộ Thể dục Thể thao chuyên tổ chức các hoạt động thể thao như bóng đá, cầu lông, bóng rổ và chạy bộ. Các thành viên sẽ được rèn luyện thể chất và tham gia vào các giải đấu nội bộ của câu lạc bộ."
         },
         {
-            title: "Câu Lạc Bộ Khoa Học Công Nghệ",
-            location: "Phòng Lab, Học viện Nông nghiệp Việt Nam",
+            name: "Câu Lạc Bộ Khoa Học Công Nghệ",
+            time_note: "Phòng Lab, Học viện Nông nghiệp Việt Nam",
             date: "Chủ Nhật hàng tuần",
             description: "Câu lạc bộ Khoa học Công nghệ là nơi để sinh viên đam mê nghiên cứu khoa học, sáng tạo và thử nghiệm các dự án công nghệ. Các hoạt động bao gồm các cuộc thi sáng tạo, các hội thảo công nghệ và các dự án nghiên cứu khoa học thực tế."
         },
         {
             title: "Câu Lạc Bộ C++",
             location: "Phòng Lab, Học viện Nông nghiệp Việt Nam",
-            date: "Chủ Nhật hàng tuần",
+            time_note: "Chủ Nhật hàng tuần",
             description: "Câu lạc bộ Khoa học Công nghệ là nơi để sinh viên đam mê nghiên cứu khoa học, sáng tạo và thử nghiệm các dự án công nghệ. Các hoạt động bao gồm các cuộc thi sáng tạo, các hội thảo công nghệ và các dự án nghiên cứu khoa học thực tế."
         }
     ];
+
+    clubsData = @json($activities);
+    console.log('clubsData', clubsData);
 
     const backgroundColors = ['#f0e1f1', '#d0f4de', '#cce7ff', '#fdf1d0', '#f8f3e1', '#d3b7ff', '#b7f3ff', '#f2c9bb', '#ffb6b6']; // Màu nền trang
     const borderColors = ['#ff69b4', '#32cd32', '#4682b4', '#ffa500', '#ff6347', '#dda0dd', '#ff1493', '#8a2be2', '#20b2aa']; // Màu khung thông báo
@@ -69,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const end = start + clubsPerPage;
         const clubsToDisplay = clubsData.slice(start, end);
 
-        clubsToDisplay.forEach((club, index) => {
+        clubsToDisplay.forEach((activity, index) => {
             const clubCard = document.createElement('div');
             clubCard.classList.add('col-12', 'mb-3', 'club-item');
 
@@ -77,14 +80,16 @@ document.addEventListener('DOMContentLoaded', function() {
             const clubBorderColor = borderColors[index % borderColors.length];
             const clubBackgroundColor = getUniqueBackgroundColor(clubBorderColor);
 
+            const registerUrl = `{{ url('/member-requests/create/${activity.club_id}') }}`;
+
             clubCard.innerHTML = `
                 <div class="card" style="border-radius: 8px; border: 1px solid ${clubBorderColor}; background-color: ${clubBackgroundColor};">
                     <div class="card-body" style="padding: 15px;">
-                        <h5 class="card-title" style="font-size: 16px; font-weight: bold;">${club.title}</h5>
-                        <p class="card-text" style="font-size: 0.875rem; margin-bottom: 8px;"><strong>Địa điểm:</strong> ${club.location}</p>
-                        <p class="card-text" style="font-size: 0.875rem; margin-bottom: 8px;"><strong>Ngày tổ chức:</strong> ${club.date}</p>
-                        <p class="card-text" style="font-size: 0.875rem; margin-bottom: 8px;">${club.description}</p>
-                        <a href="#" class="btn btn-primary register-btn" style="font-size: 14px; padding: 10px 40px; background-color: #3c92e7; border-color: #2c3e50;">Đăng Ký Tham Gia</a>
+                        <h5 class="card-title" style="font-size: 16px; font-weight: bold;">${activity.name}</h5>
+                        <p class="card-text" style="font-size: 0.875rem; margin-bottom: 8px;"><strong>Địa điểm:</strong> ${activity.location}</p>
+                        <p class="card-text" style="font-size: 0.875rem; margin-bottom: 8px;"><strong>Ngày tổ chức:</strong> ${activity.time_note}</p>
+                        <p class="card-text" style="font-size: 0.875rem; margin-bottom: 8px;">${activity.description}</p>
+                        <a href="${registerUrl}" class="btn btn-primary register-btn" style="font-size: 14px; padding: 10px 40px; background-color: #3c92e7; border-color: #2c3e50;">Đăng Ký Tham Gia</a>
                     </div>
                 </div>
             `;

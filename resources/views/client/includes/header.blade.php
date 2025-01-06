@@ -13,7 +13,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('client.actives')}}" style="color: #fff;">
+                    <a class="nav-link" href="{{ route('client.activities')}}" style="color: #fff;">
                         <i class="fas fa-users"></i> Hoạt động
                     </a>
                 </li>
@@ -48,6 +48,12 @@
                 @auth
                 <span class="d-block fw-bold text-uppercase" style="font-size: 14px; color: #fff100;">{{ Auth::user()->name }}</span>
                 <div style="font-size: 14px;">
+                    @if(Auth::user()->role->value === 'ADMIN')
+                    <a href="{{ route('admin.dashboard') }}" class="text-decoration-none login-link" style="color: #fff;">Admin</a>
+                    @endif
+                    @if(Auth::user()->role->value === 'ADMIN_CLUB')
+                    <a href="{{ route('admin-club.member-requests') }}" class="text-decoration-none login-link" style="color: #fff;">Admin CL</a>
+                    @endif
                     <form id="logout-form" action="{{ route('client.logout') }}" method="POST" style="display: inline;">
                         @csrf
                         <button type="submit" class="btn btn-link text-decoration-none login-link" style="color: #fff; padding: 0;">Đăng xuất</button>
@@ -64,6 +70,23 @@
         </div>
     </div>
 </nav>
+@if (session('success'))
+<div class="alert alert-success alert-dismissible fade show" role="alert" id="success-alert">
+    {{ session('success') }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+            var alert = document.getElementById('success-alert');
+            if (alert) {
+                alert.classList.remove('show');
+                alert.classList.add('fade');
+            }
+        }, 3000);
+    });
+</script>
+@endif
 
 <!-- Thêm CSS cho hiệu ứng hover cho tất cả các liên kết trong navbar -->
 <style>

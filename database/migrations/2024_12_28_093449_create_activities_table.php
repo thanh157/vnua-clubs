@@ -15,9 +15,12 @@ return new class extends Migration
         Schema::create('activities', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
+            $table->text('description');
+            $table->text('image_url')->nullable();
+            $table->string('time_note')->nullable();
             $table->date('start_date');
             $table->date('end_date');
+            $table->string('location');
             $table->enum('status', array_map(fn($status) => $status->value, StatusActivity::cases()))
                 ->default(StatusActivity::PLANNED);
             $table->integer('club_id');

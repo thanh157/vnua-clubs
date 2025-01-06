@@ -26,13 +26,13 @@ Chi tiết câu lạc bộ
 
             <!-- Tên câu lạc bộ - căn giữa với avatar -->
             <div class="text-black">
-                <h1 class="mb-0">{{ $clubDto->name }}</h1>
-                <span class="d-block">{{ $clubDto->category ?? 'Chưa phân loại' }}</span>
+                <h1 class="mb-0">{{ $club->name }}</h1>
+                <span class="d-block">{{ $club->category ?? 'Chưa phân loại' }}</span>
             </div>
         </div>
     </div>
 
-    {{-- {{-- view club --}}
+    {{-- view club --}}
     <div class="content">
         <!-- Simple statistics -->
         <div class="content">
@@ -49,7 +49,7 @@ Chi tiết câu lạc bộ
                         <div class="d-flex align-items-center">
                             <i class="fa-solid fa-heart text-danger me-3" style="font-size: 2rem;"></i>
                             <div class="flex-fill text-end">
-                                <h4 class="mb-0">{{ $clubDto->likes }}</h4>
+                                <h4 class="mb-0">{{ $club->likes }}</h4>
                                 <span class="text-muted">Lượt thích</span>
                             </div>
                         </div>
@@ -61,7 +61,7 @@ Chi tiết câu lạc bộ
                         <div class="d-flex align-items-center">
                             <i class="fa-solid fa-users text-indigo me-3" style="font-size: 2rem;"></i>
                             <div class="flex-fill text-end">
-                                <h4 class="mb-0">245</h4>
+                                <h4 class="mb-0">{{ $memberAmount }}</h4>
                                 <span class="text-muted">Thành viên</span>
                             </div>
                         </div>
@@ -131,7 +131,7 @@ Chi tiết câu lạc bộ
                     <div class="card card-body bg-primary text-white">
                         <div class="d-flex align-items-center">
                             <div class="flex-fill">
-                                <h4 class="mb-0">100</h4>
+                                <h4 class="mb-0">{{ $postCount }}</h4>
                                 Bài viết
                             </div>
                             <i class="fa-solid fa-newspaper text-white opacity-75 ms-3" style="font-size: 2rem;"></i>
@@ -173,7 +173,7 @@ Chi tiết câu lạc bộ
                         <div class="card-header d-lg-flex py-lg-0">
                             <h5 class="py-lg-3 mb-0">CLB Truyền thông</h5>
                             <div class="mt-1 my-lg-auto ms-lg-auto">
-                                <a href="{{ route('client.form-member')}}" class="btn btn-primaryy" style="height: 45px; font-size:16px">Tham gia ngay <i class="ph-user-plus ms-2"></i></a>
+                                <a href="{{ url('/member-requests/create/' . $club->id) }}" class="btn btn-primaryy" style="height: 45px; font-size:16px">Tham gia ngay <i class="ph-user-plus ms-2"></i></a>
                             </div>
                         </div>
 
@@ -231,7 +231,6 @@ Chi tiết câu lạc bộ
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -253,14 +252,14 @@ Chi tiết câu lạc bộ
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @foreach($posts as $index => $post) --}}
+                        @foreach($currentActivities as $index => $activity)
                         <tr>
-
-                            <td>{{ $clubDto->name }}</td>
-                            <td>{{ $clubDto->description }}</td>
-                            <td>{{ $clubDto->membserAmount }}</td>
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ \Carbon\Carbon::parse($activity->start_date)->format('H:i d/m/Y') }} - {{ \Carbon\Carbon::parse($activity->end_date)->format('H:i d/m/Y') }}</td>
+                            <td>{{ $activity->name }}</td>
+                            <td>{{ $activity->location }}</td>
                         </tr>
-                        {{-- @endforeach                    --}}
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -448,16 +447,12 @@ Chi tiết câu lạc bộ
                     <div class="">
                         <!-- Nội dung khác có thể được thêm vào đây -->
                     </div>
-                    <a href="{{ route('client.members')}}" class="text-end text-decoration-underline mt-3 d-inline-block" id="expenditureLink">Xem danh sách thành viên</a>
+                    <a href="{{ route('client.members')}}" class="text-end text-decoration-underline mt-3 d-inline-block" id="expenditureLinkb">Xem danh sách thành viên</a>
                 </div>
             </div>
-
         </div>
         {{-- end QLCT--}}
-
-
     </div>
-</div>
 </div>
 
 @endsection
