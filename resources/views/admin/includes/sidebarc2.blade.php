@@ -106,7 +106,7 @@
                     <div class="text-uppercase fs-sm lh-sm opacity-50 sidebar-resize-hide">Thông báo</div>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.announcements.delete') }}" class="nav-link">
+                    <a href="{{ route('admin.admin-notifications') }}" class="nav-link">
                         <i class="ph-megaphone-slash"></i>
                         <span>Quản lý thông báo</span>
                     </a>

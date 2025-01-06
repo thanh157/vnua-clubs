@@ -14,6 +14,21 @@
 
 <!-- Content area -->
 <div class="content">
+    <!-- Search bar -->
+    <div class="card mb-4">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Tìm kiếm đơn tham gia</h5>
+            <div class="d-flex">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="search-application" placeholder="Tìm kiếm đơn tham gia">
+                    <div class="input-group-append">
+                        <span class="input-group-text"><i class="fas fa-search"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Scrollable datatable -->
     <div class="card">
         <div class="card-header">
@@ -23,25 +38,17 @@
         <table class="table datatable-scroll-y" width="100%">
             <thead>
                 <tr>
-                    <th>Họ và tên</th>
-                    <th>Mã SV</th>
-                    <th>Lớp</th>
-                    <th>SDT</th>
-                    <th>Giới tính</th>
-                    <th>Mục đích tham gia</th>
+                    <th>Tên thành viên</th>
+                    <th>Ngày đăng ký</th>
                     <th>Trạng thái</th>
-                    <th class="text-center">Hành động</th>
+                    <th>Hành động</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($memberRequests as $request)
                 <tr>
                     <td><a href="#">{{ $request->full_name }}</a></td>
-                    <td>{{ $request->student_id }}</td>
-                    <td>{{ $request->class_name }}</td>
-                    <td>{{ $request->phone }}</td>
-                    <td>{{ $request->gender }}</td>
-                    <td>{{ $request->purpose }}</td>
+                    <td>{{ $request->created_at }}</td>
                     <td>
                         <span class="badge {{ $request->status->value === 'pending' ? 'bg-warning' : ($request->status->value === 'approved' ? 'bg-success' : 'bg-danger') }}">
                             {{ ucfirst($request->status->value) }}
@@ -58,6 +65,7 @@
                                         <i class="ph-eye me-2"></i>
                                         Chi tiết
                                     </a>
+                                    @if($request->status->value === 'pending')
                                     <form action="{{ route('admin.member-requests.approve', $request->id) }}" method="POST" class="dropdown-item">
                                         @csrf
                                         @method('PATCH')
@@ -74,6 +82,7 @@
                                             Từ chối
                                         </button>
                                     </form>
+                                    @endif
                                     <form action="{{ route('admin.member-requests.delete', $request->id) }}" method="POST" class="dropdown-item">
                                         @csrf
                                         @method('DELETE')
@@ -107,16 +116,18 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                @if($request->status->value === 'pending')
                                 <form action="{{ route('admin.member-requests.approve', $request->id) }}" method="POST" style="display: inline;">
                                     @csrf
                                     @method('PATCH')
-                                    <button type="submit" class="btn btn-primary">Phê duyệt</button>
+                                    <button type="submit" class="btn btn-success">Phê duyệt</button>
                                 </form>
                                 <form action="{{ route('admin.member-requests.reject', $request->id) }}" method="POST" style="display: inline;">
                                     @csrf
                                     @method('PATCH')
                                     <button type="submit" class="btn btn-danger">Từ chối</button>
                                 </form>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -147,4 +158,47 @@
         </div>
     </div>
 </div> -->
+@endsection
+
+@section('styles')
+<style>
+    .form-group label {
+        font-weight: bold;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        margin-bottom: 10px;
+    }
+
+    .table th,
+    .table td {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .table th {
+        background-color: #f8f9fa;
+    }
+</style>
+@endsection
+
+@section('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Tìm kiếm đơn tham gia
+        document.getElementById('search-application').addEventListener('input', function() {
+            var searchValue = this.value.toLowerCase();
+            var rows = document.querySelectorAll('#application-list tr');
+            rows.forEach(function(row) {
+                var memberName = row.cells[0].textContent.toLowerCase();
+                if (memberName.includes(searchValue)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    });
+</script>
 @endsection

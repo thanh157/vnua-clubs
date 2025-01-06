@@ -31,6 +31,7 @@
                         <input type="file" class="form-control" id="cover" name="cover" accept=".jpg, .jpeg, .png">
                         <img src="{{ asset('path/to/cover.jpg') }}" alt="Cover" class="mt-3" width="100%">
                     </div>
+                    <button type="button" class="btn btn-primary mt-3" onclick="saveImages()">Lưu</button>
                 </form>
             </div>
         </div>
@@ -55,20 +56,21 @@
                     </div>
                     <div class="form-group mb-3">
                         <label for="completed_projects">Dự án đã làm</label>
-                        <textarea class="form-control" id="completed_projects" name="completed_projects" rows="4" required>Danh sách các dự án đã làm...</textarea>
+                        <input type="number" class="form-control" id="completed_projects" name="completed_projects" value="2" required>
                     </div>
                     <div class="form-group mb-3">
                         <label for="future_projects">Dự án tương lai</label>
-                        <textarea class="form-control" id="future_projects" name="future_projects" rows="4" required>Danh sách các dự án tương lai...</textarea>
+                        <input type="number" class="form-control" id="future_projects" name="future_projects" value="2" required>
                     </div>
                     <div class="form-group mb-3">
                         <label for="events">Sự kiện đã tổ chức</label>
-                        <textarea class="form-control" id="events" name="events" rows="4" required>Danh sách các sự kiện đã tổ chức...</textarea>
+                        <input type="number" class="form-control" id="events" name="events" value="2" required>
                     </div>
                     <div class="form-group mb-3">
                         <label for="posts">Bài viết</label>
                         <textarea class="form-control" id="posts" name="posts" rows="4" required>Danh sách các bài viết...</textarea>
                     </div>
+                    <button type="button" class="btn btn-primary mt-3" onclick="saveOverview()">Lưu</button>
                 </form>
             </div>
         </div>
@@ -107,6 +109,7 @@
                         <label for="mission">Sứ mệnh</label>
                         <textarea class="form-control" id="mission" name="mission" rows="4" required>Sứ mệnh của câu lạc bộ...</textarea>
                     </div>
+                    <button type="button" class="btn btn-primary mt-3" onclick="saveDescription()">Lưu</button>
                 </form>
             </div>
         </div>
@@ -133,6 +136,7 @@
                         <label for="activity_time">Thời gian</label>
                         <input type="datetime-local" class="form-control" id="activity_time" name="activity_time" value="2023-12-31T23:59" required>
                     </div>
+                    <button type="button" class="btn btn-primary mt-3" onclick="saveActivity()">Lưu</button>
                 </form>
             </div>
         </div>
@@ -146,6 +150,9 @@
                     <div class="form-group mb-3">
                         <label for="images">Thêm hình ảnh</label>
                         <input type="file" class="form-control" id="images" name="images[]" accept=".jpg, .jpeg, .png" multiple>
+                    </div>
+                    <div class="form-group text-right">
+                        <button type="submit" class="btn btn-primary">Lưu</button>
                     </div>
                 </form>
             </div>
@@ -161,10 +168,71 @@
                         <label for="videos">Thêm video</label>
                         <input type="file" class="form-control" id="videos" name="videos[]" accept="video/*" multiple>
                     </div>
+                    <div class="form-group text-right">
+                        <button type="submit" class="btn btn-primary">Lưu</button>
+                    </div>
                 </form>
+                </div>
             </div>
         </div>
-        <!-- /club description -->
+
+        <!-- Bảng lựa chọn hình ảnh và video đã đăng -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5 class="mb-0">Hình ảnh và video đã đăng</h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Loại</th>
+                            <th>URL</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Dữ liệu mẫu -->
+                        <tr>
+                            <td>Hình ảnh</td>
+                            <td><a href="{{ asset('path/to/image1.jpg') }}" target="_blank">Xem hình ảnh</a></td>
+                            <td class="text-center">
+                                <button class="btn btn-sm btn-danger">Xóa</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Video</td>
+                            <td><a href="{{ asset('path/to/video1.mp4') }}" target="_blank">Xem video</a></td>
+                            <td class="text-center">
+                                <button class="btn btn-sm btn-danger">Xóa</button>
+                            </td>
+                        </tr>
+                        <!-- Thêm các dòng khác tương tự -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- /Bảng lựa chọn hình ảnh và video đã đăng -->
     </div>
     <!-- /content area -->
+@endsection
+
+@section('styles')
+<style>
+    .form-group label {
+        font-weight: bold;
+    }
+    .form-group input, .form-group textarea {
+        margin-bottom: 10px;
+    }
+    .table th, .table td {
+        text-align: center;
+        vertical-align: middle;
+    }
+    .table th {
+        background-color: #f8f9fa;
+    }
+    .img-thumbnail {
+        margin: 5px;
+    }
+</style>
 @endsection
