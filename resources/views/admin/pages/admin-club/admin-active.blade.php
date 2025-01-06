@@ -70,6 +70,21 @@
 
         <!-- Danh sách các hoạt động đã tạo -->
         <div class="card mt-4" id="edit-form" style="display: none;">
+            <div class="content">
+                <!-- Search bar -->
+                <div class="card mb-4">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Tìm kiếm hoạt động</h5>
+                        <div class="d-flex">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="search-activity" placeholder="Tìm kiếm hoạt động">
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="fas fa-search"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             <div class="card-header">
                 <h5 class="mb-0">Danh sách các hoạt động đã tạo</h5>
             </div>
@@ -120,6 +135,7 @@
                     </tbody>
                 </table>
             </div>
+            
         </div>
         <!-- /danh sách các hoạt động đã tạo -->
     </div>
@@ -139,7 +155,24 @@
             </div>
         </div>
     </div>
-    <!-- /modal chỉnh sửa hoạt động -->
+
+
+    <div class="modal fade" id="viewFormModal" tabindex="-1" aria-labelledby="viewFormModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="viewFormModalLabel">Thông tin chi tiết của thành viên</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    @include('admin.pages.admin-club.form-member')
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
         document.getElementById('btn-create').addEventListener('click', function() {

@@ -39,6 +39,16 @@
                         <input type="text" class="form-control" id="revenue_name" name="revenue_name" required>
                     </div>
                     <div class="form-group mb-3">
+                        <label for="revenue_name">Danh mục</label>
+                        <select class="form-control" id="revenue_name" name="revenue_name" required>
+                            <option value="">Chọn danh mục</option>
+                            <option value="category1">Danh mục 1</option>
+                            <option value="category2">Danh mục 2</option>
+                            <option value="category3">Danh mục 3</option>
+                            <!-- Thêm các tùy chọn khác tại đây -->
+                        </select>
+                    </div>
+                    <div class="form-group mb-3">
                         <label for="revenue_amount">Số tiền</label>
                         <input type="number" class="form-control" id="revenue_amount" name="revenue_amount" required>
                     </div>
@@ -94,6 +104,16 @@
                     <div class="form-group mb-3">
                         <label for="expense_name">Tên khoản chi</label>
                         <input type="text" class="form-control" id="expense_name" name="expense_name" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="revenue_name">Danh mục</label>
+                        <select class="form-control" id="revenue_name" name="revenue_name" required>
+                            <option value="">Chọn danh mục</option>
+                            <option value="category1">Danh mục 1</option>
+                            <option value="category2">Danh mục 2</option>
+                            <option value="category3">Danh mục 3</option>
+                            <!-- Thêm các tùy chọn khác tại đây -->
+                        </select>
                     </div>
                     <div class="form-group mb-3">
                         <label for="expense_amount">Số tiền</label>

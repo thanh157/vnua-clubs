@@ -72,6 +72,10 @@ Route::get('/admin-member2', function () {
     return view('admin.pages.admin-club.admin-members');
 })->name('admin.admin-members');
 
+Route::get('/admin-notifications', function () {
+    return view('admin.pages.admin-club.admin-notifications');
+})->name('admin.admin-notifications');
+
 
 Route::get('/admin-spending', function () {
     return view('admin.pages.admin-club.admin-spending');
@@ -84,6 +88,10 @@ Route::get('/admin-active', function () {
 Route::get('/admin-description', function () {
     return view('admin.pages.admin-club.admin-description');
 })->name('admin.admin-description');
+
+Route::get('/club-request', function () {
+    return view('admin.pages.admin.club-request');
+})->name('admin.club-request');
 
 Route::get('/admin-staff', function () {
     return view('admin.pages.admin-club.admin-staff');
