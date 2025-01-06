@@ -228,7 +228,7 @@ Route::post('/club-registration', [ClubController::class, 'submitRegistration'])
 // Route::get('/admin/club-requests', [ClubRequestController::class, 'index'])->name('admin.club-requests');
 
 // Route để hiển thị danh sách đăng ký tham gia câu lạc bộ
-Route::get('/admin/club-requests', [ClubRequestManagementController::class, 'index'])->name('admin.club-requests');
+// Route::get('/admin/club-requests', [ClubRequestManagementController::class, 'index'])->name('admin.club-requests');
 
 Route::get('/member-requests/create/{club_id?}', [MemberRequestController::class, 'create'])->name('member-requests.create');
 Route::post('/member-requests/store', [MemberRequestController::class, 'store'])->name('member-requests.store');
@@ -241,9 +241,13 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 
     Route::get('/clubs', [ClubManagementController::class, 'index'])->name('admin.clubs');
 
-    Route::get('/clubs/requests', function () {
-        return view('admin.pages.admin.club-request');
-    })->name('admin.club-requests');
+    Route::patch('/clubs/{id}/update-president', [ClubManagementController::class, 'updatePresident'])->name('admin.clubs.updatePresident');
+    Route::patch('/clubs/{id}/toggle-status', [ClubManagementController::class, 'toggleStatus'])->name('admin.clubs.toggleStatus');
+
+    Route::get('/club-requests', [ClubManagementController::class, 'clubRequests'])->name('admin.club-requests');
+
+    Route::patch('/club-requests/{id}/approve', [ClubManagementController::class, 'approve'])->name('admin.club-requests.approve');
+    Route::patch('/club-requests/{id}/reject', [ClubManagementController::class, 'reject'])->name('admin.club-requests.reject');
 
     // Announcement management routes
     Route::get('/admin/announcements/create', [AnnouncementController::class, 'create'])->name('admin.announcements.create');

@@ -201,7 +201,7 @@
         });
     });
 </script>
-@endsection@extends('admin.layouts.masterc2')
+@endsection
 
 @section('content')
 <!-- Page header -->

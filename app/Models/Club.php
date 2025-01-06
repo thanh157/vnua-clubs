@@ -21,7 +21,8 @@ class Club extends Model
         'balance',
         'category',
         'likes',
-        'owner_id'
+        'owner_id',
+        'status',
     ];
 
     // Relationship tới User làm President

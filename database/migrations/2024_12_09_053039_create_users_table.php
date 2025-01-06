@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable(); // Thêm cột email_verified_at
             $table->string('password');
             $table->string('phone')->nullable();
-            $table->enum('role', array_map(fn($role) => $role->value, Role::cases()));
+            $table->enum('role', array_map(fn($role) => $role->value, Role::cases()))->default(Role::USER);
             // $table->integer('club_id');
             $table->timestamps();
         });

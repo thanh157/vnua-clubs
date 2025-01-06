@@ -56,7 +56,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.club-request') }}" class="nav-link">
+                    <a href="{{ route('admin.club-requests') }}" class="nav-link">
                         <i class="ph-file-plus"></i>
                         <span>
                             Đơn đăng ký câu lạc bộ

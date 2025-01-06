@@ -46,7 +46,7 @@ class AdminSeeder extends Seeder
         if (!DB::table('users')->where('email', 'user@gmail.com')->exists()) {
             DB::table('users')->insert([
                 'email' => 'user@gmail.com',
-                'password' => bcrypt('user@123'),
+                'password' => bcrypt('user@1234'),
                 'role' => Role::USER,
                 'name' => 'User',
                 'code' => Str::random(10),

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('activity_time');
             $table->string('logo')->nullable();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->enum('status', array_map(fn($role) => $role->value, StatusRequestClub::cases()))->default('pending');
+            $table->enum('status', array_map(fn($sts) => $sts->value, StatusRequestClub::cases()))->default(StatusRequestClub::PENDING->value);
             $table->timestamps();
         });
     }

@@ -22,6 +22,8 @@ class ClubFactory extends Factory
             'description' => $this->faker->paragraph,
             'balance' => $this->faker->numberBetween(100000, 100000000),
             'owner_id' => $this->faker->optional()->randomElement($userIds), // Tạo admin_id có hoặc không, nếu có phải là của một user đã tồn tại
+            'status' => $this->faker->boolean,
+            'category' => $this->faker->word, // Thêm giá trị cho cột category
         ];
     }
 }
