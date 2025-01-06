@@ -259,6 +259,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 
 Route::middleware(['auth', 'admin-club'])->prefix('admin-club')->group(function () {
     Route::get('/', [ClubRequestManagementController::class, 'member'])->name('admin-club.member-requests');
+    Route::get('/member', [ClubRequestManagementController::class, 'member'])->name('admin-club.members');
     // Request management routes
     Route::get('/member-requests', [ClubRequestManagementController::class, 'member'])->name('admin-club.member-requests');
     Route::patch('/member-requests/approve/{id}', [ClubRequestManagementController::class, 'approve'])->name('admin-club.member-requests.approve');

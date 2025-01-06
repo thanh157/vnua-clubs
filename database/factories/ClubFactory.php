@@ -20,7 +20,7 @@ class ClubFactory extends Factory
             'thumbnail' => $this->faker->imageUrl(640, 480, 'clubs', true),
             'cover_image' => $this->faker->imageUrl(1280, 720, 'clubs', true),
             'description' => $this->faker->paragraph,
-            'balance' => $this->faker->numberBetween(0, 10000),
+            'balance' => $this->faker->numberBetween(100000, 100000000),
             'owner_id' => $this->faker->optional()->randomElement($userIds), // Tạo admin_id có hoặc không, nếu có phải là của một user đã tồn tại
         ];
     }
