@@ -12,8 +12,8 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $totalUsers = 100; // Tổng số lượng user cần tạo
-        $chunkSize = 100; // Số lượng user tạo trong mỗi chunk
+        $totalUsers = 20; // Tổng số lượng user cần tạo
+        $chunkSize = 20; // Số lượng user tạo trong mỗi chunk
 
         for ($i = 0; $i < $totalUsers; $i += $chunkSize) {
             User::factory()->count($chunkSize)->create();

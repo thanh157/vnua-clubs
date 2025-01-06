@@ -49,10 +49,10 @@
                 <span class="d-block fw-bold text-uppercase" style="font-size: 14px; color: #fff100;">{{ Auth::user()->name }}</span>
                 <div style="font-size: 14px;">
                     @if(Auth::user()->role->value === 'ADMIN')
-                    <a href="{{ route('admin.club-requests') }}" class="text-decoration-none login-link" style="color: #fff;">Admin</a>
+                    <a href="{{ route('admin.dashboard') }}" class="text-decoration-none login-link" style="color: #fff;">Admin</a>
                     @endif
                     @if(Auth::user()->role->value === 'ADMIN_CLUB')
-                    <a href="{{ route('admin.club-requests') }}" class="text-decoration-none login-link" style="color: #fff;">Admin CL</a>
+                    <a href="{{ route('admin-club.member-requests') }}" class="text-decoration-none login-link" style="color: #fff;">Admin CL</a>
                     @endif
                     <form id="logout-form" action="{{ route('client.logout') }}" method="POST" style="display: inline;">
                         @csrf

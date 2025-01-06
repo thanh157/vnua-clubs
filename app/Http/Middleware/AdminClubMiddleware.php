@@ -1,15 +1,15 @@
 <?php
 namespace App\Http\Middleware;
 
-use Closure;
 use App\Enums\Role;
+use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class AdminMiddleware
+class AdminClubMiddleware
 {
     public function handle($request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->role === Role::ADMIN) {
+        if (Auth::check() && Auth::user()->role === Role::ADMIN || Auth::user()->role === Role::ADMIN_CLUB) {
             return $next($request);
         }
 

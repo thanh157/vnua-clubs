@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\ClubPresident;
 
 use App\Enums\RoleClub;
 use App\Http\Controllers\Controller;

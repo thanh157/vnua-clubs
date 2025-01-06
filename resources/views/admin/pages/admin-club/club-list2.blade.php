@@ -66,7 +66,7 @@
                                         Chi tiết
                                     </a>
                                     @if($request->status->value === 'pending')
-                                    <form action="{{ route('admin.member-requests.approve', $request->id) }}" method="POST" class="dropdown-item">
+                                    <form action="{{ route('admin-club.member-requests.approve', $request->id) }}" method="POST" class="dropdown-item">
                                         @csrf
                                         @method('PATCH')
                                         <button type="submit" class="btn btn-link p-0 m-0 align-baseline">
@@ -74,7 +74,7 @@
                                             Phê duyệt
                                         </button>
                                     </form>
-                                    <form action="{{ route('admin.member-requests.reject', $request->id) }}" method="POST" class="dropdown-item">
+                                    <form action="{{ route('admin-club.member-requests.reject', $request->id) }}" method="POST" class="dropdown-item">
                                         @csrf
                                         @method('PATCH')
                                         <button type="submit" class="btn btn-link p-0 m-0 align-baseline text-danger">
@@ -83,7 +83,7 @@
                                         </button>
                                     </form>
                                     @endif
-                                    <form action="{{ route('admin.member-requests.delete', $request->id) }}" method="POST" class="dropdown-item">
+                                    <form action="{{ route('admin-club.member-requests.delete', $request->id) }}" method="POST" class="dropdown-item">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-link p-0 m-0 align-baseline text-danger">
@@ -117,12 +117,12 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                                 @if($request->status->value === 'pending')
-                                <form action="{{ route('admin.member-requests.approve', $request->id) }}" method="POST" style="display: inline;">
+                                <form action="{{ route('admin-club.member-requests.approve', $request->id) }}" method="POST" style="display: inline;">
                                     @csrf
                                     @method('PATCH')
                                     <button type="submit" class="btn btn-success">Phê duyệt</button>
                                 </form>
-                                <form action="{{ route('admin.member-requests.reject', $request->id) }}" method="POST" style="display: inline;">
+                                <form action="{{ route('admin-club.member-requests.reject', $request->id) }}" method="POST" style="display: inline;">
                                     @csrf
                                     @method('PATCH')
                                     <button type="submit" class="btn btn-danger">Từ chối</button>

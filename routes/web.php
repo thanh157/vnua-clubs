@@ -15,7 +15,9 @@ use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\ClubDescriptionController;
 use App\Http\Controllers\Admin\SpendingController;
 use App\Http\Controllers\Admin\AnnouncementController;
-use App\Http\Controllers\Admin\ClubRequestManagementController;
+use App\Http\Controllers\Admin\ClubManagementController;
+
+use App\Http\Controllers\ClubPresident\ClubRequestManagementController;
 use App\Http\Controllers\User\MemberRequestController;
 
 /*
@@ -50,36 +52,36 @@ Route::get('admin/login', function () {
     return view('admin.pages.admin.login');
 })->name('admin.login');
 
-Route::prefix('admin')->group(function () {
-    Route::get('/', function () {
-        return view('admin.pages.admin.dashboard');
-    })->name('admin.dashboard');
+// Route::prefix('admin')->group(function () {
+//     Route::get('/', function () {
+//         return view('admin.pages.admin.dashboard');
+//     })->name('admin.dashboard');
 
-    Route::get('/clubs', function () {
-        return view('admin.pages.admin.club-list');
-    })->name('admin.clubs');
+//     Route::get('/clubs', function () {
+//         return view('admin.pages.admin.club-list');
+//     })->name('admin.clubs');
 
-    Route::get('/clubs/requests', function () {
-        return view('admin.pages.admin.club-request');
-    })->name('admin.club-requests');
-});
+//     Route::get('/clubs/requests', function () {
+//         return view('admin.pages.admin.club-request');
+//     })->name('admin.club-requests');
+// });
 
 //Admin-club
-Route::get('/admin-club/login', function () {
-    return view('admin.pages.admin-club.club-admin-login');
-});
+// Route::get('/admin-club/login', function () {
+//     return view('admin.pages.admin-club.club-admin-login');
+// });
 
-Route::get('/admin-club', function () {
-    return view('admin.pages.admin-club.club-list2');
-})->name('admin.admin-club');
+// Route::get('/admin-club', function () {
+//     return view('admin.pages.admin-club.club-list2');
+// })->name('admin.admin-club');
 
-Route::get('/admin-member2', function () {
-    return view('admin.pages.admin-club.admin-members');
-})->name('admin.admin-members');
+// Route::get('/admin-member2', function () {
+//     return view('admin.pages.admin-club.admin-members');
+// })->name('admin.admin-members');
 
-Route::get('/admin-notifications', function () {
-    return view('admin.pages.admin-club.admin-notifications');
-})->name('admin.admin-notifications');
+// Route::get('/admin-notifications', function () {
+//     return view('admin.pages.admin-club.admin-notifications');
+// })->name('admin.admin-notifications');
 
 
 Route::get('/admin-spending', function () {
@@ -159,7 +161,7 @@ Route::post('/email/resend', function (Request $request) {
 
 // Route cho các hoạt động
 Route::resource('Hoat-dong-sap-toi', ActivityController::class);
-Route::get('/Hoat-dong-sap-toi', [ActivityController::class,'index'])->name('client.activities');
+Route::get('/Hoat-dong-sap-toi', [ActivityController::class, 'index'])->name('client.activities');
 
 // profile
 Route::get('/edit-profile', fn() => view('client/pages/edit-profile/edit'))->name('client.edit');
@@ -205,21 +207,13 @@ Route::get('/admin/members/committee', [MemberController::class, 'committee'])->
 Route::get('/admin/events/create', [EventController::class, 'create'])->name('admin.events.create');
 Route::get('/admin/events/update', [EventController::class, 'update'])->name('admin.events.update');
 
-// Club description management routes
-Route::get('/admin/club-description/create', [ClubDescriptionController::class, 'create'])->name('admin.club-description.create');
-Route::get('/admin/club-description/edit', [ClubDescriptionController::class, 'edit'])->name('admin.club-description.edit');
-Route::get('/admin/club-description/delete', [ClubDescriptionController::class, 'delete'])->name('admin.club-description.delete');
+
 
 // Spending management routes
 Route::get('/admin/spending/income', [SpendingController::class, 'income'])->name('admin.spending.income');
 Route::get('/admin/spending/expense', [SpendingController::class, 'expense'])->name('admin.spending.expense');
 Route::get('/admin/spending/report', [SpendingController::class, 'report'])->name('admin.spending.report');
 
-// Announcement management routes
-Route::get('/admin/announcements/create', [AnnouncementController::class, 'create'])->name('admin.announcements.create');
-Route::get('/admin/announcements/edit', [AnnouncementController::class, 'edit'])->name('admin.announcements.edit');
-Route::get('/admin/announcements/delete', [AnnouncementController::class, 'delete'])->name('admin.announcements.delete');
-Route::get('/admin/announcements/show', [AnnouncementController::class, 'show'])->name('admin.announcements.show');
 
 // web.php
 Route::get('/club-registration', [ClubController::class, 'showRegistrationForm'])->name('club.registration');
@@ -236,8 +230,36 @@ Route::get('/member-requests/create/{club_id?}', [MemberRequestController::class
 Route::post('/member-requests/store', [MemberRequestController::class, 'store'])->name('member-requests.store');
 
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin/member-requests', [ClubRequestManagementController::class, 'member'])->name('admin.member-requests');
-    Route::patch('/admin/member-requests/approve/{id}', [ClubRequestManagementController::class, 'approve'])->name('admin.member-requests.approve');
-    Route::patch('/admin/member-requests/{id}/reject', [ClubRequestManagementController::class, 'reject'])->name('admin.member-requests.reject');
-    Route::delete('/admin/member-requests/{id}', [ClubRequestManagementController::class, 'deleteMemberRequest'])->name('admin.member-requests.delete');
+
+    Route::get('/', function () {
+        return view('admin.pages.admin.dashboard');
+    })->name('admin.dashboard');
+
+    Route::get('/clubs', function () {
+        return view('admin.pages.admin.club-list');
+    })->name('admin.clubs');
+
+    Route::get('/clubs/requests', function () {
+        return view('admin.pages.admin.club-request');
+    })->name('admin.club-requests');
+
+    // Announcement management routes
+    Route::get('/admin/announcements/create', [AnnouncementController::class, 'create'])->name('admin.announcements.create');
+    Route::get('/admin/announcements/edit', [AnnouncementController::class, 'edit'])->name('admin.announcements.edit');
+    Route::get('/admin/announcements/delete', [AnnouncementController::class, 'delete'])->name('admin.announcements.delete');
+    Route::get('/admin/announcements/show', [AnnouncementController::class, 'show'])->name('admin.announcements.show');
+
+    // Club description management routes
+    Route::get('/admin/club-description/create', [ClubDescriptionController::class, 'create'])->name('admin.club-description.create');
+    Route::get('/admin/club-description/edit', [ClubDescriptionController::class, 'edit'])->name('admin.club-description.edit');
+    Route::get('/admin/club-description/delete', [ClubDescriptionController::class, 'delete'])->name('admin.club-description.delete');
+});
+
+Route::middleware(['auth', 'admin-club'])->prefix('admin-club')->group(function () {
+    Route::get('/', [ClubRequestManagementController::class, 'member'])->name('admin-club.member-requests');
+    // Request management routes
+    Route::get('/member-requests', [ClubRequestManagementController::class, 'member'])->name('admin-club.member-requests');
+    Route::patch('/member-requests/approve/{id}', [ClubRequestManagementController::class, 'approve'])->name('admin-club.member-requests.approve');
+    Route::patch('/member-requests/{id}/reject', [ClubRequestManagementController::class, 'reject'])->name('admin-club.member-requests.reject');
+    Route::delete('/member-requests/{id}', [ClubRequestManagementController::class, 'deleteMemberRequest'])->name('admin-club.member-requests.delete');
 });

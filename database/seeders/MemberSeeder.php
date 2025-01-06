@@ -13,6 +13,6 @@ class MemberSeeder extends Seeder
     public function run(): void
     {
         // Tạo 50 member ngẫu nhiên
-        Member::factory()->count(200)->create();
+        Member::factory()->count(10)->create();
     }
 }
