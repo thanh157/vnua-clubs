@@ -15,7 +15,7 @@
             </div>
         </div>
 
-        <div class="page-header-content d-lg-flex border-top">
+        {{-- <div class="page-header-content d-lg-flex border-top">
             <div class="d-flex">
                 <div class="breadcrumb py-2">
                     <a href="index.html" class="breadcrumb-item"><i class="ph-house"></i></a>
@@ -25,6 +25,19 @@
                 <a href="#breadcrumb_elements" class="btn btn-light align-self-center collapsed d-lg-none border-transparent rounded-pill p-0 ms-auto" data-bs-toggle="collapse">
                     <i class="ph-caret-down collapsible-indicator ph-sm m-1"></i>
                 </a>
+            </div> --}}
+        </div>
+        <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Tìm kiếm câu lạc bộ</h5>
+                <div class="d-flex">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="search-activity" placeholder="Tìm kiếm câu lạc bộ">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-search"></i></span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
