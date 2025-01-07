@@ -10,7 +10,7 @@ use App\Http\Controllers\Auth\RegisterController;
 
 use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\ClubManagementController;
-
+use App\Http\Controllers\ClubPresident\ActivityManagementController;
 use App\Http\Controllers\ClubPresident\ClubDescriptionController;
 use App\Http\Controllers\ClubPresident\AnnouncementController;
 use App\Http\Controllers\ClubPresident\MemberRequestManagementController;
@@ -97,9 +97,7 @@ Route::get('/admin-spending', function () {
     return view('admin.pages.admin-club.admin-spending');
 })->name('admin.admin-spending');
 
-Route::get('/admin-active', function () {
-    return view('admin.pages.admin-club.admin-active');
-})->name('admin.admin-active');
+
 
 Route::get('/admin-description', function () {
     return view('admin.pages.admin-club.admin-description');
@@ -279,6 +277,12 @@ Route::middleware(['auth', 'admin-club'])->prefix('admin-club')->group(function 
     Route::patch('/member-requests/approve/{id}', [MemberRequestManagementController::class, 'approve'])->name('admin-club.member-requests.approve');
     Route::patch('/member-requests/{id}/reject', [MemberRequestManagementController::class, 'reject'])->name('admin-club.member-requests.reject');
     Route::delete('/member-requests/{id}', [MemberRequestManagementController::class, 'deleteMemberRequest'])->name('admin-club.member-requests.delete');
+
+    // Activity
+    Route::get('/activities', [ActivityManagementController::class, 'index'])->name('admin-club.activities');
+    Route::post('/activities', [ActivityManagementController::class, 'create'])->name('admin-club.activities.create');
+    Route::patch('/activities/{id}', [ActivityManagementController::class, 'update'])->name('admin-club.activities.update');
+    Route::delete('/activities/{id}', [ActivityManagementController::class, 'destroy'])->name('admin-club.activities.destroy');
 
     Route::get('/select-club/{clubId}', [ClubWorkspaceController::class, 'selectClub'])->name('admin-club.workspace.select');
 });

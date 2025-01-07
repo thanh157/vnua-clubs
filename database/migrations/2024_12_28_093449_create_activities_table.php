@@ -18,13 +18,13 @@ return new class extends Migration
             $table->text('description');
             $table->text('image_url')->nullable();
             $table->string('time_note')->nullable();
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->datetime('start_date');
+            $table->datetime('end_date');
             $table->string('location');
             $table->enum('status', array_map(fn($status) => $status->value, StatusActivity::cases()))
                 ->default(StatusActivity::PLANNED);
             $table->integer('club_id');
-            $table->bigInteger('budget');
+            $table->bigInteger('budget')->nullable();
             $table->timestamps();
         });
     }

@@ -14,7 +14,7 @@ class ActivityController extends Controller
      */
     public function index()
     {
-        $activities = Activity::all();
+        $activities = Activity::orderBy('updated_at', 'desc')->get();
         return view('client/pages/actives/actives', compact('activities'));
     }
 

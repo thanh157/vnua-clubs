@@ -21,7 +21,7 @@ class HomeController extends Controller
 
     public function index() 
     {
-        $clubs = Club::take(8)->get();
+        $clubs = Club::orderBy('likes', 'desc')->take(8)->get();
         $latestActivities = Activity::orderBy('start_date', 'desc')->take(4)->get();
         $latestPosts = Post::orderBy('created_at', 'desc')->take(8)->get();
 
