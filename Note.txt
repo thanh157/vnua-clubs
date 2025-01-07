@@ -1,0 +1,16 @@
+Các bước chạy project:
+
+B1: Clone project về
+
+B2: Chạy lệnh "composer install" để cài thư viện
+
+B3: Xin file .env từ chính chủ và để ở ngoài cùng của project
+
+B4: Chạy lệnh "php artisan migrate --seed" để tạo bảng và tạo dữ liệu giả lập. (Nếu đã có db cùng tên từ trước thì phải xoá hết các bảng trước khi chạy lệnh này)
+
+B5: Chạy lệnh "php artisan serve" để start ứng dụng
+
+B6: Chạy lệnh "php artisan queue:work" để start dịch vụ upload hình ảnh
+
+B7: Truy cập project
+    Mở trình duyệt và truy cập vào địa chỉ http://localhost:8000
