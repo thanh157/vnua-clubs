@@ -73,7 +73,7 @@ Chi tiết câu lạc bộ
                         <div class="d-flex align-items-center">
                             <i class="fa-solid fa-trophy text-warning me-3" style="font-size: 2rem;"></i>
                             <div class="flex-fill text-end">
-                                <h4 class="mb-0">20</h4>
+                                <h4 class="mb-0">{{ $club->award_amount }}</h4>
                                 <span class="text-muted">Giải thưởng</span>
                             </div>
                         </div>
@@ -85,7 +85,13 @@ Chi tiết câu lạc bộ
                         <div class="d-flex align-items-center">
                             <i class="fa-solid fa-calendar-check text-info me-3" style="font-size: 2rem;"></i>
                             <div class="flex-fill text-end">
-                                <h4 class="mb-0">10</h4>
+                                <h4 class="mb-0">
+                                    @if ($yearsActive >= 1)
+                                    {{ $yearsActive }}
+                                    @else
+                                    {{"<1"}}
+                                    @endif
+                                </h4>
                                 <span class="text-muted">Số năm hoạt động</span>
                             </div>
                         </div>
@@ -96,7 +102,7 @@ Chi tiết câu lạc bộ
                     <div class="card card-body bg-primary text-white">
                         <div class="d-flex align-items-center">
                             <div class="flex-fill">
-                                <h4 class="mb-0">390</h4>
+                                <h4 class="mb-0">{{ $club->projects_completed }}</h4>
                                 Dự án đã làm
                             </div>
                             <i class="fa-solid fa-folder-open text-white opacity-75 ms-3" style="font-size: 2rem;"></i>
@@ -108,7 +114,7 @@ Chi tiết câu lạc bộ
                     <div class="card card-body bg-danger text-white">
                         <div class="d-flex align-items-center">
                             <div class="flex-fill">
-                                <h4 class="mb-0">38</h4>
+                                <h4 class="mb-0">{{ $club->future_project_amount }}</h4>
                                 Dự án tương lai
                             </div>
                             <i class="fa-solid fa-lightbulb text-white opacity-75 ms-3" style="font-size: 2rem;"></i>
@@ -120,7 +126,7 @@ Chi tiết câu lạc bộ
                     <div class="card card-body bg-success text-white">
                         <div class="d-flex align-items-center">
                             <div class="flex-fill">
-                                <h4 class="mb-0">15</h4>
+                                <h4 class="mb-0">{{ $club->event_amount }}</h4>
                                 Sự kiện đã tổ chức
                             </div>
                             <i class="fa-solid fa-calendar-day text-white opacity-75 ms-3" style="font-size: 2rem;"></i>

@@ -6,9 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Club;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Like;
-use App\DTOs\ClubDTO;
-use App\Enums\RoleClub;
 use App\Models\Member;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 
@@ -23,8 +22,10 @@ class ClubController extends Controller
             $activityCount = $club->activities()->count();
             $currentActivities = $club->activities()->orderBy('start_date', 'desc')->get();
             $postCount = $club->posts()->count();
+            $foundedDate = Carbon::parse($club->founded_date);
+            $yearsActive = now()->year - $foundedDate->year;
             
-            return view('client.pages.clubs-details.details', compact('club', 'memberAmount', 'activityCount', 'currentActivities', 'postCount'));
+            return view('client.pages.clubs-details.details', compact('club', 'memberAmount', 'activityCount', 'currentActivities', 'postCount', 'yearsActive'));
             // return view('client.pages.clubs-details.details', compact('club'));
         } catch (\Exception $e) {
             Log::error('Error: '. $e->getMessage());
