@@ -5,11 +5,11 @@ namespace App\Http\Controllers\ClubPresident;
 use App\Models\MemberRequest;
 use App\Http\Controllers\Controller;
 
-class MemberController extends Controller
+class ClubInfoController extends Controller
 {
     public function index()
     {
-        $memberRequests = MemberRequest::all();
+        $club = MemberRequest::all();
         return view('admin.pages.admin-club.admin-members', compact('memberRequests'));
     }
 

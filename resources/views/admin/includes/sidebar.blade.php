@@ -37,7 +37,7 @@
                         <i class="ph-house"></i>
                         <span>
                             Trang điều khiển
-{{--                            <span class="d-block fw-normal opacity-50">No pending orders</span>--}}
+                            {{-- <span class="d-block fw-normal opacity-50">No pending orders</span>--}}
                         </span>
                     </a>
                 </li>

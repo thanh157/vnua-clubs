@@ -9,21 +9,33 @@ use App\Enums\StatusMemberRequest;
 use App\Models\MemberRequest;
 use App\Models\Member;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use App\Models\Club;
 
-class ClubRequestManagementController extends Controller
+class MemberRequestManagementController extends Controller
 {
     public function index()
     {
-        // Lấy danh sách đăng ký từ cơ sở dữ liệu
-        $requests = ClubRequest::all();
-        $memberRequests = MemberRequest::all();
-        return view('admin.pages.admin-club.club-list2', compact('requests','memberRequests'));
+        $clubId = session('current_club_id');
+        $memberRequests = MemberRequest::where('club_id', $clubId)->get();
+
+        return view('admin.pages.admin-club.club-list2', compact('memberRequests'));
     }
 
-    public function member()
+    public function member(Request $request)
     {
-        $memberRequests = MemberRequest::all();
-        return view('admin.pages.admin-club.club-list2', compact('memberRequests'));
+         // Lấy current_club_id từ session
+         $currentClubId = $request->session()->get('current_club_id');
+
+         // Kiểm tra xem current_club_id có tồn tại trong session không
+         if (!$currentClubId) {
+             return redirect()->route('admin.dashboard')->with('error', 'Không có câu lạc bộ nào được chọn.');
+         }
+ 
+         // Lấy các yêu cầu thành viên dựa trên current_club_id
+         $memberRequests = MemberRequest::where('club_id', $currentClubId)->get();
+        return view('admin.pages.admin-club.member-request', compact('memberRequests'));
     }
 
     public function show($id)

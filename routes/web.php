@@ -1,24 +1,29 @@
 <?php
 
-use App\Http\Controllers\User\ClubRequestController;
-use App\Http\Controllers\Guest\HomeController;
-use App\Http\Controllers\User\ClubController;
+
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Guest\ActivityController;
 
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\EventController;
-use App\Http\Controllers\Admin\ClubDescriptionController;
-use App\Http\Controllers\Admin\SpendingController;
-use App\Http\Controllers\Admin\AnnouncementController;
 use App\Http\Controllers\Admin\ClubManagementController;
 
-use App\Http\Controllers\ClubPresident\ClubRequestManagementController;
+use App\Http\Controllers\ClubPresident\ClubDescriptionController;
+use App\Http\Controllers\ClubPresident\AnnouncementController;
+use App\Http\Controllers\ClubPresident\MemberRequestManagementController;
+use App\Http\Controllers\ClubPresident\MemberController;
+use App\Http\Controllers\ClubPresident\ClubWorkspaceController;
+use App\Http\Controllers\ClubPresident\SpendingController;
+
+use App\Http\Controllers\User\ClubRequestController;
+use App\Http\Controllers\User\ClubController;
 use App\Http\Controllers\User\MemberRequestController;
+
+use App\Http\Controllers\Guest\HomeController;
+use App\Http\Controllers\Guest\ActivityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -194,13 +199,13 @@ Route::post('/club-requests/store', [ClubRequestController::class, 'store'])->na
 // Route::get('/admin-club', fn() => view('admin/pages/admin-club/form-member'))->name('admin-club.form-member');
 
 
-Route::get('/admin/clubs/approve/{id}', [ClubRequestManagementController::class, 'approve'])->name('admin.clubs.approve');
-Route::get('/admin/clubs/details/{id}', [ClubRequestManagementController::class, 'show'])->name('admin.clubs.details');
-Route::get('/admin/clubs/create', [ClubRequestManagementController::class, 'create'])->name('admin.clubs.create');
-Route::get('/admin/clubs/edit/{id}', [ClubRequestManagementController::class, 'edit'])->name('admin.clubs.edit');
-Route::delete('/admin/clubs/delete/{id}', [ClubRequestManagementController::class, 'destroy'])->name('admin.clubs.delete');
-Route::get('/admin/clubs/spending', [ClubRequestManagementController::class, 'spending'])->name('admin.clubs.spending');
-Route::get('/admin/clubs/report', [ClubRequestManagementController::class, 'report'])->name('admin.clubs.report');
+Route::get('/admin/clubs/approve/{id}', [MemberRequestManagementController::class, 'approve'])->name('admin.clubs.approve');
+Route::get('/admin/clubs/details/{id}', [MemberRequestManagementController::class, 'show'])->name('admin.clubs.details');
+Route::get('/admin/clubs/create', [MemberRequestManagementController::class, 'create'])->name('admin.clubs.create');
+Route::get('/admin/clubs/edit/{id}', [MemberRequestManagementController::class, 'edit'])->name('admin.clubs.edit');
+Route::delete('/admin/clubs/delete/{id}', [MemberRequestManagementController::class, 'destroy'])->name('admin.clubs.delete');
+Route::get('/admin/clubs/spending', [MemberRequestManagementController::class, 'spending'])->name('admin.clubs.spending');
+Route::get('/admin/clubs/report', [MemberRequestManagementController::class, 'report'])->name('admin.clubs.report');
 
 // Member management routes
 Route::get('/admin/members/approve', [MemberController::class, 'approve'])->name('admin.members.approve');
@@ -228,10 +233,10 @@ Route::post('/club-registration', [ClubController::class, 'submitRegistration'])
 // Route::get('/admin/club-requests', [ClubRequestController::class, 'index'])->name('admin.club-requests');
 
 // Route để hiển thị danh sách đăng ký tham gia câu lạc bộ
-// Route::get('/admin/club-requests', [ClubRequestManagementController::class, 'index'])->name('admin.club-requests');
+// Route::get('/admin/club-requests', [MemberRequestManagementController::class, 'index'])->name('admin.club-requests');
 
-Route::get('/member-requests/create/{club_id?}', [MemberRequestController::class, 'create'])->name('member-requests.create');
-Route::post('/member-requests/store', [MemberRequestController::class, 'store'])->name('member-requests.store');
+Route::get('/member-requests/create/{club_id?}', [MemberRequestController::class, 'create'])->name('member-requests.create')->middleware('auth');
+Route::post('/member-requests/store', [MemberRequestController::class, 'store'])->name('member-requests.store')->middleware('auth');;
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 
@@ -262,11 +267,13 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 });
 
 Route::middleware(['auth', 'admin-club'])->prefix('admin-club')->group(function () {
-    Route::get('/', [ClubRequestManagementController::class, 'member'])->name('admin-club.member-requests');
-    Route::get('/member', [ClubRequestManagementController::class, 'member'])->name('admin-club.members');
+    Route::get('/', [MemberRequestManagementController::class, 'member'])->name('admin-club');
+    Route::get('/member', [MemberController::class, 'index'])->name('admin-club.members');
     // Request management routes
-    Route::get('/member-requests', [ClubRequestManagementController::class, 'member'])->name('admin-club.member-requests');
-    Route::patch('/member-requests/approve/{id}', [ClubRequestManagementController::class, 'approve'])->name('admin-club.member-requests.approve');
-    Route::patch('/member-requests/{id}/reject', [ClubRequestManagementController::class, 'reject'])->name('admin-club.member-requests.reject');
-    Route::delete('/member-requests/{id}', [ClubRequestManagementController::class, 'deleteMemberRequest'])->name('admin-club.member-requests.delete');
+    Route::get('/member-requests', [MemberRequestManagementController::class, 'member'])->name('admin-club.member-requests');
+    Route::patch('/member-requests/approve/{id}', [MemberRequestManagementController::class, 'approve'])->name('admin-club.member-requests.approve');
+    Route::patch('/member-requests/{id}/reject', [MemberRequestManagementController::class, 'reject'])->name('admin-club.member-requests.reject');
+    Route::delete('/member-requests/{id}', [MemberRequestManagementController::class, 'deleteMemberRequest'])->name('admin-club.member-requests.delete');
+
+    Route::get('/select-club/{clubId}', [ClubWorkspaceController::class, 'selectClub'])->name('admin-club.workspace.select');
 });

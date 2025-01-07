@@ -51,7 +51,7 @@
                     @if(Auth::user()->role->value === 'ADMIN')
                     <a href="{{ route('admin.dashboard') }}" class="text-decoration-none login-link" style="color: #fff;">Admin</a>
                     @endif
-                    @if(Auth::user()->role->value === 'ADMIN_CLUB')
+                    @if(Auth::user()->role->value === 'ADMIN_CLUB' && Auth::user()->clubs->count() > 0)
                     <a href="{{ route('admin-club.member-requests') }}" class="text-decoration-none login-link" style="color: #fff;">Admin CL</a>
                     @endif
                     <form id="logout-form" action="{{ route('client.logout') }}" method="POST" style="display: inline;">

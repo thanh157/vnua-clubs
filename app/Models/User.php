@@ -57,4 +57,9 @@ class User extends Authenticatable implements MustVerifyEmailContract
                     ->withPivot('role', 'is_active', 'is_blocked')
                     ->withTimestamps();
     }
+
+    public function ownClubs()
+    {
+        return $this->hasMany(Club::class, 'owner_id');
+    }
 }
