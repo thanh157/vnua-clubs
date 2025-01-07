@@ -62,4 +62,12 @@ class User extends Authenticatable implements MustVerifyEmailContract
     {
         return $this->hasMany(Club::class, 'owner_id');
     }
+
+    // Thêm phương thức lấy các thành viên của một câu lạc bộ dựa trên club_id
+    public static function membersByClub($clubId)
+    {
+        return self::whereHas('clubs', function ($query) use ($clubId) {
+            $query->where('club_id', $clubId);
+        })->get();
+    }
 }

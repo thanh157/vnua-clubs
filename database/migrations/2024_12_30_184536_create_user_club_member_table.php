@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('club_id')->constrained()->onDelete('cascade');
-            $table->enum('role', array_map(fn($role) => $role->value, RoleClub::cases()));
+            $table->string('role');
             $table->boolean('is_active')->default(true);
             $table->boolean('is_blocked')->default(false);
             $table->timestamps();

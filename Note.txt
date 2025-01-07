@@ -10,7 +10,6 @@ B4: Chạy lệnh "php artisan migrate --seed" để tạo bảng và tạo dữ
 
 B5: Chạy lệnh "php artisan serve" để start ứng dụng
 
-B6: Chạy lệnh "php artisan queue:work" để start dịch vụ upload hình ảnh
+B6: Mở thêm terminal khác và chạy lệnh "php artisan queue:work" để start dịch vụ upload hình ảnh
 
-B7: Truy cập project
-    Mở trình duyệt và truy cập vào địa chỉ http://localhost:8000
+B7: Truy cập project, mở trình duyệt và truy cập vào địa chỉ http://localhost:8000
