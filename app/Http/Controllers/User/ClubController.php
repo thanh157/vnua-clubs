@@ -18,12 +18,11 @@ class ClubController extends Controller
     {
         try {
             Log::info('ClubController@index');
-            $clubObject = Club::findOrFail($id);
-            $club = ClubDTO::fromClub($clubObject);
-            $memberAmount = $clubObject->users()->count();
-            $activityCount = $clubObject->activities()->count();
-            $currentActivities = $clubObject->activities()->orderBy('start_date', 'desc')->take(5)->get();
-            $postCount = $clubObject->posts()->count();
+            $club = Club::findOrFail($id);
+            $memberAmount = $club->users()->count();
+            $activityCount = $club->activities()->count();
+            $currentActivities = $club->activities()->orderBy('start_date', 'desc')->get();
+            $postCount = $club->posts()->count();
             
             return view('client.pages.clubs-details.details', compact('club', 'memberAmount', 'activityCount', 'currentActivities', 'postCount'));
             // return view('client.pages.clubs-details.details', compact('club'));

@@ -9,4 +9,5 @@ enum ResourceUseFor: string
     case GALLERY = 'GALLERY';
     case CLUB_REQUEST = 'CLUB_REQUEST';
     case MEMBER_REQUEST = 'MEMBER_REQUEST';
+    case CLUB = 'CLUB';
 }

@@ -17,6 +17,7 @@ use App\Http\Controllers\ClubPresident\MemberRequestManagementController;
 use App\Http\Controllers\ClubPresident\MemberController;
 use App\Http\Controllers\ClubPresident\ClubWorkspaceController;
 use App\Http\Controllers\ClubPresident\SpendingController;
+use App\Http\Controllers\ClubPresident\DetailInformationController;
 
 use App\Http\Controllers\User\ClubRequestController;
 use App\Http\Controllers\User\ClubController;
@@ -98,10 +99,6 @@ Route::get('/admin-spending', function () {
 })->name('admin.admin-spending');
 
 
-
-Route::get('/admin-description', function () {
-    return view('admin.pages.admin-club.admin-description');
-})->name('admin.admin-description');
 
 Route::get('/club-request', function () {
     return view('admin.pages.admin.club-request');
@@ -283,6 +280,12 @@ Route::middleware(['auth', 'admin-club'])->prefix('admin-club')->group(function 
     Route::post('/activities', [ActivityManagementController::class, 'create'])->name('admin-club.activities.create');
     Route::patch('/activities/{id}', [ActivityManagementController::class, 'update'])->name('admin-club.activities.update');
     Route::delete('/activities/{id}', [ActivityManagementController::class, 'destroy'])->name('admin-club.activities.destroy');
+
+    // Detail Club info
+    Route::get('/information', [DetailInformationController::class, 'index'])->name('admin-club.information');
+    Route::patch('/information/update-images/{id}', [DetailInformationController::class, 'updateImages'])->name('admin-club.information.update-images');
+    Route::patch('/information/update-overview/{id}', [DetailInformationController::class, 'updateOverview'])->name('admin-club.information.update-overview');
+    Route::patch('/information/update-description/{id}', [DetailInformationController::class, 'updateDescription'])->name('admin-club.information.update-description');
 
     Route::get('/select-club/{clubId}', [ClubWorkspaceController::class, 'selectClub'])->name('admin-club.workspace.select');
 });

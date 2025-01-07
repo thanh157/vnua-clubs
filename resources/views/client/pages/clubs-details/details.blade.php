@@ -10,7 +10,7 @@ Chi tiết câu lạc bộ
     <div class="profile-cover">
         <!-- Ảnh bìa -->
         <div class="profile-cover-img"
-            style="background-image: url('http://127.0.0.1:8000/assets/client/images/mau-clb2.jpg');background-position: 20% 80%;background-size: cover;background-repeat: no-repeat;border-radius: 10px;">
+            style="background-image: url('{{ $club->cover_image ?? 'http://127.0.0.1:8000/assets/client/images/mau-clb2.jpg' }}'); background-position: 20% 80%; background-size: cover; background-repeat: no-repeat; border-radius: 10px;">
         </div>
         <!-- Nội dung -->
         <div class="d-flex align-items-center position-relative mx-3 mb-3" style="padding-right: 20px; padding-top: 10px">
@@ -18,7 +18,7 @@ Chi tiết câu lạc bộ
             <!-- Avatar - ở bên trái -->
             <div class="me-lg-3 mb-0 position-relative">
                 <a href="#">
-                    <img src="http://127.0.0.1:8000/assets/client/images/mau-clb1.jpg" class="img-thumbnail shadow" width="150" alt="" style="border-radius: 50%; object-fit: cover; height:140px">
+                    <img src="{{ $club->thumbnail ?? 'http://127.0.0.1:8000/assets/client/images/mau-clb1.jpg' }}" class="img-thumbnail shadow" width="150" alt="" style="border-radius: 50%; object-fit: cover; height:140px">
                 </a>
                 <!-- Biểu tượng máy ảnh -->
                 <i class="fa fa-camera" style="position: absolute; bottom: 5px; right: 5px; background-color: rgba(0,0,0,0.5); color: white; border-radius: 50%; padding: 5px; font-size: 20px;"></i>
@@ -171,7 +171,7 @@ Chi tiết câu lạc bộ
                     <!-- Task overview -->
                     <div class="card">
                         <div class="card-header d-lg-flex py-lg-0">
-                            <h5 class="py-lg-3 mb-0">CLB Truyền thông</h5>
+                            <h5 class="py-lg-3 mb-0">{{ $club->name }}</h5>
                             <div class="mt-1 my-lg-auto ms-lg-auto">
                                 <a href="{{ url('/member-requests/create/' . $club->id) }}" class="btn btn-primaryy" style="height: 45px; font-size:16px">Tham gia ngay <i class="ph-user-plus ms-2"></i></a>
                             </div>
@@ -180,53 +180,53 @@ Chi tiết câu lạc bộ
                         <div class="card-body">
                             <div class="mb-4">
                                 <h6><i class="ph-flag banner-icon"></i> Mô tả câu lạc bộ</h6>
-                                <p class="mb-3">Câu lạc bộ Truyền thông trẻ là nơi tập hợp các bạn trẻ đam mê lĩnh vực truyền thông, sáng tạo nội dung, và kết nối cộng đồng. Chúng tôi luôn nỗ lực tạo ra môi trường năng động để thành viên phát triển kỹ năng và thể hiện bản thân.</p>
+                                <p class="mb-3">{{ $club->description }}</p>
                             </div>
 
                             <!-- Sử dụng Flexbox để hiển thị thông tin trong 1 dòng -->
                             <div class="d-flex flex-wrap mb-4">
                                 <div class="info-item me-4">
                                     <h6><i class="ph-calendar"></i> Ngày thành lập</h6>
-                                    <p class="mb-3">15/07/2003</p>
+                                    <p class="mb-3">{{ $club->founded_date }}</p>
                                 </div>
                                 <div class="info-item me-4">
                                     <h6><i class="fas fa-bullhorn"></i> Lĩnh vực hoạt động</h6>
-                                    <p class="mb-3">Truyền thông</p>
+                                    <p class="mb-3">{{ $club->category }}</p>
                                 </div>
                                 <div class="info-item">
-                                    <h6><i class="ph-map-pin"></i> Địa điểm hoạt động</h6>
-                                    <p class="mb-3">Sân sinh viên</p>
+                                    <h6><i class="ph-map-pin"></i>Địa điểm hoạt động</h6>
+                                    <p class="mb-3"> {{ $club->address }}</p>
                                 </div>
                             </div>
 
                             <div class="mb-4">
                                 <h6><i class="ph-target"></i> Mục đích và sứ mệnh</h6>
-                                <p class="mb-4">Câu lạc bộ hướng đến mục tiêu xây dựng một cộng đồng sáng tạo, nơi các thành viên có thể học hỏi và phát triển bản thân. Sứ mệnh của chúng tôi là truyền cảm hứng và tạo giá trị thông qua các hoạt động ý nghĩa.</p>
+                                <p class="mb-4">{{ $club->mission }}</p>
 
                                 <div class="row px-3">
                                     <div class="col-lg-6">
                                         <dl>
                                             <dt class="fs-sm text-primary text-uppercase mb-2"><i class="ph-pencil-simple-line"></i> 1. Sáng tạo nội dung</dt>
-                                            <dd class="mb-3">Tạo ra những nội dung độc đáo và chất lượng để chia sẻ giá trị đến cộng đồng.</dd>
+                                            <dd class="mb-3">{{ $club->content_type }}</dd>
 
                                             <dt class="fs-sm text-primary text-uppercase mb-2"><i class="ph-users-three"></i> 2. Kết nối cộng đồng</dt>
-                                            <dd class="mb-3">Tăng cường giao lưu và kết nối các bạn trẻ có cùng đam mê.</dd>
+                                            <dd class="mb-3">{{ $club->community_purpose }}</dd>
 
                                             <dt class="fs-sm text-primary text-uppercase mb-2"><i class="ph-briefcase"></i> 3. Phát triển kỹ năng</dt>
-                                            <dd class="mb-3">Đào tạo và hỗ trợ thành viên nâng cao kỹ năng mềm và chuyên môn.</dd>
+                                            <dd class="mb-3">{{ $club->skill_improvement}}</dd>
                                         </dl>
                                     </div>
 
                                     <div class="col-lg-6">
                                         <dl>
-                                            <dt class="fs-sm text-primary text-uppercase mb-2"><i class="ph-eye"></i> 1. Tầm nhìn</dt>
-                                            <dd class="mb-3">Trở thành một tổ chức truyền thông hàng đầu dành cho giới trẻ.</dd>
+                                            <dt class="fs-sm text-primary text-uppercase mb-2"><i class="ph-eye"></i> 4. Tầm nhìn</dt>
+                                            <dd class="mb-3"> {{ $club->vision }}</dd>
 
-                                            <dt class="fs-sm text-primary text-uppercase mb-2"><i class="ph-shield-check"></i> 2. Giá trị cốt lõi</dt>
-                                            <dd class="mb-3">Đoàn kết, sáng tạo, và chia sẻ giá trị thực sự.</dd>
+                                            <dt class="fs-sm text-primary text-uppercase mb-2"><i class="ph-shield-check"></i> 5. Giá trị cốt lõi</dt>
+                                            <dd class="mb-3"> {{ $club->core_values }}</dd>
 
-                                            <dt class="fs-sm text-primary text-uppercase mb-2"><i class="ph-flag-banner"></i> 3. Khẩu hiệu</dt>
-                                            <dd class="mb-3">"Sáng tạo không giới hạn".</dd>
+                                            <dt class="fs-sm text-primary text-uppercase mb-2"><i class="ph-flag-banner"></i> 6. Khẩu hiệu</dt>
+                                            <dd class="mb-3">"{{ $club->slogan }}"</dd>
                                         </dl>
                                     </div>
                                 </div>
@@ -239,25 +239,26 @@ Chi tiết câu lạc bộ
             {{-- table time  --}}
             <div class="mb-3">
                 <h6>Thông tin hoạt động</h6>
-                <p class="mb-3">Câu lạc bộ Truyền thông trẻ tổ chức các hoạt động định kỳ với mục đích kết nối các thành viên và phát triển kỹ năng truyền thông.</p>
+                <p class="mb-3"> {{ $club->activity_info }}</p>
             </div>
             <div class="table-responsive border rounded">
                 <table class="table table-bordered">
                     <thead>
                         <tr>
                             {{-- <th>STT</th> --}}
-                            <th>Tên</th>
+                            <th>Tên hoạt động</th>
+                            <th>Thời gian</th>
+                            <th>Địa điểm</th>
                             <th>Mô tả</th>
-                            <th>Số thành viên</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($currentActivities as $index => $activity)
                         <tr>
-                            <td>{{ $index + 1 }}</td>
-                            <td>{{ \Carbon\Carbon::parse($activity->start_date)->format('H:i d/m/Y') }} - {{ \Carbon\Carbon::parse($activity->end_date)->format('H:i d/m/Y') }}</td>
                             <td>{{ $activity->name }}</td>
+                            <td>{{ \Carbon\Carbon::parse($activity->start_date)->format('H:i d/m/Y') }} - {{ \Carbon\Carbon::parse($activity->end_date)->format('H:i d/m/Y') }}</td>
                             <td>{{ $activity->location }}</td>
+                            <td>{{ $activity->description }}</td>
                         </tr>
                         @endforeach
                     </tbody>
