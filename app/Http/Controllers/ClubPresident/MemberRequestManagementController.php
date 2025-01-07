@@ -25,16 +25,29 @@ class MemberRequestManagementController extends Controller
 
     public function member(Request $request)
     {
-         // Lấy current_club_id từ session
-         $currentClubId = $request->session()->get('current_club_id');
+          // Lấy current_club_id từ session
+        $currentClubId = $request->session()->get('current_club_id');
 
-         // Kiểm tra xem current_club_id có tồn tại trong session không
-         if (!$currentClubId) {
-             return redirect()->route('admin.dashboard')->with('error', 'Không có câu lạc bộ nào được chọn.');
-         }
- 
-         // Lấy các yêu cầu thành viên dựa trên current_club_id
-         $memberRequests = MemberRequest::where('club_id', $currentClubId)->get();
+        // Kiểm tra xem current_club_id có tồn tại trong session không
+        if (!$currentClubId) {
+            // Lấy người dùng hiện tại
+            $user = Auth::user();
+
+            // Lấy danh sách các câu lạc bộ mà người dùng hiện tại làm chủ
+            $clubs = $user->clubs;
+
+            // Kiểm tra xem người dùng có câu lạc bộ nào không
+            if ($clubs->isEmpty()) {
+                return redirect()->route('admin.dashboard')->with('error', 'Bạn không có câu lạc bộ nào.');
+            }
+
+            // Gán mặc định câu lạc bộ đầu tiên
+            $currentClubId = $clubs->first()->id;
+            $request->session()->put('current_club_id', $currentClubId);
+        }
+
+        // Lấy các yêu cầu thành viên dựa trên current_club_id
+        $memberRequests = MemberRequest::where('club_id', $currentClubId)->get();
         return view('admin.pages.admin-club.member-request', compact('memberRequests'));
     }
 
