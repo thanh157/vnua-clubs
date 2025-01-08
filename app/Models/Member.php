@@ -12,6 +12,15 @@ class Member extends Model
     protected $table = 'user_club_member';
 
     protected $fillable = [
+        'full_name',
+        'student_id',
+        'class_name',
+        'phone',
+        'email',
+        'gender',
+        'avatar',
+        'faculty',
+        'purpose',
         'user_id',
         'club_id',
         'role',

@@ -17,8 +17,8 @@ class ClubFactory extends Factory
 
         return [
             'name' => $this->faker->company,
-            'thumbnail' => $this->faker->imageUrl(640, 480, 'clubs', true),
-            'cover_image' => $this->faker->imageUrl(1280, 720, 'clubs', true),
+            'thumbnail' => null,
+            'cover_image' => null,
             'description' => $this->faker->paragraph,
             'balance' => $this->faker->randomFloat(2, 1000, 1000000),
             'category' => $this->faker->word,

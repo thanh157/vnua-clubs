@@ -67,15 +67,25 @@ class MemberRequestManagementController extends Controller
         Log::info('Member request approved.', ['memberRequest' => $memberRequest]);
 
         // Tạo bản ghi mới trong model Member
-        Member::create([
-            'user_id' => $memberRequest->user_id,
-            'club_id' => $memberRequest->club_id,
-            'role' => RoleClub::MEMBER, // Hoặc giá trị mặc định khác cho role
-            'is_active' => true,
-            'is_blocked' => false,
-        ]);
+       // Tạo một bản ghi mới trong bảng user_club_member
+       Member::create([
+        'full_name' => $memberRequest->full_name,
+        'student_id' => $memberRequest->student_id,
+        'class_name' => $memberRequest->class_name,
+        'phone' => $memberRequest->phone,
+        'email' => $memberRequest->email,
+        'gender' => $memberRequest->gender,
+        'avatar' => $memberRequest->avatar,
+        'faculty' => $memberRequest->faculty,
+        'purpose' => $memberRequest->purpose,
+        'user_id' => $memberRequest->user_id,
+        'club_id' => $memberRequest->club_id,
+        'role' => RoleClub::MEMBER, // Hoặc vai trò khác nếu cần
+        'is_active' => true,
+        'is_blocked' => false,
+    ]);
 
-        return redirect()->route('admin.member-requests')->with('success', 'Yêu cầu đã được phê duyệt.');
+        return redirect()->route('admin-club.member-requests')->with('success', 'Yêu cầu đã được phê duyệt.');
     }
 
     public function reject($id)

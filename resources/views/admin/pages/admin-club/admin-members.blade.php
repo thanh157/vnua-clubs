@@ -96,8 +96,14 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <p>Tên: {{ $member->user->name }}</p>
-                                <p>Email: {{ $member->user->email }}</p>
+                                <p>Tên: {{ $member->full_name }}</p>
+                                <p>Email: {{ $member->email }}</p>
+                                <p>Số điện thoại: {{ $member->phone }}</p>
+                                <p>Giới tính: {{ $member->gender }}</p>
+                                <p>Khoa: {{ $member->faculty }}</p>
+                                <p>Lớp: {{ $member->class_name }}</p>
+                                <p>Mã sinh viên: {{ $member->student_id }}</p>
+                                <p>Mục đích: {{ $member->purpose }}</p>
                                 <p>Vai trò: {{ $member->role == 'admin' ? 'Quản trị viên' : 'Thành viên' }}</p>
                                 <p>Ngày tham gia: {{ $member->created_at ? $member->created_at->format('Y-m-d') : 'N/A' }}</p>
                                 <form action="{{ route('admin-club.members.updateRole', $member->id) }}" method="POST">

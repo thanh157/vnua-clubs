@@ -14,6 +14,15 @@ return new class extends Migration
     {
         Schema::create('user_club_member', function (Blueprint $table) {
             $table->id();
+            $table->string('full_name');
+            $table->string('student_id')->nullable();
+            $table->string('class_name')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('email');
+            $table->string('gender')->nullable();
+            $table->string('avatar')->nullable();
+            $table->string('faculty')->nullable();
+            $table->text('purpose')->nullable();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('club_id')->constrained()->onDelete('cascade');
             $table->string('role');
