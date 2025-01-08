@@ -68,7 +68,9 @@ class UploadImageToCloud implements ShouldQueue
         $resource->save();
 
         // Update the model with the new image URL
-        $this->model->update([$this->fieldName => $result['secure_url']]);
+        if ($this->model != null) {
+            $this->model->update([$this->fieldName => $result['secure_url']]);
+        }
 
         // Xóa file tạm sau khi upload thành công
         Storage::delete($this->filePath);

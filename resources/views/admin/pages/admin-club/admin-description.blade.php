@@ -173,6 +173,127 @@
         </div>
     </div>
     <!-- /Bảng lựa chọn hình ảnh và video đã đăng -->
+    <div class="card mt-4">
+        <div class="card-header">
+            <h5 class="mb-0">Thông tin hoạt động</h5>
+        </div>
+        <div class="card-body">
+            <form>
+                <div class="form-group mb-3">
+                    <label for="activity_name">Tên hoạt động</label>
+                    <input type="text" class="form-control" id="activity_name" name="activity_name" value="Tên hoạt động" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="activity_description">Mô tả</label>
+                    <textarea class="form-control" id="activity_description" name="activity_description" rows="4" required>Mô tả chi tiết về hoạt động...</textarea>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="activity_members">Số thành viên</label>
+                    <input type="number" class="form-control" id="activity_members" name="activity_members" value="50" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="activity_time">Thời gian</label>
+                    <input type="datetime-local" class="form-control" id="activity_time" name="activity_time" value="2023-12-31T23:59" required>
+                </div>
+                <button type="button" class="btn btn-primary mt-3" onclick="saveActivity()">Lưu</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Club images and documents -->
+    <div class="card mt-4">
+        <div class="card-header">
+            <h5 class="mb-0">Hình ảnh và tài liệu</h5>
+        </div>
+        <div class="card-body">
+            <form action="{{ route('admin-club.information.upload-resource') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="form-group mb-3">
+                    <label for="resource">Thêm hình ảnh hoặc video</label>
+                    <input type="file" class="form-control" id="resource" name="resource" accept=".jpg, .jpeg, .png, .mp4, .avi, .mov">
+                </div>
+                <div class="form-group text-right">
+                    <button type="submit" class="btn btn-primary">Lưu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-header">
+            <h5 class="mb-0">Video nổi bật</h5>
+        </div>
+        <div class="card-body">
+            <form>
+                <div class="form-group mb-3">
+                    <label for="videos">Thêm video</label>
+                    <input type="file" class="form-control" id="videos" name="videos[]" accept="video/*" multiple>
+                </div>
+                <div class="form-group text-right">
+                    <button type="submit" class="btn btn-primary">Lưu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Display resources -->
+    <div class="card mt-4">
+        <div class="card-header">
+            <h5 class="mb-0">Hình ảnh và Video của Câu lạc bộ</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                @foreach($resources as $resource)
+                <div class="col-md-1 mb-3">
+                    @if($resource->type == \App\Enums\ResourceType::IMAGE)
+                    <img src="{{ $resource->public_url }}" class="img-fluid" alt="Image" style="width: 40px; height: 40px; object-fit: cover;">
+                    @elseif($resource->type == \App\Enums\ResourceType::VIDEO)
+                    <video class="img-fluid" style="width: 100px; height: 100px; object-fit: cover;" controls>
+                        <source src="{{ $resource->public_url }}" type="video/mp4">
+                        Trình duyệt của bạn không hỗ trợ thẻ video.
+                    </video>
+                    @endif
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+
+    <!-- Bảng lựa chọn hình ảnh và video đã đăng -->
+    <div class="card mt-4">
+        <div class="card-header">
+            <h5 class="mb-0">Hình ảnh và video đã đăng</h5>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Loại</th>
+                        <th>URL</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dữ liệu mẫu -->
+                    <tr>
+                        <td>Hình ảnh</td>
+                        <td><a href="{{ asset('path/to/image1.jpg') }}" target="_blank">Xem hình ảnh</a></td>
+                        <td class="text-center">
+                            <button class="btn btn-sm btn-danger">Xóa</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Video</td>
+                        <td><a href="{{ asset('path/to/video1.mp4') }}" target="_blank">Xem video</a></td>
+                        <td class="text-center">
+                            <button class="btn btn-sm btn-danger">Xóa</button>
+                        </td>
+                    </tr>
+                    <!-- Thêm các dòng khác tương tự -->
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 <!-- /content area -->
 @endsection

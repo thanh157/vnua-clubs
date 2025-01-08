@@ -9,14 +9,22 @@ use Illuminate\Support\Facades\Auth;
 use App\Jobs\UploadImageToCloud;
 use App\Enums\ResourceType;
 use App\Enums\ResourceUseFor;
+use App\Models\Resource;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class DetailInformationController extends Controller
 {
     public function index()
     {
-        $club = Club::findOrFail(session('current_club_id'));
-        return view('admin.pages.admin-club.admin-description', compact('club'));
+        $clubId = session('current_club_id');
+        $club = Club::findOrFail($clubId);
+
+        // Lấy các resource liên quan đến câu lạc bộ
+        $resources = Resource::where('use_for', ResourceUseFor::GALLERY)
+                             ->where('use_for_id', $clubId)
+                             ->get();
+        return view('admin.pages.admin-club.admin-description', compact('club', 'resources'));
     }
 
     public function updateImages(Request $request, $id)
@@ -86,6 +94,48 @@ class DetailInformationController extends Controller
         ]);
 
         return redirect()->route('admin-club.information', $club->id)->with('success', 'Mô tả chi tiết đã được cập nhật.');
+    }
+
+    public function uploadResource(Request $request)
+    {
+        Log::info('upload resource');
+        $request->validate([
+            'resource' => 'required|file|mimes:jpg,jpeg,png,mp4,avi,mov',
+        ]);
+
+        $file = $request->file('resource');
+        $path = $file->store('resources');
+
+        // Phân biệt loại file
+        $mimeType = $file->getMimeType();
+        $type = strpos($mimeType, 'image') !== false ? ResourceType::IMAGE : ResourceType::VIDEO;
+
+        // Lấy current_club_id từ session
+        $useForId = session('current_club_id');
+
+        // // Lưu vào Model Resource
+        $resource = Resource::create([
+            'public_url' => Storage::url($path),
+            'secure_url' => Storage::url($path),
+            'type' => $type,
+            'use_for' => ResourceUseFor::GALLERY,
+            'public_id' => $path,
+            'use_for_id' => $useForId, // Cập nhật nếu cần thiết
+            'create_user_id' => Auth::id(),
+        ]);
+
+        // Tạo metadata cho resource
+        $metaData = [
+            'type' => $type,
+            'use_for' => ResourceUseFor::GALLERY,
+            'use_for_id' => $useForId,
+            'create_user_id' => Auth::id()
+        ];
+
+        // Dispatch job để upload hình ảnh lên cloud
+        UploadImageToCloud::dispatch($resource, $path, 'public_url', $metaData);
+
+        return redirect()->back()->with('success', 'Resource đã được upload thành công.');
     }
 
     public function list()

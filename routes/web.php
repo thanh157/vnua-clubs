@@ -286,6 +286,7 @@ Route::middleware(['auth', 'admin-club'])->prefix('admin-club')->group(function 
     Route::patch('/information/update-images/{id}', [DetailInformationController::class, 'updateImages'])->name('admin-club.information.update-images');
     Route::patch('/information/update-overview/{id}', [DetailInformationController::class, 'updateOverview'])->name('admin-club.information.update-overview');
     Route::patch('/information/update-description/{id}', [DetailInformationController::class, 'updateDescription'])->name('admin-club.information.update-description');
+    Route::post('/information/upload-resource', [DetailInformationController::class, 'uploadResource'])->name('admin-club.information.upload-resource');
 
     Route::get('/select-club/{clubId}', [ClubWorkspaceController::class, 'selectClub'])->name('admin-club.workspace.select');
 });
