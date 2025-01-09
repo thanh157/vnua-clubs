@@ -136,7 +136,7 @@ Trang chủ
             @foreach ($clubs as $club)
             <div class="col-md-4">
                 <div class="card shadow-sm border-0 rounded-lg bg-light" style="transition: transform 0.3s;">
-                    <img src="{{ asset($club->image ?? 'assets/client/images/club-1.jpg') }}"
+                    <img src="{{ asset($club->cover_image ?? 'assets/client/images/club-1.jpg') }}"
                         alt="{{ $club->name }}"
                         class="card-img-top rounded-top"
                         style="height: 180px; object-fit: cover;">
