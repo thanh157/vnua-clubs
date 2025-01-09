@@ -78,7 +78,7 @@
                     <div class="text-uppercase fs-sm lh-sm opacity-50 sidebar-resize-hide">Quản lý sự kiện</div>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.admin-active') }}" class="nav-link">
+                    <a href="{{ route('admin-club.activities') }}" class="nav-link">
                         <i class="ph-calendar-plus"></i>
                         <span>Hoạt động sắp tới</span>
                     </a>
@@ -95,7 +95,7 @@
                     <div class="text-uppercase fs-sm lh-sm opacity-50 sidebar-resize-hide">Thông tin Câu lạc bộ</div>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.admin-description') }}" class="nav-link">
+                    <a href="{{ route('admin-club.information') }}" class="nav-link">
                         <i class="ph-file-plus"></i>
                         <span>Chỉnh sửa mô tả chi tiết</span>
                     </a>

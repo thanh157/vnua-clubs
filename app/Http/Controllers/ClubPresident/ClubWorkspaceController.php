@@ -17,7 +17,7 @@ class ClubWorkspaceController extends Controller
 
         $request->session()->put('current_club_id', $club->id);
 
-        return redirect()->route('admin-club')->with('success', 'Đã chuyển sang câu lạc bộ ' . $club->name);
+        return redirect()->back()->with('success', 'Đã chuyển sang câu lạc bộ ' . $club->name);
     }
 
     public function getCurrentClub()

@@ -51,9 +51,11 @@
                     @if(Auth::user()->role->value === 'ADMIN')
                     <a href="{{ route('admin.dashboard') }}" class="text-decoration-none login-link" style="color: #fff;">Admin</a>
                     @endif
-                    @if(Auth::user()->role->value === 'ADMIN_CLUB' && Auth::user()->clubs->count() > 0)
-                    <a href="{{ route('admin-club.member-requests') }}" class="text-decoration-none login-link" style="color: #fff;">Admin CL</a>
+                    @if(Auth::user()->role->value === 'ADMIN_CLUB' && Auth::user()->ownClubs()->count() > 0)
+                    <a href="{{ route('admin-club') }}" class="text-decoration-none login-link" style="color: #fff;">Admin CL</a>
+                    
                     @endif
+                    <!-- <p>Count: {{Auth::user()->ownClubs()->count()}}</p> -->
                     <form id="logout-form" action="{{ route('client.logout') }}" method="POST" style="display: inline;">
                         @csrf
                         <button type="submit" class="btn btn-link text-decoration-none login-link" style="color: #fff; padding: 0;">Đăng xuất</button>

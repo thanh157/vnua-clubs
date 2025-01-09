@@ -25,6 +25,15 @@ class MemberFactory extends Factory
         } while ($exists);
 
         return [
+            'full_name' => $this->faker->name,
+            'student_id' => $this->faker->unique()->numerify('S#######'),
+            'class_name' => $this->faker->word,
+            'phone' => $this->faker->phoneNumber,
+            'email' => $this->faker->unique()->safeEmail,
+            'gender' => $this->faker->randomElement(['male', 'female']),
+            'avatar' => $this->faker->imageUrl(100, 100, 'people'),
+            'faculty' => $this->faker->word,
+            'purpose' => $this->faker->sentence,
             'user_id' => $userId,
             'club_id' => $clubId,
             'role' => $this->faker->randomElement(array_map(fn($role) => $role->value, RoleClub::cases())),

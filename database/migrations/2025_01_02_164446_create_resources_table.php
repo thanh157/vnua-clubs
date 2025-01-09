@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('public_url');
             $table->string('secure_url');
             $table->enum('type', array_map(fn($type) => $type->value, ResourceType::cases()));
-            $table->enum('use_for', array_map(fn($for) => $for->value, ResourceUseFor::cases()));
+            $table->string('use_for');
             $table->string('public_id');
             $table->unsignedBigInteger('create_user_id')->nullable();
             $table->unsignedBigInteger('use_for_id')->nullable();

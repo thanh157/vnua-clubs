@@ -10,13 +10,14 @@ use App\Http\Controllers\Auth\RegisterController;
 
 use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\ClubManagementController;
-
+use App\Http\Controllers\ClubPresident\ActivityManagementController;
 use App\Http\Controllers\ClubPresident\ClubDescriptionController;
 use App\Http\Controllers\ClubPresident\AnnouncementController;
 use App\Http\Controllers\ClubPresident\MemberRequestManagementController;
 use App\Http\Controllers\ClubPresident\MemberController;
 use App\Http\Controllers\ClubPresident\ClubWorkspaceController;
 use App\Http\Controllers\ClubPresident\SpendingController;
+use App\Http\Controllers\ClubPresident\DetailInformationController;
 
 use App\Http\Controllers\User\ClubRequestController;
 use App\Http\Controllers\User\ClubController;
@@ -97,13 +98,7 @@ Route::get('/admin-spending', function () {
     return view('admin.pages.admin-club.admin-spending');
 })->name('admin.admin-spending');
 
-Route::get('/admin-active', function () {
-    return view('admin.pages.admin-club.admin-active');
-})->name('admin.admin-active');
 
-Route::get('/admin-description', function () {
-    return view('admin.pages.admin-club.admin-description');
-})->name('admin.admin-description');
 
 Route::get('/club-request', function () {
     return view('admin.pages.admin.club-request');
@@ -268,12 +263,30 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 
 Route::middleware(['auth', 'admin-club'])->prefix('admin-club')->group(function () {
     Route::get('/', [MemberRequestManagementController::class, 'member'])->name('admin-club');
+    
+    // Member management routes
     Route::get('/member', [MemberController::class, 'index'])->name('admin-club.members');
-    // Request management routes
+    Route::delete('/members/{id}', [MemberController::class, 'destroy'])->name('admin-club.members.delete');
+    Route::patch('/members/{id}/update-role', [MemberController::class, 'updateRole'])->name('admin-club.members.updateRole');
+
+    // Member Request management routes
     Route::get('/member-requests', [MemberRequestManagementController::class, 'member'])->name('admin-club.member-requests');
     Route::patch('/member-requests/approve/{id}', [MemberRequestManagementController::class, 'approve'])->name('admin-club.member-requests.approve');
     Route::patch('/member-requests/{id}/reject', [MemberRequestManagementController::class, 'reject'])->name('admin-club.member-requests.reject');
     Route::delete('/member-requests/{id}', [MemberRequestManagementController::class, 'deleteMemberRequest'])->name('admin-club.member-requests.delete');
+
+    // Activity
+    Route::get('/activities', [ActivityManagementController::class, 'index'])->name('admin-club.activities');
+    Route::post('/activities', [ActivityManagementController::class, 'create'])->name('admin-club.activities.create');
+    Route::patch('/activities/{id}', [ActivityManagementController::class, 'update'])->name('admin-club.activities.update');
+    Route::delete('/activities/{id}', [ActivityManagementController::class, 'destroy'])->name('admin-club.activities.destroy');
+
+    // Detail Club info
+    Route::get('/information', [DetailInformationController::class, 'index'])->name('admin-club.information');
+    Route::patch('/information/update-images/{id}', [DetailInformationController::class, 'updateImages'])->name('admin-club.information.update-images');
+    Route::patch('/information/update-overview/{id}', [DetailInformationController::class, 'updateOverview'])->name('admin-club.information.update-overview');
+    Route::patch('/information/update-description/{id}', [DetailInformationController::class, 'updateDescription'])->name('admin-club.information.update-description');
+    Route::post('/information/upload-resource', [DetailInformationController::class, 'uploadResource'])->name('admin-club.information.upload-resource');
 
     Route::get('/select-club/{clubId}', [ClubWorkspaceController::class, 'selectClub'])->name('admin-club.workspace.select');
 });
