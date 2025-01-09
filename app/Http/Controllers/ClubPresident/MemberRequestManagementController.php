@@ -25,29 +25,60 @@ class MemberRequestManagementController extends Controller
 
     public function member(Request $request)
     {
-          // Lấy current_club_id từ session
-        $currentClubId = $request->session()->get('current_club_id');
+        Log::info('Member request list.');
+        try {
+            // Lấy current_club_id từ session
+            $currentClubId = $request->session()->get('current_club_id');
 
-        // Kiểm tra xem current_club_id có tồn tại trong session không
-        if (!$currentClubId) {
-            // Lấy người dùng hiện tại
-            $user = Auth::user();
+            // Kiểm tra xem current_club_id có tồn tại trong session không
+            if (!$currentClubId) {
+                // Lấy người dùng hiện tại
+                $user = Auth::user();
 
-            // Lấy danh sách các câu lạc bộ mà người dùng hiện tại làm chủ
-            $clubs = $user->clubs;
+                // Lấy danh sách các câu lạc bộ mà người dùng hiện tại làm chủ
+                $clubs = $user->ownClubs;
 
-            // Kiểm tra xem người dùng có câu lạc bộ nào không
-            if ($clubs->isEmpty()) {
-                return redirect()->route('admin.dashboard')->with('error', 'Bạn không có câu lạc bộ nào.');
+                // Kiểm tra xem người dùng có câu lạc bộ nào không
+                if ($clubs->isEmpty()) {
+                    log::info('User does not have any club.');
+                    return redirect()->route('admin.dashboard')->with('error', 'Bạn không có câu lạc bộ nào.');
+                }
+
+                // Gán mặc định câu lạc bộ đầu tiên
+                $currentClubId = $clubs->first()->id;
+                $request->session()->put('current_club_id', $currentClubId);
             }
 
-            // Gán mặc định câu lạc bộ đầu tiên
-            $currentClubId = $clubs->first()->id;
-            $request->session()->put('current_club_id', $currentClubId);
+            // Lấy các yêu cầu thành viên dựa trên current_club_id
+            $memberRequests = MemberRequest::where('club_id', $currentClubId)->get();
+            return view('admin.pages.admin-club.member-request', compact('memberRequests'));
+        } catch (\Exception $e) {
+            Log::error('Error member request list.', ['error' => $e->getMessage()]);
+            return redirect()->route('client.home')->with('error', 'Có lỗi xảy ra, vui lòng thử lại sau.');
         }
+        //   // Lấy current_club_id từ session
+        // $currentClubId = $request->session()->get('current_club_id');
+
+        // // Kiểm tra xem current_club_id có tồn tại trong session không
+        // if (!$currentClubId) {
+        //     // Lấy người dùng hiện tại
+        //     $user = Auth::user();
+
+        //     // Lấy danh sách các câu lạc bộ mà người dùng hiện tại làm chủ
+        //     $clubs = $user->clubs;
+
+        //     // Kiểm tra xem người dùng có câu lạc bộ nào không
+        //     if ($clubs->isEmpty()) {
+        //         return redirect()->route('admin.dashboard')->with('error', 'Bạn không có câu lạc bộ nào.');
+        //     }
+
+        //     // Gán mặc định câu lạc bộ đầu tiên
+        //     $currentClubId = $clubs->first()->id;
+        //     $request->session()->put('current_club_id', $currentClubId);
+        // }
 
         // Lấy các yêu cầu thành viên dựa trên current_club_id
-        $memberRequests = MemberRequest::where('club_id', $currentClubId)->get();
+        // $memberRequests = MemberRequest::where('club_id', $currentClubId)->get();
         return view('admin.pages.admin-club.member-request', compact('memberRequests'));
     }
 

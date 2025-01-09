@@ -136,7 +136,7 @@ Trang chủ
             @foreach ($clubs as $club)
             <div class="col-md-4">
                 <div class="card shadow-sm border-0 rounded-lg bg-light" style="transition: transform 0.3s;">
-                    <img src="{{ asset($club->cover_image ?? 'assets/client/images/club-1.jpg') }}"
+                    <img src="{{ asset($club->image ?? 'assets/client/images/club-1.jpg') }}"
                         alt="{{ $club->name }}"
                         class="card-img-top rounded-top"
                         style="height: 180px; object-fit: cover;">
@@ -186,106 +186,108 @@ Trang chủ
             </div>
             @endforeach
         </div>
+    </div>
 
-        <!-- Achievements Section -->
-        <div class="container" style="max-width: 100%; padding: 50px; background-color: #fffdf6d6">
-            <div class="text-center mb-4">
-                <h2 class="highlight-title" style="font-size: 1.75rem">Thành tựu của các câu lạc bộ</h2>
-                <p style="font-size: 1.125rem;">Những thành tích nổi bật mà các câu lạc bộ đã đạt được trong các hoạt động.</p>
+    <!-- Achievements Section -->
+    <div class="container" style="max-width: 100%; padding: 50px; background-color: #fffdf6d6">
+        <div class="text-center mb-4">
+            <h2 class="highlight-title" style="font-size: 1.75rem">Thành tựu của các câu lạc bộ</h2>
+            <p style="font-size: 1.125rem;">Những thành tích nổi bật mà các câu lạc bộ đã đạt được trong các hoạt động.</p>
+        </div>
+        <div class="row row-cols-1 row-cols-md-4 row-cols-lg-4 g-4">
+            <div class="col">
+                <div class="card shadow-sm text-center">
+                    <img src="{{asset('assets/client/images/vnua-9.jpg')}}" alt="Achievement 1" class="card-img-top" style="height: 180px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">Giải Nhất Cuộc Thi Sáng Tạo</h5>
+                        <p class="card-text">Câu lạc bộ Khoa học đạt giải nhất trong cuộc thi sáng tạo cấp trường.</p>
+                    </div>
+                </div>
             </div>
-            <div class="row row-cols-1 row-cols-md-4 row-cols-lg-4 g-4">
-                <div class="col">
-                    <div class="card shadow-sm text-center">
-                        <img src="{{asset('assets/client/images/vnua-9.jpg')}}" alt="Achievement 1" class="card-img-top" style="height: 180px; object-fit: cover;">
-                        <div class="card-body">
-                            <h5 class="card-title">Giải Nhất Cuộc Thi Sáng Tạo</h5>
-                            <p class="card-text">Câu lạc bộ Khoa học đạt giải nhất trong cuộc thi sáng tạo cấp trường.</p>
-                        </div>
+            <div class="col">
+                <div class="card shadow-sm text-center">
+                    <img src="{{asset('assets/client/images/vnua-10.jpg')}}" alt="Achievement 2" class="card-img-top" style="height: 180px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">Giải Nhì Cuộc Thi Thể Thao</h5>
+                        <p class="card-text">Câu lạc bộ Bóng đá giành giải nhì trong cuộc thi thể thao toàn trường.</p>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="card shadow-sm text-center">
-                        <img src="{{asset('assets/client/images/vnua-10.jpg')}}" alt="Achievement 2" class="card-img-top" style="height: 180px; object-fit: cover;">
-                        <div class="card-body">
-                            <h5 class="card-title">Giải Nhì Cuộc Thi Thể Thao</h5>
-                            <p class="card-text">Câu lạc bộ Bóng đá giành giải nhì trong cuộc thi thể thao toàn trường.</p>
-                        </div>
+            </div>
+            <div class="col">
+                <div class="card shadow-sm text-center">
+                    <img src="{{asset('assets/client/images/vnua-13.jpg')}}" alt="Achievement 2" class="card-img-top" style="height: 180px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">Giải Nhì Cuộc Thi Quần Vợt</h5>
+                        <p class="card-text">Giải quần vợt câu lạc bộ cán bộ công nhân viên chức Học viện.</p>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="card shadow-sm text-center">
-                        <img src="{{asset('assets/client/images/vnua-13.jpg')}}" alt="Achievement 2" class="card-img-top" style="height: 180px; object-fit: cover;">
-                        <div class="card-body">
-                            <h5 class="card-title">Giải Nhì Cuộc Thi Quần Vợt</h5>
-                            <p class="card-text">Giải quần vợt câu lạc bộ cán bộ công nhân viên chức Học viện.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card shadow-sm text-center">
-                        <img src="{{asset('assets/client/images/vnua-14.jpg')}}" alt="Achievement 2" class="card-img-top" style="height: 180px; object-fit: cover;">
-                        <div class="card-body">
-                            <h5 class="card-title">Giải Nhất cuộc thi Văn nghệ</h5>
-                            <p class="card-text">Câu lạc bộ Tiếng anh đạt được giải nhất trong cuộc thi.</p>
-                        </div>
+            </div>
+            <div class="col">
+                <div class="card shadow-sm text-center">
+                    <img src="{{asset('assets/client/images/vnua-14.jpg')}}" alt="Achievement 2" class="card-img-top" style="height: 180px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">Giải Nhất cuộc thi Văn nghệ</h5>
+                        <p class="card-text">Câu lạc bộ Tiếng anh đạt được giải nhất trong cuộc thi.</p>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- News Section -->
-        <div class="container pb-5" style="max-width: 100%; padding: 50px; background-color: #f9eff1;">
-            <div class="text-center mb-4">
-                <h2 class="highlight-title" style="font-size: 1.75rem">Tin tức mới nhất</h2>
-                <p style="font-size: 1.125rem;">Cập nhật các tin tức mới nhất về các hoạt động và sự kiện.</p>
-            </div>
+    <!-- News Section -->
+    <div class="container pb-5" style="max-width: 100%; padding: 50px; background-color: #f9eff1;">
+        <div class="text-center mb-4">
+            <h2 class="highlight-title" style="font-size: 1.75rem">Tin tức mới nhất</h2>
+            <p style="font-size: 1.125rem;">Cập nhật các tin tức mới nhất về các hoạt động và sự kiện.</p>
+        </div>
 
-            <!-- Carousel -->
-            <div id="newsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
-                <div class="carousel-inner">
-                    @foreach($latestPosts->chunk(4) as $index => $chunk)
-                    <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-                            @foreach($chunk as $post)
-                            <div class="col">
-                                <div class="card shadow-sm h-100 text-center" style="height: 300px;">
-                                    <img src="{{ $post->image ?? asset('assets/client/images/club-1.jpg') }}" alt="{{ $post->title }}" class="card-img-top" style="height: 150px; object-fit: cover;">
-                                    <div class="card-body" style="padding: 10px;">
-                                        <h5 class="card-title" style="font-size: 1rem;">{{ $post->title }}</h5>
-                                        <p class="card-text" style="font-size: 0.875rem;">{{ Str::limit($post->content, 100) }}</p>
-                                    </div>
-                                    <div class="card-footer" style="padding: 5px;">
-                                        <a href="{{ $post->reference_url ?? '#' }}" class="text-decoration-none text-primary">Xem thêm</a>
-                                    </div>
+        <!-- Carousel -->
+        <div id="newsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+            <div class="carousel-inner">
+                @foreach($latestPosts->chunk(4) as $index => $chunk)
+                <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+                        @foreach($chunk as $post)
+                        <div class="col">
+                            <div class="card shadow-sm h-100 text-center" style="height: 300px;">
+                                <img src="{{ $post->image ?? asset('assets/client/images/club-1.jpg') }}" alt="{{ $post->title }}" class="card-img-top" style="height: 150px; object-fit: cover;">
+                                <div class="card-body" style="padding: 10px;">
+                                    <h5 class="card-title" style="font-size: 1rem;">{{ $post->title }}</h5>
+                                    <p class="card-text" style="font-size: 0.875rem;">{{ Str::limit($post->content, 100) }}</p>
+                                </div>
+                                <div class="card-footer" style="padding: 5px;">
+                                    <a href="{{ $post->reference_url ?? '#' }}" class="text-decoration-none text-primary">Xem thêm</a>
                                 </div>
                             </div>
-                            @endforeach
                         </div>
+                        @endforeach
                     </div>
-                    @endforeach
                 </div>
-                <!-- Điều khiển slide -->
-                <button class="carousel-control-prev" type="button" data-bs-target="#newsCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#newsCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+                @endforeach
             </div>
+            <!-- Điều khiển slide -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#newsCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#newsCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
-        <!-- Call to Action Section -->
-        <div class="text-center py-5" style="background-color: #17a2b8; color: white;">
-            <h2 style="font-size: 2rem;">Bạn đã sẵn sàng tham gia hoặc thành lập một câu lạc bộ chưa?</h2>
-            <p style="font-size: 1.125rem;">Đừng bỏ lỡ cơ hội trở thành một phần của cộng đồng sinh viên năng động.</p>
-            <div class="dk" style="padding: 20px">
-                <a href="{{ route('member-requests.create', ['club_id' => null]) }}" class="btn btn-warning rounded-pill px-4 py-2" style="margin-right: 20px;">Đăng ký tham gia CLB</a>
-                <a href="{{ route('club-requests.create') }}" class="btn btn-warning rounded-pill px-4 py-2">Đăng ký thành lập CLB</a>
-            </div>
-        </div>
-
     </div>
+
+    <!-- Call to Action Section -->
+    <div class="text-center py-5" style="background-color: #17a2b8; color: white;">
+        <h2 style="font-size: 2rem;">Bạn đã sẵn sàng tham gia hoặc thành lập một câu lạc bộ chưa?</h2>
+        <p style="font-size: 1.125rem;">Đừng bỏ lỡ cơ hội trở thành một phần của cộng đồng sinh viên năng động.</p>
+        <div class="dk" style="padding: 20px">
+            <a href="{{ route('member-requests.create', ['club_id' => null]) }}" class="btn btn-warning rounded-pill px-4 py-2" style="margin-right: 20px;">Đăng ký tham gia CLB</a>
+            <a href="{{ route('club-requests.create') }}" class="btn btn-warning rounded-pill px-4 py-2">Đăng ký thành lập CLB</a>
+        </div>
+    </div>
+
+</div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {

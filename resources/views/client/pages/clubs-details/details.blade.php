@@ -145,29 +145,6 @@ Chi tiết câu lạc bộ
                     </div>
                 </div>
 
-                {{-- <div class="col-sm-6 col-xl-3">
-                    <div class="card card-body bg-danger text-white">
-                        <div class="d-flex align-items-center">
-                            <div class="flex-fill">
-                                <h4 class="mb-0">$5000</h4>
-                                Tổng chi phí
-                            </div>
-                            <i class="fa-solid fa-money-bill-wave text-white opacity-75 ms-3" style="font-size: 2rem;"></i>
-                        </div>
-                    </div>
-                </div>
-        
-                <div class="col-sm-6 col-xl-3">
-                    <div class="card card-body bg-success text-white">
-                        <div class="d-flex align-items-center">
-                            <div class="flex-fill">
-                                <h4 class="mb-0">5</h4>
-                                Mẫu đơn
-                            </div>
-                            <i class="fa-solid fa-star text-white opacity-75 ms-3" style="font-size: 2rem;"></i>
-                        </div>
-                    </div>
-                </div> --}}
             </div>
 
             {{-- gioi thieu chi tiet clb --}}
@@ -461,5 +438,5 @@ Chi tiết câu lạc bộ
         {{-- end QLCT--}}
     </div>
 </div>
-
+</div>
 @endsection

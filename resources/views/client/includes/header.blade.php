@@ -55,7 +55,7 @@
                     <a href="{{ route('admin-club') }}" class="text-decoration-none login-link" style="color: #fff;">Admin CL</a>
                     
                     @endif
-                    <!-- <p>Count: {{Auth::user()->ownClubs()->count()}}</p> -->
+                    {{-- <p>Count: {{Auth::user()->ownClubs()->count()}}</p>  --}}
                     <form id="logout-form" action="{{ route('client.logout') }}" method="POST" style="display: inline;">
                         @csrf
                         <button type="submit" class="btn btn-link text-decoration-none login-link" style="color: #fff; padding: 0;">Đăng xuất</button>
