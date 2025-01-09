@@ -1,5 +1,5 @@
 <!-- Form hoạt động -->
-<form id="{{ $formId }}">
+<form id="{{ $formId }}" enctype="multipart/form-data">
     @csrf
     <div class="form-group mb-3">
         <label for="{{ $prefix }}-name">Tên hoạt động</label>
@@ -33,8 +33,39 @@
             @endforeach
         </select>
     </div>
+    <div class="form-group mb-3">
+        <label for="{{ $prefix }}-image">Chọn ảnh</label>
+        <input type="file" class="form-control" id="{{ $prefix }}-image" name="image" accept="image/*" onchange="previewImage(event, '{{ $prefix }}-image-preview')">
+    </div>
+    <div class="form-group mb-3">
+        <img id="{{ $prefix }}-image-preview" src="#" alt="Image Preview" style="display: none; max-width: 30%; height: auto;">
+    </div>
+    
     <div class="form-group text-right">
         <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
     </div>
 </form>
+
+<script>
+    function previewImage(event, previewId) {
+        var reader = new FileReader();
+        reader.onload = function(){
+            var output = document.getElementById(previewId);
+            output.src = reader.result;
+            output.style.display = 'block';
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+
+    // Hàm để hiển thị ảnh hiện có khi modal được mở
+    function loadExistingImage(imageUrl, previewId) {
+        var output = document.getElementById(previewId);
+        if (imageUrl) {
+            output.src = imageUrl;
+            output.style.display = 'block';
+        } else {
+            output.style.display = 'none';
+        }
+    }
+</script>

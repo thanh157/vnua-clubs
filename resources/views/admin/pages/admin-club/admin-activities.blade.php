@@ -59,7 +59,7 @@
                         <td>{{ $activity['description'] }}</td>
                         <td>{{ $activity['status'] == 'active' ? 'Hoạt động' : 'Không hoạt động' }}</td>
                         <td>
-                            <button class="btn btn-secondary btn-edit-activity" data-id="{{ $activity['id'] }}" data-name="{{ $activity['name'] }}" data-start_date="{{ $activity['start_date'] }}" data-end_date="{{ $activity['end_date'] }}" data-time_note="{{ $activity['time_note'] }}" data-location="{{ $activity['location'] }}" data-status="{{ $activity['status'] }}" data-description="{{ $activity['description'] }}" data-bs-toggle="modal" data-bs-target="#activityModal">Chỉnh sửa</button>
+                            <button class="btn btn-secondary btn-edit-activity" data-id="{{ $activity['id'] }}" data-name="{{ $activity['name'] }}" data-start_date="{{ $activity['start_date'] }}" data-end_date="{{ $activity['end_date'] }}" data-time_note="{{ $activity['time_note'] }}" data-location="{{ $activity['location'] }}" data-status="{{ $activity['status'] }}" data-description="{{ $activity['description'] }}" data-image="{{ $activity['image_url'] }}" data-bs-toggle="modal" data-bs-target="#activityModal">Chỉnh sửa</button>
                         </td>
                     </tr>
                     @endforeach
@@ -87,6 +87,7 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+
         // Hiển thị modal chỉnh sửa hoạt động khi nhấn nút "Chỉnh sửa"
         document.querySelectorAll('.btn-edit-activity').forEach(function(button) {
             button.addEventListener('click', function() {
@@ -110,6 +111,10 @@
                 form.querySelector('input[name="location"]').value = this.getAttribute('data-location');
                 form.querySelector('select[name="status"]').value = this.getAttribute('data-status');
                 form.querySelector('textarea[name="description"]').value = this.getAttribute('data-description');
+
+                // Khi modal được mở, tải ảnh hiện có
+                var imageUrl = this.getAttribute('data-image'); // Lấy URL ảnh từ thuộc tính data-image
+                loadExistingImage(imageUrl, 'activity-image-preview');
             });
         });
 
@@ -147,6 +152,13 @@
                 });
             });
         });
+        // $('#activityModal').on('show.bs.modal', function(event) {
+        //     var button = $(event.relatedTarget); // Nút đã kích hoạt modal
+        //     var imageUrl = button.data('image'); // Lấy URL ảnh từ thuộc tính data-image
+        //     console.log("image: ", imageUrl);
+        //     loadExistingImage(imageUrl, 'activity-image-preview');
+        // });
+
     });
 </script>
 @endsection

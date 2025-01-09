@@ -9,6 +9,11 @@ use App\Models\Activity;
 use App\Enums\RoleClub;
 use App\Models\Member;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+use App\Jobs\UploadImageToCloud;
+use App\Enums\ResourceType;
+use App\Enums\ResourceUseFor;
+
 
 class ActivityManagementController extends Controller
 {
@@ -39,41 +44,84 @@ class ActivityManagementController extends Controller
 
     public function create(Request $request)
     {
-        Log::info('create activity');
+        try {
+            Log::info('create activity');
 
-        // Tạo mới hoạt động
-        $activity = new Activity();
-        $activity->name = $request->input('name');
-        $activity->start_date = $request->input('start_date');
-        $activity->end_date = $request->input('end_date');
-        $activity->time_note = $request->input('time_note');
-        $activity->location = $request->input('location');
-        $activity->description = $request->input('description');
-        $activity->status = $request->input('status');
-        $activity->club_id = session('current_club_id'); // Gán club_id cho hoạt động
-        $activity->save();
+            // Tạo mới hoạt động
+            $activity = new Activity();
+            $activity->name = $request->input('name');
+            $activity->start_date = $request->input('start_date');
+            $activity->end_date = $request->input('end_date');
+            $activity->time_note = $request->input('time_note');
+            $activity->location = $request->input('location');
+            $activity->description = $request->input('description');
+            $activity->status = $request->input('status');
+            $activity->club_id = session('current_club_id'); // Gán club_id cho hoạt động
+            $activity->save();
 
-        return redirect()->route('admin-club.activities')->with('success', 'Hoạt động đã được tạo mới.');
+            // Tạo metadata
+            $metaData = [
+                'type' => ResourceType::IMAGE,
+                'use_for' => ResourceUseFor::ACTIVITY,
+                'use_for_id' => $activity->id,
+                'create_user_id' => Auth::id()
+            ];
+
+            // Xử lý upload file avatar ngầm
+           
+            if ($request->hasFile('image')) {
+                Log::info('upload image');
+                $file = $request->file('image');
+                $filePath = $file->store('temp_activity'); // Lưu file tạm thời
+
+                UploadImageToCloud::dispatch($activity, $filePath, 'image_url', $metaData);
+            }
+
+            return redirect()->route('admin-club.activities')->with('success', 'Hoạt động đã được tạo mới.');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+        }
+        return redirect()->route('admin-club.activities')->with('error', 'Có lỗi xảy ra, vui lòng thử lại sau.');
     }
 
     public function update(Request $request, $id)
     {
-        Log::info('update activity');
+        try {
+            Log::info('update activity');
 
-        // Tìm hoạt động theo ID
-        $activity = Activity::findOrFail($id);
+            // Tìm hoạt động theo ID
+            $activity = Activity::findOrFail($id);
 
-        // Cập nhật thông tin hoạt động
-        $activity->name = $request->input('name');
-        $activity->start_date = $request->input('start_date');
-        $activity->end_date = $request->input('end_date');
-        $activity->time_note = $request->input('time_note');
-        $activity->location = $request->input('location');
-        $activity->description = $request->input('description');
-        $activity->status = $request->input('status');
-        $activity->save();
+            // Cập nhật thông tin hoạt động
+            $activity->name = $request->input('name');
+            $activity->start_date = $request->input('start_date');
+            $activity->end_date = $request->input('end_date');
+            $activity->time_note = $request->input('time_note');
+            $activity->location = $request->input('location');
+            $activity->description = $request->input('description');
+            $activity->status = $request->input('status');
+            $activity->save();
 
-        return redirect()->route('admin-club.activities')->with('success', 'Hoạt động đã được cập nhật.');
+            // Tạo metadata
+            $metaData = [
+                'type' => ResourceType::IMAGE,
+                'use_for' => ResourceUseFor::ACTIVITY,
+                'use_for_id' => $activity->id,
+                'create_user_id' => Auth::id()
+            ];
+
+            // Xử lý upload file avatar ngầm
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                $filePath = $file->store('temp_activity'); // Lưu file tạm thời
+
+                UploadImageToCloud::dispatch($activity, $filePath, 'image_url', $metaData);
+            }
+            return redirect()->route('admin-club.activities')->with('success', 'Hoạt động đã được cập nhật.');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+        }
+        return redirect()->route('admin-club.activities')->with('error', 'Có lỗi xảy ra, vui lòng thử lại sau.');
     }
 
     public function list()
