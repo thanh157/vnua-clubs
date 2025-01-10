@@ -17,6 +17,7 @@
         <div class="content-wrapper">
             <!-- Inner content -->
             <div class="content-inner">
+                @include('admin.includes.toast')
                 @yield('content')
 
                 <!-- Footer -->

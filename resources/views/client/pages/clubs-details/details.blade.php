@@ -228,10 +228,13 @@ Chi tiết câu lạc bộ
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            {{-- <th>STT</th> --}}
                             <th>Tên hoạt động</th>
                             <th>Thời gian</th>
-                            <th>Địa điểm</th>
+                            @auth
+                                @if(auth()->user()->clubs->contains($club->id))
+                                    <th>Địa điểm</th>
+                                @endif
+                            @endauth
                             <th>Mô tả</th>
                         </tr>
                     </thead>
@@ -240,7 +243,11 @@ Chi tiết câu lạc bộ
                         <tr>
                             <td>{{ $activity->name }}</td>
                             <td>{{ \Carbon\Carbon::parse($activity->start_date)->format('H:i d/m/Y') }} - {{ \Carbon\Carbon::parse($activity->end_date)->format('H:i d/m/Y') }}</td>
-                            <td>{{ $activity->location }}</td>
+                            @auth
+                                @if(auth()->user()->clubs->contains($club->id))
+                                    <td>{{ $activity->location }}</td>
+                                @endif
+                            @endauth
                             <td>{{ $activity->description }}</td>
                         </tr>
                         @endforeach
@@ -395,6 +402,7 @@ Chi tiết câu lạc bộ
             </div>
         </div>
 
+        @auth()
         {{-- quản lí chi tiêu --}}
         <div class="mb-3 pt-4">
             <h6 class="mb-0">Các khoản phí và danh sách các thành viên trong CLB (Dành cho thành viên CLB)</h6>
@@ -431,11 +439,12 @@ Chi tiết câu lạc bộ
                     <div class="">
                         <!-- Nội dung khác có thể được thêm vào đây -->
                     </div>
-                    <a href="{{ route('client.members')}}" class="text-end text-decoration-underline mt-3 d-inline-block" id="expenditureLinkb">Xem danh sách thành viên</a>
+                    <a href="{{ route('client.members',$club->id)}}" class="text-end text-decoration-underline mt-3 d-inline-block" id="expenditureLinkb">Xem danh sách thành viên</a>
                 </div>
             </div>
         </div>
         {{-- end QLCT--}}
+        @endauth
     </div>
 </div>
 </div>

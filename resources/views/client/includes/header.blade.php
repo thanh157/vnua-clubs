@@ -32,7 +32,7 @@
         <div class="d-flex align-items-center text-success" style="font-family: Arial, sans-serif; color: #fff;">
             <div class="me-2">
                 @auth
-                <a href="#" class="text-decoration-none" style="font-size: 34px; color: #fff;">
+                <a href="{{ route('client.information.user') }}" class="text-decoration-none" style="font-size: 34px; color: #fff;">
                     <img src="{{ Auth::user()->avatar_url ?? asset('https://scontent-hkg4-1.xx.fbcdn.net/v/t39.30808-6/431968918_1408471566698978_892730662987273362_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=a5f93a&_nc_eui2=AeExdgGrvIahDVOfRpFR6ktPGK8q0_gLGLUYryrT-AsYtZqthgN0kgm1hM-MbgAWC_hlOMehWe3gXa_tkYURbSST&_nc_ohc=sDJpi6o6DcIQ7kNvgHS7lGN&_nc_zt=23&_nc_ht=scontent-hkg4-1.xx&_nc_gid=AzBmTPeU5oM_MuNCY-1eB30&oh=00_AYAkaZmCkQBa_sAhiQasSTK4qAOcTBgoXlmjbuGBTTNUqw&oe=6778D2D6') }}"
                         alt=""
                         class="rounded-circle"

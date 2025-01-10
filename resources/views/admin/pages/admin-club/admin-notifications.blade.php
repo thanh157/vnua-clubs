@@ -20,14 +20,21 @@
                 <h5 class="mb-0">Thông báo tuyển thành viên</h5>
             </div>
             <div class="card-body">
-                <form id="notification-form">
+                <form id="notification-form" action="{{ route('admin.admin-notifications.store') }}" method="POST">
+                    @csrf
                     <div class="form-group mb-3">
-                        <label for="notification_date">Ngày đăng</label>
-                        <input type="date" class="form-control" id="notification_date" name="notification_date" required>
+                        <label for="title">Tiêu đề</label>
+                        <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title') }}" required>
+                        @error('title')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group mb-3">
-                        <label for="notification_description">Mô tả</label>
-                        <textarea class="form-control" id="notification_description" name="notification_description" rows="4" required></textarea>
+                        <label for="message">Mô tả</label>
+                        <textarea class="form-control @error('message') is-invalid @enderror" id="message" name="message" rows="4" required>{{ old('message') }}</textarea>
+                        @error('message')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group text-right">
                         <button type="submit" class="btn btn-primary">Đăng thông báo</button>
@@ -52,37 +59,76 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>Ngày đăng</th>
+                            <th>Tiêu đề</th>
                             <th>Mô tả</th>
+                            <th>Ngày đăng</th>
+                            <th>Trạng thái</th>
                             <th>Hành động</th>
                         </tr>
                     </thead>
                     <tbody id="notification-list">
-                        <!-- Dữ liệu mẫu -->
-                        <tr>
-                            <td>2023-10-01</td>
-                            <td>Thông báo tuyển thành viên cho câu lạc bộ ABC...</td>
-                            <td class="text-center">
-                                <div class="d-inline-flex">
-                                    <div class="dropdown">
-                                        <a href="#" class="text-body" data-bs-toggle="dropdown">
-                                            <i class="ph-list"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-end">
-                                            <a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#viewFormModal">
-                                                <i class="ph-eye me-2"></i>
-                                                Chỉnh sửa thông báo
+
+                        @foreach ($notifications as $item)
+                            <tr>
+                                <td>{{ $item->title }}</td>
+                                <td>{{ $item->message }}</td>
+                                <td>{{ $item->created_at }}</td>
+                                <td>
+                                    @if($item->status == 'pending') 
+                                        <span class="badge bg-warning">Chờ duyệt</span>
+                                    @elseif($item->status == 'approved')
+                                        <span class="badge bg-success">Đã duyệt</span>
+                                    @else
+                                        <span class="badge bg-danger">Từ chối</span>
+                                    @endif
+                                </td>
+                                <td class="text-center">
+                                    <div class="d-inline-flex">
+                                        <div class="dropdown">
+                                            <a href="#" class="text-body" data-bs-toggle="dropdown">
+                                                <i class="ph-list"></i>
                                             </a>
-                                            <a href="#" class="dropdown-item text-danger">
-                                                <i class="ph-x-circle me-2"></i>
-                                                Xóa
-                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#viewFormModal-{{ $item->id }}">
+                                                    <i class="ph-eye me-2"></i>
+                                                    Chỉnh sửa thông báo
+                                                </a>
+                                              
+
+                                                <form action="{{ route('admin.admin-notifications.destroy', $item->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="dropdown-item text-danger">
+                                                        <i class="ph-x-circle me-2"></i>
+                                                        Xóa
+                                                    </button>
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <div class="modal fade" id="viewFormModal-{{ $item->id }}" tabindex="-1" aria-labelledby="viewFormModalLabel-{{ $item->id }}" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="viewFormModalLabel-{{ $item->id }}">Chỉnh sửa thông báo</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                @include('admin.pages.admin-club.form-edit-notification', ['item' => $item])
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </td>
-                        </tr>
-                        <!-- Thêm các dòng dữ liệu khác tại đây -->
+                            </tr>
+                            
+                        @endforeach
+
+                       
                     </tbody>
                 </table>
             </div>
@@ -114,22 +160,7 @@
             </div>
         </div> --}}
     </div>
-    <div class="modal fade" id="viewFormModal" tabindex="-1" aria-labelledby="viewFormModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="viewFormModalLabel">Chi tiết đơn đăng kí tham gia</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    @include('admin.pages.admin-club.form-edit-notification')
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    
     <!-- /content area -->
 @endsection
 

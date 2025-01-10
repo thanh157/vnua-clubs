@@ -87,7 +87,7 @@
                     </td>
                 </tr>
 
-                @include('admin.pages.admin.club-modal', ['club' => $club, 'users' => $users])
+                @include('admin.pages.admin.club-modal', ['club' => $club, 'users' => $club->users, 'activities' => $club->activities])
                 @endforeach
             </tbody>
         </table>

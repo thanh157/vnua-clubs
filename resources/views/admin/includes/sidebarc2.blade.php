@@ -10,11 +10,13 @@
                 <h6 class="sidebar-resize-hide flex-grow-1 my-auto">Quản lý CLB của bạn</h6>
 
                 <div>
-                    <button type="button" class="btn btn-flat-white btn-icon btn-sm rounded-pill border-transparent sidebar-control sidebar-main-resize d-none d-lg-inline-flex">
+                    <button type="button"
+                        class="btn btn-flat-white btn-icon btn-sm rounded-pill border-transparent sidebar-control sidebar-main-resize d-none d-lg-inline-flex">
                         <i class="ph-arrows-left-right"></i>
                     </button>
 
-                    <button type="button" class="btn btn-flat-white btn-icon btn-sm rounded-pill border-transparent sidebar-mobile-main-toggle d-lg-none">
+                    <button type="button"
+                        class="btn btn-flat-white btn-icon btn-sm rounded-pill border-transparent sidebar-mobile-main-toggle d-lg-none">
                         <i class="ph-x"></i>
                     </button>
                 </div>
@@ -25,20 +27,21 @@
         <!-- Dropdown chọn câu lạc bộ -->
         <div class="sidebar-section">
             <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="clubDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    @if(session('current_club_id'))
-                    {{ \App\Models\Club::find(session('current_club_id'))->name }}
+                <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="clubDropdown"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    @if (session('current_club_id'))
+                        {{ \App\Models\Club::find(session('current_club_id'))->name }}
                     @else
-                    Chọn câu lạc bộ
+                        Chọn câu lạc bộ
                     @endif
                 </button>
                 <ul class="dropdown-menu w-100" aria-labelledby="clubDropdown">
-                    @foreach(Auth::user()->ownClubs as $club)
-                    <li>
-                        <a class="dropdown-item" href="{{ route('admin-club.workspace.select', $club->id) }}">
-                            {{ $club->name }}
-                        </a>
-                    </li>
+                    @foreach (Auth::user()->ownClubs as $club)
+                        <li>
+                            <span class="dropdown-item" href="{{ route('admin-club.workspace.select', $club->id) }}">
+                                {{ $club->name }}
+                            </span>
+                        </li>
                     @endforeach
                 </ul>
             </div>
@@ -66,12 +69,12 @@
                         <span>Quản lý danh sách thành viên</span>
                     </a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="{{ route('admin.admin-staff') }}" class="nav-link">
                         <i class="ph-user-circle"></i>
                         <span>Xem danh sách ban cán sự</span>
                     </a>
-                </li>
+                </li> --}}
 
                 <!-- Event management -->
                 <li class="nav-item-header pt-0 mt-3">
@@ -117,7 +120,7 @@
                     </a>
                 </li> --}}
                 <li class="nav-item">
-                    <a href="{{ route('admin.admin-spending') }}" class="nav-link">
+                    <a href="{{ route('admin-club.spendings') }}" class="nav-link">
                         <i class="ph-graph"></i>
                         <span>Báo cáo chi tiêu</span>
                     </a>

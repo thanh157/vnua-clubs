@@ -125,7 +125,8 @@
                     <div class="row mb-3">
                         <label class="col-lg-3 col-form-label">Tên câu lạc bộ muốn đăng kí:</label>
                         <div class="col-lg-9">
-                            <select class="form-control" name="club_id" required>
+                            <input type="text" id="club-search" class="form-control mb-2" placeholder="Tìm kiếm câu lạc bộ...">
+                            <select class="form-control" name="club_id" id="club-select" required>
                                 <option value="" disabled>Chọn câu lạc bộ</option>
                                 @foreach($clubs as $club)
                                 <option value="{{ $club->id }}" {{ $club->id == $defaultClubId ? 'selected' : '' }}>{{ $club->name }}</option>
@@ -174,6 +175,40 @@
 </div>
 
 <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const clubSearch = document.getElementById('club-search');
+        const clubSelect = document.getElementById('club-select');
+
+        clubSearch.addEventListener('input', function() {
+            const filter = clubSearch.value.toLowerCase();
+            const options = clubSelect.options;
+
+            for (let i = 0; i < options.length; i++) {
+                const option = options[i];
+                const text = option.text.toLowerCase();
+                option.style.display = text.includes(filter) ? '' : 'none';
+            }
+
+            // Open the dropdown
+            clubSelect.size = options.length;
+            clubSelect.style.display = 'block';
+        });
+
+        clubSearch.addEventListener('blur', function() {
+            // Close the dropdown when the search input loses focus
+            setTimeout(() => {
+                clubSelect.size = 1;
+                clubSelect.style.display = '';
+            }, 200);
+        });
+
+        clubSelect.addEventListener('change', function() {
+            // Close the dropdown when an option is selected
+            clubSelect.size = 1;
+            clubSelect.style.display = '';
+        });
+    });
+
     document.getElementById('memberRequestForm').addEventListener('submit', function(event) {
         event.preventDefault();
 
@@ -205,6 +240,7 @@
         })
         .catch(error => console.error('Error:', error));
     });
+
     function showSuccessMessage() {
         // Ẩn toàn bộ form đăng ký, header và body
         document.getElementById('registrationForm').style.display = 'none';

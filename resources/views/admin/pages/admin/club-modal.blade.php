@@ -12,6 +12,23 @@
                 <p><strong>Ngân sách:</strong> {{ number_format($club->balance, 0, ',', '.') }} VNĐ</p>
                 <p><strong>Trạng thái:</strong> {{ $club->status == 'active' ? 'Hoạt động' : 'Ngừng hoạt động' }}</p>
                 <p><strong>Chủ tịch hiện tại: </strong> {{$club->president->name ?? 'Chưa có chủ tịch'}}</p>
+
+                <div class="row">
+                    @foreach ($activities as $item)
+                    <div class="col-12 col-md-4 mb-3">
+                        <div class="card" style="border-radius: 8px; border: 1px solid;">
+                            <div class="card-body" style="padding: 15px;">
+                                <h5 class="card-title" style="font-size: 16px; font-weight: bold;">{{ $item->name }}</h5>
+                                <p class="card-text" style="font-size: 0.875rem; margin-bottom: 8px;"><strong>Địa điểm:</strong> {{$item->location  }}</p>
+                                <p class="card-text" style="font-size: 0.875rem; margin-bottom: 8px;"><strong>Ngày tổ chức:</strong> {{ $item->start_date }} - {{ $item->end_date }}</p>
+                                <p class="card-text" style="font-size: 0.875rem; margin-bottom: 8px;">{{ $item->description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                       
+                    @endforeach
+                </div>
+
                 <form action="{{ route('admin.clubs.updatePresident', $club->id) }}" method="POST">
                     @csrf
                     @method('PATCH')

@@ -1,30 +1,33 @@
 <?php
 
 
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
-
-use App\Http\Controllers\Admin\EventController;
-use App\Http\Controllers\Admin\ClubManagementController;
-use App\Http\Controllers\ClubPresident\ActivityManagementController;
-use App\Http\Controllers\ClubPresident\ClubDescriptionController;
-use App\Http\Controllers\ClubPresident\AnnouncementController;
-use App\Http\Controllers\ClubPresident\MemberRequestManagementController;
-use App\Http\Controllers\ClubPresident\MemberController;
-use App\Http\Controllers\ClubPresident\ClubWorkspaceController;
-use App\Http\Controllers\ClubPresident\SpendingController;
-use App\Http\Controllers\ClubPresident\DetailInformationController;
-
-use App\Http\Controllers\User\ClubRequestController;
 use App\Http\Controllers\User\ClubController;
-use App\Http\Controllers\User\MemberRequestController;
+use App\Http\Controllers\Auth\LoginController;
 
 use App\Http\Controllers\Guest\HomeController;
+use App\Http\Controllers\Admin\EventController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Guest\ActivityController;
+use App\Http\Controllers\User\ClubRequestController;
+use App\Http\Controllers\ClubPresident\NotificationController;
+use App\Http\Controllers\User\MemberRequestController;
+use App\Http\Controllers\Admin\ClubManagementController;
+use App\Http\Controllers\ClubPresident\MemberController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+
+use App\Http\Controllers\ClubPresident\SpendingController;
+use App\Http\Controllers\ClubPresident\AnnouncementController;
+use App\Http\Controllers\ClubPresident\ClubWorkspaceController;
+
+use App\Http\Controllers\ClubPresident\ClubDescriptionController;
+use App\Http\Controllers\ClubPresident\DetailInformationController;
+use App\Http\Controllers\ClubPresident\ActivityManagementController;
+use App\Http\Controllers\ClubPresident\MemberRequestManagementController;
+use Illuminate\Support\Facades\App;
 
 /*
 |--------------------------------------------------------------------------
@@ -89,9 +92,11 @@ Route::get('admin/login', function () {
 //     return view('admin.pages.admin-club.admin-notifications');
 // })->name('admin.admin-notifications');
 
-Route::get('/admin-notifications', function () {
-    return view('admin.pages.admin-club.admin-notifications');
-})->name('admin.admin-notifications');
+// Route::get('/admin-notifications', function () {
+//     return view('admin.pages.admin-club.admin-notifications');
+// })->name('admin.admin-notifications');
+
+
 
 
 Route::get('/admin-spending', function () {
@@ -174,10 +179,11 @@ Route::get('/edit-profile', fn() => view('client/pages/edit-profile/edit'))->nam
 Route::get('/spending', fn() => view('client/pages/spending/spending'))->name('client.spending');
 
 // members
-Route::get('/members', fn() => view('client/pages/members/club-member'))->name('client.members');
+Route::get('/members/{id_club}',  [\App\Http\Controllers\InformationController::class, 'members'])->name('client.members');
 
 // notification
-Route::get('/notification', fn() => view('client/pages/notifications/notification'))->name('client.notifications');
+Route::get('/notification',[\App\Http\Controllers\NotificationController::class, 'index'] )->name('client.notifications');
+Route::get('information-user', [\App\Http\Controllers\InformationController::class, 'index'])->name('client.information.user');
 
 Route::get('/404', function () {
     abort(404);
@@ -207,6 +213,12 @@ Route::get('/admin/members/approve', [MemberController::class, 'approve'])->name
 Route::get('/admin/members/list', [MemberController::class, 'list'])->name('admin.members.list');
 Route::get('/admin/members/committee', [MemberController::class, 'committee'])->name('admin.members.committee');
 
+// Spending management routes
+Route::prefix('club-president')->name('club-president-')->group(function () {
+    Route::resource('spending', SpendingController::class);
+});
+
+
 // Event management routes
 Route::get('/admin/events/create', [EventController::class, 'create'])->name('admin.events.create');
 Route::get('/admin/events/update', [EventController::class, 'update'])->name('admin.events.update');
@@ -234,10 +246,12 @@ Route::get('/member-requests/create/{club_id?}', [MemberRequestController::class
 Route::post('/member-requests/store', [MemberRequestController::class, 'store'])->name('member-requests.store')->middleware('auth');;
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+    Route::get('/', [ClubManagementController::class, 'index1'])->name('admin.dashboard');
 
-    Route::get('/', function () {
-        return view('admin.pages.admin.dashboard');
-    })->name('admin.dashboard');
+    // Route::get('/', function () {
+    //     // return view('admin.pages.admin.dashboard');
+    //     return view('admin.pages.admin.club-list');
+    // })->name('admin.dashboard');
 
     Route::get('/clubs', [ClubManagementController::class, 'index'])->name('admin.clubs');
 
@@ -259,11 +273,21 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/admin/club-description/create', [ClubDescriptionController::class, 'create'])->name('admin.club-description.create');
     Route::get('/admin/club-description/edit', [ClubDescriptionController::class, 'edit'])->name('admin.club-description.edit');
     Route::get('/admin/club-description/delete', [ClubDescriptionController::class, 'delete'])->name('admin.club-description.delete');
+
+    Route::get('notifications', [\App\Http\Controllers\Admin\NotificationController::class, 'index'])->name('admin.notifications');
+    Route::patch('notifications-approved/{id}', [\App\Http\Controllers\Admin\NotificationController::class, 'approved'])->name('admin.notifications.approved');
+    Route::patch('notifications-rejected/{id}', [\App\Http\Controllers\Admin\NotificationController::class, 'rejected'])->name('admin.notifications.rejected');
 });
 
 Route::middleware(['auth', 'admin-club'])->prefix('admin-club')->group(function () {
+
+    Route::get('/admin-notifications', [NotificationController::class, 'index'])->name('admin.admin-notifications');
+    Route::post('/admin-notifications', [NotificationController::class, 'store'])->name('admin.admin-notifications.store');
+    Route::put('/admin-notifications/{notification}', [NotificationController::class, 'update'])->name('admin.admin-notifications.update');
+    Route::delete('/admin-notifications/{notification}', [NotificationController::class, 'destroy'])->name('admin.admin-notifications.destroy');
+
     Route::get('/', [MemberRequestManagementController::class, 'member'])->name('admin-club');
-    
+
     // Member management routes
     Route::get('/member', [MemberController::class, 'index'])->name('admin-club.members');
     Route::delete('/members/{id}', [MemberController::class, 'destroy'])->name('admin-club.members.delete');
@@ -288,5 +312,12 @@ Route::middleware(['auth', 'admin-club'])->prefix('admin-club')->group(function 
     Route::patch('/information/update-description/{id}', [DetailInformationController::class, 'updateDescription'])->name('admin-club.information.update-description');
     Route::post('/information/upload-resource', [DetailInformationController::class, 'uploadResource'])->name('admin-club.information.upload-resource');
 
+    Route::get('/spendings', [SpendingController::class, 'index'])->name('admin-club.spendings');
+    Route::post('/spendingss/create', [SpendingController::class, 'store'])->name('admin-club.spendings.create');
+    Route::patch('/spendings/update/{id}', [SpendingController::class, 'update'])->name('admin-club.spendings.update');
+
     Route::get('/select-club/{clubId}', [ClubWorkspaceController::class, 'selectClub'])->name('admin-club.workspace.select');
+    // Route::prefix('club-president')->name('club-president-')->group(function () {
+    //     Route::resource('spending', SpendingController::class);
+    // });
 });

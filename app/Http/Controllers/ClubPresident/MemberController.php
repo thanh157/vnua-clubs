@@ -91,8 +91,20 @@ class MemberController extends Controller
 
         // Cập nhật vai trò của thành viên
         $member->role = $role;
+        // Kiểm tra và xử lý ảnh đại diện mới nếu có
+        if ($request->hasFile('avatar')) {
+            // Xóa ảnh đại diện cũ nếu có
+            if ($member->avatar_url) {
+                Storage::delete($member->avatar_url);
+            }
+
+            // Lưu ảnh đại diện mới
+            $avatarPath = $request->file('avatar')->store('avatars');
+            $member->avatar_url = $avatarPath;
+        }
         $member->save();
 
         return redirect()->route('admin-club.members')->with('success', 'Vai trò của thành viên đã được cập nhật.');
     }
+    
 }

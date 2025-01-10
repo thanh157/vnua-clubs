@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Support\Facades\Log;
+use App\Enums\Role;
+use App\Enums\RoleClub;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,8 +23,7 @@ class LoginController extends Controller
         return view('client/pages/login/login');
     }
 
-    public function login(Request $request)
-    {
+    public function login(Request $request) {
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
@@ -32,7 +34,17 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended(route('client.home'));
+            // Kiểm tra vai trò của người dùng
+            $user = Auth::user();
+            Log::info($user->role->value);
+            if ($user->role === Role::ADMIN) {
+                return redirect()->route('admin.dashboard');
+            } elseif ($user->role === Role::ADMIN_CLUB) {
+                Log::info('Vao admin-club');
+                return redirect()->route('admin-club');
+            } else {
+                return redirect()->route('client.home');
+            }
         }
 
         throw ValidationException::withMessages([

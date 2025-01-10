@@ -27,7 +27,7 @@
         <div class="sidebar-section">
             <ul class="nav nav-sidebar" data-nav-type="accordion">
 
-                <!-- Main -->
+                {{-- <!-- Main -->
                 <li class="nav-item-header pt-0">
                     <div class="text-uppercase fs-sm lh-sm opacity-50 sidebar-resize-hide"></div>
                     <i class="ph-dots-three sidebar-resize-show"></i>
@@ -38,9 +38,9 @@
                         <span>
                             Trang điều khiển
                             {{-- <span class="d-block fw-normal opacity-50">No pending orders</span>--}}
-                        </span>
+                        {{-- </span>
                     </a>
-                </li>
+                </li> --}} 
 
                 <!-- Club list -->
                 <li class="nav-item-header pt-0 mt-3">
@@ -60,6 +60,15 @@
                         <i class="ph-file-plus"></i>
                         <span>
                             Đơn đăng ký câu lạc bộ
+                        </span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.notifications') }}" class="nav-link">
+                        <i class="ph ph-bell-ringing"></i>
+                        <span>
+                            Thông báo câu lạc bộ
                         </span>
                     </a>
                 </li>

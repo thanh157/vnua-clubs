@@ -14,6 +14,17 @@ class ClubManagementController extends Controller
 {
     public function index()
     {
+        $clubs = Club::get();
+        foreach ($clubs as $club) {
+            $club->users = $club->users;
+            $club->activities = $club->activities;
+        }
+
+        return view('admin.pages.admin.club-list', compact('clubs'));
+    }
+
+     public function index1()
+    {
         $clubs = Club::all();
         $users = User::all(); // Lấy danh sách tất cả người dùng
         return view('admin.pages.admin.club-list', compact('clubs', 'users'));
@@ -23,6 +34,10 @@ class ClubManagementController extends Controller
     {
         $club = Club::findOrFail($id);
         $newPresidentId = $request->input('president_id');
+
+        if (!$club->users()->where('user_id', $newPresidentId)->exists()) {
+            return redirect()->route('admin.clubs')->with('error', 'Người dùng được chọn không phải là thành viên của câu lạc bộ.');
+        }
 
         // Tìm chủ tịch hiện tại của câu lạc bộ và cập nhật vai trò của họ
         if ($club->owner_id) {

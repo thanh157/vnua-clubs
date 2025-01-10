@@ -24,7 +24,7 @@ class User extends Authenticatable implements MustVerifyEmailContract
         'password',
         'phone',
         'role',
-        // 'club_id'
+        'club_id'
     ];
 
     protected $hidden = [
@@ -36,10 +36,10 @@ class User extends Authenticatable implements MustVerifyEmailContract
         'email_verified_at' => 'datetime',
     ];
 
-    // public function club(): BelongsTo
-    // {
-    //     return $this->belongsTo(Club::class, 'club_id');
-    // }
+    public function club(): BelongsTo
+    {
+        return $this->belongsTo(Club::class, 'club_id');
+    }
 
     public function transactions(): HasMany
     {
@@ -69,5 +69,10 @@ class User extends Authenticatable implements MustVerifyEmailContract
         return self::whereHas('clubs', function ($query) use ($clubId) {
             $query->where('club_id', $clubId);
         })->get();
+    }
+
+    public function member()
+    {
+        return $this->hasOne(Member::class);
     }
 }

@@ -96,6 +96,10 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
+                                <!-- Hiển thị ảnh đại diện của thành viên -->
+                                <div class="text-center mb-3">
+                                    <img src="{{ $member->avatar_url ?? asset('assets/default-avatar.png') }}" alt="Avatar" class="img-thumbnail avatar-img">
+                                </div>
                                 <p>Tên: {{ $member->full_name }}</p>
                                 <p>Email: {{ $member->email }}</p>
                                 <p>Số điện thoại: {{ $member->phone }}</p>
@@ -126,8 +130,26 @@
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                             </div>
                         </div>
+                        
+                        <style>
+                        .avatar-img {
+                            width: 150px;
+                            height: 150px;
+                            object-fit: cover;
+                            border-radius: 50%;
+                            border: 3px solid #ddd;
+                            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                            transition: transform 0.3s ease, box-shadow 0.3s ease;
+                        }
+                        
+                        .avatar-img:hover {
+                            transform: scale(1.05);
+                            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+                        }
+                        </style>
                     </div>
                 </div>
+
 
                 <!-- Modal Delete Member -->
                 <div class="modal fade" id="deleteMemberModal-{{ $member->id }}" tabindex="-1" aria-labelledby="deleteMemberModalLabel-{{ $member->id }}" aria-hidden="true">

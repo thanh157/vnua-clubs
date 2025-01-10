@@ -16,6 +16,7 @@
 
 
     @include('client.includes.script')
+    @include('admin.includes.toast')
     @yield('content')
 
     <!-- Kiểm tra nếu không phải trang đăng ký hoặc đăng nhập, thì hiển thị footer -->

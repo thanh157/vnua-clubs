@@ -125,13 +125,13 @@ class MemberRequestManagementController extends Controller
         $memberRequest->status = StatusMemberRequest::REJECTED;
         $memberRequest->save();
 
-        return redirect()->route('admin.club-requests')->with('success', 'Yêu cầu đã bị từ chối.');
+        return redirect()->route('admin-club.member-requests')->with('success', 'Yêu cầu đã bị từ chối.');
     }
     public function deleteMemberRequest($id)
     {
         $memberRequest = MemberRequest::findOrFail($id);
         $memberRequest->delete();
 
-        return redirect()->route('admin.club-requests')->with('success', 'Yêu cầu đã bị xóa.');
+        return redirect()->route('admin-club.member-requests')->with('success', 'Yêu cầu đã bị xóa.');
     }
 }
